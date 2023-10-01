@@ -336,6 +336,8 @@ __pycache__/
 OpenCover/
 
 /intermediate/
+/bin-int/
+/obj/
 
 # Azure Stream Analytics local run output
 ASALocalRun/

@@ -1,0 +1,3 @@
+[submodule "MyRevoke/vendor/spdlog"]
+	path = MyRevoke/vendor/spdlog
+	url = https://github.com/gabime/spdlog

@@ -58,6 +58,7 @@
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)MyRevoke\vendor\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -73,6 +74,7 @@
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)MyRevoke\vendor\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,9 +84,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\MyRevoke\Log.cpp" />
     <ClCompile Include="src\MyRevoke\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\MyRevoke\Log.h" />
     <ClInclude Include="src\MyRevoke.h" />
     <ClInclude Include="src\MyRevoke\Application.h" />
     <ClInclude Include="src\MyRevoke\Core.h" />

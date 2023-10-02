@@ -7,3 +7,5 @@
 		#define RV_API __declspec(dllimport)
 	#endif // DEBUG
 #endif
+
+#define BIT(x) (1 << x)

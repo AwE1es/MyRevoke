@@ -1,6 +1,7 @@
 #pragma once
 
 #include"Core.h"
+#include "EventSystem/Event.h"
 
 namespace Revoke
 {

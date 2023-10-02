@@ -19,6 +19,10 @@
     <ClInclude Include="src\MyRevoke\Log.h">
       <Filter>MyRevoke</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\EventSystem\Event.h" />
+    <ClInclude Include="src\MyRevoke\EventSystem\AppEvent.h" />
+    <ClInclude Include="src\MyRevoke\EventSystem\KeyEvent.h" />
+    <ClInclude Include="src\MyRevoke\EventSystem\MouseEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp">

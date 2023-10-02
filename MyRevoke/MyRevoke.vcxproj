@@ -106,6 +106,10 @@
     <ClInclude Include="src\MyRevoke\Application.h" />
     <ClInclude Include="src\MyRevoke\Core.h" />
     <ClInclude Include="src\MyRevoke\EntryPoint.h" />
+    <ClInclude Include="src\MyRevoke\EventSystem\AppEvent.h" />
+    <ClInclude Include="src\MyRevoke\EventSystem\Event.h" />
+    <ClInclude Include="src\MyRevoke\EventSystem\KeyEvent.h" />
+    <ClInclude Include="src\MyRevoke\EventSystem\MouseEvent.h" />
     <ClInclude Include="src\MyRevoke\Log.h" />
   </ItemGroup>
   <ItemGroup>

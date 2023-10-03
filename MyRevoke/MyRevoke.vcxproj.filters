@@ -4,6 +4,9 @@
     <Filter Include="MyRevoke">
       <UniqueIdentifier>{775274B4-631F-CFBF-8C38-BD677864044E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyRevoke\EventSystem">
+      <UniqueIdentifier>{AD026749-9991-F012-42B0-040E2E1E01B9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MyRevoke.h" />
@@ -16,13 +19,22 @@
     <ClInclude Include="src\MyRevoke\EntryPoint.h">
       <Filter>MyRevoke</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\EventSystem\AppEvent.h">
+      <Filter>MyRevoke\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\EventSystem\Event.h">
+      <Filter>MyRevoke\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\EventSystem\KeyEvent.h">
+      <Filter>MyRevoke\EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\EventSystem\MouseEvent.h">
+      <Filter>MyRevoke\EventSystem</Filter>
+    </ClInclude>
     <ClInclude Include="src\MyRevoke\Log.h">
       <Filter>MyRevoke</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\EventSystem\Event.h" />
-    <ClInclude Include="src\MyRevoke\EventSystem\AppEvent.h" />
-    <ClInclude Include="src\MyRevoke\EventSystem\KeyEvent.h" />
-    <ClInclude Include="src\MyRevoke\EventSystem\MouseEvent.h" />
+    <ClInclude Include="src\rvpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp">
@@ -31,5 +43,6 @@
     <ClCompile Include="src\MyRevoke\Log.cpp">
       <Filter>MyRevoke</Filter>
     </ClCompile>
+    <ClCompile Include="src\rvpch.cpp" />
   </ItemGroup>
 </Project>

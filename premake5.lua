@@ -15,6 +15,9 @@ workspace "MyRevoke"
         targetdir ("bin/" .. outputdir .. "/%{prj.name}")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+        pchheader "rvpch.h"
+        pchsource "MyRevoke/src/rvpch.cpp"
+
         files
         {
             "%{prj.name}/src/**.h",
@@ -23,7 +26,7 @@ workspace "MyRevoke"
 
         includedirs
         {
-            "%{prj.name}/src"
+            "%{prj.name}/src",
             "%{prj.name}/vendor/spdlog/include"
         }
 

@@ -2,8 +2,7 @@
 
 #include "../Core.h"
 
-#include <string>>
-#include <functional>
+#include "rvpch.h"
 
 // Event system
 namespace Revoke
@@ -26,7 +25,7 @@ namespace Revoke
 		EventCategoryMouseButton	= BIT(4)
 
 	};
-	class RV_API Event
+	class RV_API Event //abstract base class for all the events
 	{
 		friend class EventDispatcher;
 	public:

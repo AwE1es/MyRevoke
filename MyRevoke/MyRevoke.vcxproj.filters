@@ -7,6 +7,12 @@
     <Filter Include="MyRevoke\EventSystem">
       <UniqueIdentifier>{AD026749-9991-F012-42B0-040E2E1E01B9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyRevoke\Platform">
+      <UniqueIdentifier>{AB4408D6-175B-066C-60D2-918DCC27D7F3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyRevoke\Platform\Windows">
+      <UniqueIdentifier>{E56939C1-512C-6D4B-9ADC-FBD706DE4529}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MyRevoke.h" />
@@ -34,6 +40,12 @@
     <ClInclude Include="src\MyRevoke\Log.h">
       <Filter>MyRevoke</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\Platform\Windows\WindowsWindow.h">
+      <Filter>MyRevoke\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Window.h">
+      <Filter>MyRevoke</Filter>
+    </ClInclude>
     <ClInclude Include="src\rvpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Log.cpp">
       <Filter>MyRevoke</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Platform\Windows\WindowsWindow.cpp">
+      <Filter>MyRevoke\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\rvpch.cpp" />
   </ItemGroup>

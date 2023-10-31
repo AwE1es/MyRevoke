@@ -6,6 +6,8 @@
 #include<algorithm>
 #include<functional>
 
+#include"MyRevoke/Log.h"
+
 #include<string>
 #include<sstream>
 #include<vector>

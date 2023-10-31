@@ -5,14 +5,20 @@
 #include "EventSystem/MouseEvent.h"
 #include "Log.h"
 
+#include <GLFW/glfw3.h>
+
 namespace Revoke
 {
+	Application::Application()
+	{
+		m_Window = std::unique_ptr<Window>(Window::Create());
+	}
 	void Application::Run()
 	{
-		WindowResizeEvent e(1280, 720);
-		MouseButtonPressedEvent s(1);
-		RV_TRACE(s);
-		RV_TRACE(e);
-		while (true);
+	
+		while (m_Run)
+		{
+			m_Window->OnUpdate();
+		}
 	}
 }

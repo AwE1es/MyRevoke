@@ -6,6 +6,10 @@ workspace "MyRevoke"
 
     outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
     
+    IncludeDir = {};
+    IncludeDir ["GLFW"] = "MyRevoke/vendor/GLFW/include"
+
+    include "MyRevoke/vendor/GLFW"
 
     project "MyRevoke"
         location "MyRevoke"
@@ -22,12 +26,21 @@ workspace "MyRevoke"
         {
             "%{prj.name}/src/**.h",
             "%{prj.name}/src/**.cpp"
+           
         }
+
 
         includedirs
         {
             "%{prj.name}/src",
-            "%{prj.name}/vendor/spdlog/include"
+            "%{prj.name}/vendor/spdlog/include",
+            "%{IncludeDir.GLFW}" 
+        }
+
+        links
+        {
+            "GLFW",
+            "opengl32.lib"
         }
 
         filter "system:windows"
@@ -102,4 +115,4 @@ workspace "MyRevoke"
             optimize "On"
     
         filter { "system:windows", "configurations:Release" }
-            buildoptions "/MT"
+            buildoptions "/MTd"

@@ -2,6 +2,7 @@
 // ONLY FOR USE BY APPLICATION --------------------------------------------
 
 #include "MyRevoke/Application.h"
+
 #include "MyRevoke/Log.h"
 
 #include "rvpch.h"

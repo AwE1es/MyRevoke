@@ -47,6 +47,12 @@
       <Filter>MyRevoke</Filter>
     </ClInclude>
     <ClInclude Include="src\rvpch.h" />
+    <ClInclude Include="Layer.h">
+      <Filter>MyRevoke</Filter>
+    </ClInclude>
+    <ClInclude Include="LayerStack.h">
+      <Filter>MyRevoke</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp">
@@ -59,5 +65,11 @@
       <Filter>MyRevoke\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\rvpch.cpp" />
+    <ClCompile Include="LayerStack.cpp">
+      <Filter>MyRevoke</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer.cpp">
+      <Filter>MyRevoke</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

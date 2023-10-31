@@ -1,5 +1,6 @@
 #pragma once
 
+
 #ifdef  RV_PLATFORM_WINDOWS
 
 extern Revoke::Application* Revoke::CreateApplication();

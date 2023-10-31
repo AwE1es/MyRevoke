@@ -7,7 +7,7 @@
 #include "EventSystem/AppEvent.h"
 #include "EventSystem/MouseEvent.h"
 #include "EventSystem/KeyEvent.h"
-#include "MyRevoke/"
+#include "LayerStack.h"
 
 
 namespace Revoke
@@ -23,7 +23,7 @@ namespace Revoke
 		void OnEvent(Event& e);
 
 		void PushLayer(Layer* layer);
-		void PushOverlay(Layer* overlay)
+		void PushOverlay(Layer* overlay);
 
 	private:
 		bool OnWindowsClose(WindowsCloseEvent e);

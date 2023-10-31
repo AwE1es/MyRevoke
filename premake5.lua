@@ -61,10 +61,12 @@ workspace "MyRevoke"
 
         filter "configurations:Debug"
             defines "RV_DEBUG"
+            buildoptions"/MDd"
             symbols "On"
 
         filter "configurations:Release"
             defines "RV_RELEASE"
+            buildoptions"/MD"
             optimize "On"
 
         filter { "system:windows", "configurations:Release" }
@@ -108,10 +110,12 @@ workspace "MyRevoke"
     
         filter "configurations:Debug"
             defines "RV_DEBUG"
+            buildoptions"/MDd"
             symbols "On"
     
         filter "configurations:Release"
             defines "RV_RELEASE"
+            buildoptions"/MD"
             optimize "On"
     
         filter { "system:windows", "configurations:Release" }

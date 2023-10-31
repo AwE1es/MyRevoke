@@ -64,6 +64,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -90,7 +91,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MT %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/MD /MT %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -106,8 +107,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Layer.h" />
-    <ClInclude Include="LayerStack.h" />
     <ClInclude Include="src\MyRevoke.h" />
     <ClInclude Include="src\MyRevoke\Application.h" />
     <ClInclude Include="src\MyRevoke\Core.h" />
@@ -116,15 +115,17 @@
     <ClInclude Include="src\MyRevoke\EventSystem\Event.h" />
     <ClInclude Include="src\MyRevoke\EventSystem\KeyEvent.h" />
     <ClInclude Include="src\MyRevoke\EventSystem\MouseEvent.h" />
+    <ClInclude Include="src\MyRevoke\Layer.h" />
+    <ClInclude Include="src\MyRevoke\LayerStack.h" />
     <ClInclude Include="src\MyRevoke\Log.h" />
     <ClInclude Include="src\MyRevoke\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\MyRevoke\Window.h" />
     <ClInclude Include="src\rvpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Layer.cpp" />
-    <ClCompile Include="LayerStack.cpp" />
     <ClCompile Include="src\MyRevoke\Application.cpp" />
+    <ClCompile Include="src\MyRevoke\Layer.cpp" />
+    <ClCompile Include="src\MyRevoke\LayerStack.cpp" />
     <ClCompile Include="src\MyRevoke\Log.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\rvpch.cpp">

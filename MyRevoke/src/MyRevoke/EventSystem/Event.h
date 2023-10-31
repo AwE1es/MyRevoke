@@ -38,6 +38,7 @@ namespace Revoke
 		{
 			return GetCategoryFlags() & category;
 		}
+		bool IsHandeled() const { return m_Handled; }
 	protected:
 		bool m_Handled = false;
 	};

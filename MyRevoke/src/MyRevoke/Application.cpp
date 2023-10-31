@@ -20,6 +20,8 @@ namespace Revoke
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 			m_Window->OnUpdate();
+			for (Layer* layer : m_LayerStack)
+				layer->OnUpdate();
 		}
 	}
 	void Application::OnEvent(Event& e)
@@ -30,6 +32,22 @@ namespace Revoke
 		eDispatcher.Dispatch<WindowsCloseEvent>(BIND_EVENT_FUNC(OnWindowsClose));
 
 		RV_CORE_TRACE("{0}", e);
+
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
+		{
+			(*--it)->OnEvent(e);
+			if (e.IsHandeled())
+				break;
+		}
+
+	}
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+	void Application::PushOverlay(Layer* overlay)
+	{
+		m_LayerStack.PushOverlay(overlay);
 	}
 	bool Application::OnWindowsClose(WindowsCloseEvent e)
 	{

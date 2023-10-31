@@ -8,8 +8,10 @@ workspace "MyRevoke"
     
     IncludeDir = {};
     IncludeDir ["GLFW"] = "MyRevoke/vendor/GLFW/include"
+    IncludeDir ["GLAD"] = "MyRevoke/vendor/GLAD/include"
 
     include "MyRevoke/vendor/GLFW"
+    include "MyRevoke/vendor/GLAD"
 
     project "MyRevoke"
         location "MyRevoke"
@@ -34,11 +36,13 @@ workspace "MyRevoke"
         {
             "%{prj.name}/src",
             "%{prj.name}/vendor/spdlog/include",
-            "%{IncludeDir.GLFW}" 
+            "%{IncludeDir.GLFW}",
+            "%{IncludeDir.GLAD}" 
         }
 
         links
         {
+            "GLAD",
             "GLFW",
             "opengl32.lib"
         }
@@ -51,7 +55,8 @@ workspace "MyRevoke"
             defines
             {
                 "RV_PLATFORM_WINDOWS",
-                "RV_BUILD_DLL"
+                "RV_BUILD_DLL",
+                "GLFW_INCLUDE_NONE"
             }
 
             postbuildcommands

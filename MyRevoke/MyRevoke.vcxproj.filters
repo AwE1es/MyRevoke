@@ -37,6 +37,12 @@
     <ClInclude Include="src\MyRevoke\EventSystem\MouseEvent.h">
       <Filter>MyRevoke\EventSystem</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\Layer.h">
+      <Filter>MyRevoke</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\LayerStack.h">
+      <Filter>MyRevoke</Filter>
+    </ClInclude>
     <ClInclude Include="src\MyRevoke\Log.h">
       <Filter>MyRevoke</Filter>
     </ClInclude>
@@ -47,11 +53,15 @@
       <Filter>MyRevoke</Filter>
     </ClInclude>
     <ClInclude Include="src\rvpch.h" />
-    <ClInclude Include="src\MyRevoke\LayerStack.h" />
-    <ClInclude Include="src\MyRevoke\Layer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp">
+      <Filter>MyRevoke</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Layer.cpp">
+      <Filter>MyRevoke</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\LayerStack.cpp">
       <Filter>MyRevoke</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Log.cpp">
@@ -61,7 +71,5 @@
       <Filter>MyRevoke\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\rvpch.cpp" />
-    <ClCompile Include="src\MyRevoke\Layer.cpp" />
-    <ClCompile Include="src\MyRevoke\LayerStack.cpp" />
   </ItemGroup>
 </Project>

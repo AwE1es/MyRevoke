@@ -5,6 +5,7 @@
 #include "MyRevoke/Core.h"
 #include "MyRevoke/EventSystem/Event.h"
 
+
 namespace Revoke {
 
 	struct WindowSettings

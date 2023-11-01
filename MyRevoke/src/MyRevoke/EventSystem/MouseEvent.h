@@ -35,6 +35,8 @@ namespace Revoke
 	class RV_API MouseButtonEvent : public Event
 	{
 	public:
+		inline int GetMouseButton() const { return m_Button; }
+
 		virtual int GetCategoryFlags() const override { return EventCategoryMouse | EventCategoryInput; }
 	protected:
 		MouseButtonEvent(int button)

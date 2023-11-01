@@ -18,3 +18,4 @@
 
 
 #define BIT(x) (1 << x)
+#define RV_BIND_EVENT_FUNK(fn) std::bind(&fn, this, std::placeholders::_1)

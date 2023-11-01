@@ -11,7 +11,7 @@ namespace Revoke
 	{
 		None = 0,
 		WindowClose, WindowResize, WindowMoved,										// Covered in AppEvent.h
-		KeyPressed, KeyReleased,													// Covered in KeyEvent.h
+		KeyPressed, KeyReleased, KeyTyped,													// Covered in KeyEvent.h
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled			// Covered in MouseEvnt.h
 	};
 

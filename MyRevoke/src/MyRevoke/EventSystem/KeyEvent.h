@@ -42,6 +42,24 @@ namespace Revoke
 	private:
 		int m_RepeatCount;
 	};
+	class RV_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keycode)
+			: KeyEvent(keycode) {}
+		
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << m_KeyCode ;
+			return ss.str();
+		}
+
+		static EventType GetStaticType() { return EventType::KeyTyped; } // used staic `couse keypressedevent alwways gonna be KeyPressed type
+		virtual EventType GetEventType() const override { return GetStaticType(); }
+		virtual const char* GetName() const override { return "KeyTyped"; }
+	};
 
 	class RV_API KeyReleasedEvent : public KeyEvent
 	{
@@ -63,5 +81,6 @@ namespace Revoke
 	private:
 		int m_RepeatCount;
 	};
+
 
 }

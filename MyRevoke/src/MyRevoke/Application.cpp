@@ -7,8 +7,14 @@
 namespace Revoke
 {
 #define BIND_EVENT_FUNC(x) std::bind(&Application::x, this, std::placeholders::_1)
+	
+	Application* Application::s_Instance = nullptr;
+	
 	Application::Application()
 	{
+		RV_CORE_ASSERT(!s_Instance, "Applicatio already exist");
+		s_Instance = this;
+
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 	}
@@ -36,7 +42,7 @@ namespace Revoke
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
 			(*--it)->OnEvent(e);
-			if (e.IsHandeled())
+			if (e.Handled)
 				break;
 		}
 
@@ -44,10 +50,12 @@ namespace Revoke
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
-	void Application::PushOverlay(Layer* overlay)
+	void Application::PushOverlay(Layer* layer)
 	{
-		m_LayerStack.PushOverlay(overlay);
+		m_LayerStack.PushOverlay(layer);
+		layer->OnAttach();
 	}
 	bool Application::OnWindowsClose(WindowsCloseEvent e)
 	{

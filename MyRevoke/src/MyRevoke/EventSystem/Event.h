@@ -38,9 +38,10 @@ namespace Revoke
 		{
 			return GetCategoryFlags() & category;
 		}
-		bool IsHandeled() const { return m_Handled; }
+		bool IsHandeled() const { return Handled; }
+	public:
+		bool Handled = false;
 	protected:
-		bool m_Handled = false;
 	};
 
 	class EventDispatcher
@@ -54,7 +55,7 @@ namespace Revoke
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;

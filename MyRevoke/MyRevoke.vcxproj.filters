@@ -71,6 +71,10 @@
       <Filter>MyRevoke</Filter>
     </ClInclude>
     <ClInclude Include="src\rvpch.h" />
+    <ClInclude Include="src\MyRevoke\Input.h" />
+    <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h" />
+    <ClInclude Include="src\MyRevoke\KeyCodes.h" />
+    <ClInclude Include="src\MyRevoke\MouseBtnCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp">
@@ -98,5 +102,6 @@
       <Filter>MyRevoke\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\rvpch.cpp" />
+    <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp" />
   </ItemGroup>
 </Project>

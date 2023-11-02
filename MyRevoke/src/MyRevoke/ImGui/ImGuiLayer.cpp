@@ -79,7 +79,7 @@ void Revoke::ImGuiLayer::OnUpdate()
 
     static bool show = true;
     ImGui::ShowDemoWindow(&show);
-    RV_CORE_TRACE("ImGuiLayer is updated");
+   
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

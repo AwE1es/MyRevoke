@@ -1,8 +1,10 @@
 #include "rvpch.h"
 #include "Application.h"
 #include "Log.h"
+#include "Input.h"
 
 #include <glad/glad.h>
+
 
 namespace Revoke
 {
@@ -27,6 +29,7 @@ namespace Revoke
 			glClear(GL_COLOR_BUFFER_BIT);
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
 			m_Window->OnUpdate();
 		}
 	}
@@ -37,7 +40,7 @@ namespace Revoke
 		
 		eDispatcher.Dispatch<WindowsCloseEvent>(RV_BIND_EVENT_FUNK(Application::OnWindowsClose));
 
-		RV_CORE_TRACE("{0}", e);
+		
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{

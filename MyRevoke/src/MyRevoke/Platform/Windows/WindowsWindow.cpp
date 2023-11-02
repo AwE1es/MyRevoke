@@ -36,6 +36,7 @@ namespace Revoke
 
 	void WindowsWindow::Init(const WindowSettings& settings)
 	{
+
 		m_Data.Title = settings.Title;
 		m_Data.Width = settings.Width;
 		m_Data.Height = settings.Height;

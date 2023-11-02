@@ -22,6 +22,7 @@ namespace Revoke
 		void SetVSync(bool enable) override;
 		bool IsVSync() const override;
 
+		inline void* GetCoreWindow() const override { return m_Window; }
 	private:
 		virtual void Init(const WindowSettings& settings);
 		virtual void Shutdown();

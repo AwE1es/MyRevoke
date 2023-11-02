@@ -59,12 +59,11 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -83,15 +82,14 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MD /MT %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -116,15 +114,19 @@
     <ClInclude Include="src\MyRevoke\EventSystem\KeyEvent.h" />
     <ClInclude Include="src\MyRevoke\EventSystem\MouseEvent.h" />
     <ClInclude Include="src\MyRevoke\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\MyRevoke\Input.h" />
+    <ClInclude Include="src\MyRevoke\KeyCodes.h" />
     <ClInclude Include="src\MyRevoke\Layer.h" />
     <ClInclude Include="src\MyRevoke\LayerStack.h" />
     <ClInclude Include="src\MyRevoke\Log.h" />
+    <ClInclude Include="src\MyRevoke\MouseBtnCodes.h" />
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_glfw.h" />
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3.h" />
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\MyRevoke\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\MyRevoke\Window.h" />
     <ClInclude Include="src\rvpch.h" />
+    <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp" />
@@ -138,6 +140,7 @@
     <ClCompile Include="src\rvpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLAD\GLAD.vcxproj">

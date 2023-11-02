@@ -8,12 +8,13 @@ public:
 	{}
 	void OnUpdate() override
 	{
-		RV_INFO("Test layer is updated");
+		if (Revoke::Input::IsKeyPressed(RV_KEY_TAB))
+			RV_TRACE("TAB is pressed");
 	}
 
 	void OnEvent(Revoke::Event& e) override
 	{
-		RV_TRACE("{0}", e);
+	
 	}
 };
 

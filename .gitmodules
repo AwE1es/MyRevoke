@@ -1,9 +1,9 @@
 [submodule "MyRevoke/vendor/spdlog"]
 	path = MyRevoke/vendor/spdlog
 	url = https://github.com/gabime/spdlog
-[submodule "MyRevoke/vendor/GLFW"]
-	path = MyRevoke/vendor/GLFW
-	url = https://github.com/TheCherno/glfw/tree/b4b43190ce623f1a75c94f7100c2d5b0b7bbb4f8
+[submodule "MyRevoke/vendor/glm"]
+	path = MyRevoke/vendor/glm
+	url = https://github.com/g-truc/glm
 [submodule "MyRevoke/vendor/imgui"]
 	path = MyRevoke/vendor/imgui
-	url = https://github.com/ocornut/imgui
+	url = git@github.com:Revokeeee/imgui.git

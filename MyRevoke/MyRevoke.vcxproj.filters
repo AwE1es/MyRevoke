@@ -46,6 +46,12 @@
     <ClInclude Include="src\MyRevoke\ImGui\ImGuiLayer.h">
       <Filter>MyRevoke\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\Input.h">
+      <Filter>MyRevoke</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\KeyCodes.h">
+      <Filter>MyRevoke</Filter>
+    </ClInclude>
     <ClInclude Include="src\MyRevoke\Layer.h">
       <Filter>MyRevoke</Filter>
     </ClInclude>
@@ -53,6 +59,9 @@
       <Filter>MyRevoke</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Log.h">
+      <Filter>MyRevoke</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\MouseBtnCodes.h">
       <Filter>MyRevoke</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_glfw.h">
@@ -64,6 +73,9 @@
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3_loader.h">
       <Filter>MyRevoke\Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h">
+      <Filter>MyRevoke\Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\MyRevoke\Platform\Windows\WindowsWindow.h">
       <Filter>MyRevoke\Platform\Windows</Filter>
     </ClInclude>
@@ -71,10 +83,6 @@
       <Filter>MyRevoke</Filter>
     </ClInclude>
     <ClInclude Include="src\rvpch.h" />
-    <ClInclude Include="src\MyRevoke\Input.h" />
-    <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h" />
-    <ClInclude Include="src\MyRevoke\KeyCodes.h" />
-    <ClInclude Include="src\MyRevoke\MouseBtnCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp">
@@ -98,10 +106,12 @@
     <ClCompile Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3.cpp">
       <Filter>MyRevoke\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp">
+      <Filter>MyRevoke\Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\MyRevoke\Platform\Windows\WindowsWindow.cpp">
       <Filter>MyRevoke\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\rvpch.cpp" />
-    <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp" />
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include <glad/glad.h>
 
 
+
 namespace Revoke
 {
 //#define BIND_EVENT_FUNC(x) std::bind(&Application::x, this, std::placeholders::_1)

@@ -10,6 +10,7 @@ workspace "MyRevoke"
     IncludeDir ["GLFW"] = "MyRevoke/vendor/GLFW/include"
     IncludeDir ["ImGui"] = "MyRevoke/vendor/imgui"
     IncludeDir ["GLAD"] = "MyRevoke/vendor/GLAD/include"
+    IncludeDir ["GLM"] = "MyRevoke/vendor/glm"
 
     group "Dependencies"
         include "MyRevoke/vendor/GLFW"
@@ -44,7 +45,8 @@ workspace "MyRevoke"
             "%{prj.name}/vendor/spdlog/include",
             "%{IncludeDir.GLFW}",
             "%{IncludeDir.GLAD}",
-            "%{IncludeDir.ImGui}"
+            "%{IncludeDir.ImGui}",
+            "%{IncludeDir.GLM}"
         }
 
         links
@@ -103,7 +105,8 @@ workspace "MyRevoke"
         includedirs
         {
             "MyRevoke/vendor/spdlog/include",
-            "MyRevoke/src"
+            "MyRevoke/src",
+            "%{IncludeDir.GLM}"
         }
     
         links

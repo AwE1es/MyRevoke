@@ -60,7 +60,7 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -83,7 +83,7 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -123,10 +123,10 @@
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_glfw.h" />
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3.h" />
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h" />
     <ClInclude Include="src\MyRevoke\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\MyRevoke\Window.h" />
     <ClInclude Include="src\rvpch.h" />
-    <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp" />
@@ -136,11 +136,11 @@
     <ClCompile Include="src\MyRevoke\Log.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\OpenGL\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\rvpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLAD\GLAD.vcxproj">

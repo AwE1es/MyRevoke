@@ -7,3 +7,6 @@
 [submodule "MyRevoke/vendor/imgui"]
 	path = MyRevoke/vendor/imgui
 	url = git@github.com:Revokeeee/imgui.git
+[submodule "MyRevoke/vendor/GLFW"]
+	path = MyRevoke/vendor/GLFW
+	url = git@github.com:Revokeeee/glfw.git

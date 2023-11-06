@@ -120,9 +120,6 @@
     <ClInclude Include="src\MyRevoke\LayerStack.h" />
     <ClInclude Include="src\MyRevoke\Log.h" />
     <ClInclude Include="src\MyRevoke\MouseBtnCodes.h" />
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_glfw.h" />
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3.h" />
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h" />
     <ClInclude Include="src\MyRevoke\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\MyRevoke\Window.h" />
@@ -130,12 +127,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp" />
+    <ClCompile Include="src\MyRevoke\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\MyRevoke\Layer.cpp" />
     <ClCompile Include="src\MyRevoke\LayerStack.cpp" />
     <ClCompile Include="src\MyRevoke\Log.cpp" />
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\imgui_impl_glfw.cpp" />
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\rvpch.cpp">

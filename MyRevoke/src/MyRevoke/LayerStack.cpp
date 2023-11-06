@@ -6,7 +6,6 @@ namespace Revoke
 {
 	LayerStack::LayerStack()
 	{
-		m_LayerInsert = m_LayersArr.begin();
 	}
 	LayerStack::~LayerStack()
 	{
@@ -26,7 +25,8 @@ namespace Revoke
 	}
 	void LayerStack::PushLayer(Layer* layer)
 	{
-		m_LayerInsert = m_LayersArr.emplace(m_LayerInsert, layer);
+		m_LayersArr.emplace(m_LayersArr.begin() + m_LayerInsertInd, layer);
+		m_LayerInsertInd++;
 	}
 	void LayerStack::PopLayer(Layer* layer)
 	{
@@ -35,7 +35,7 @@ namespace Revoke
 		if (it != m_LayersArr.end())
 		{
 			m_LayersArr.erase(it);
-			m_LayerInsert--;
+			m_LayerInsertInd--;
 		}
 	}
 }

@@ -21,6 +21,6 @@ namespace Revoke {
 		std::vector<Layer*>::iterator end() { return m_LayersArr.end(); }
 	private:
 		std::vector<Layer*> m_LayersArr;
-		std::vector<Layer*>::iterator m_LayerInsert;
+		unsigned int  m_LayerInsertInd = 0;
 	};
 }

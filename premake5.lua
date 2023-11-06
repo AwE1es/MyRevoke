@@ -106,7 +106,8 @@ workspace "MyRevoke"
         {
             "MyRevoke/vendor/spdlog/include",
             "MyRevoke/src",
-            "%{IncludeDir.GLM}"
+            "%{IncludeDir.GLM}",
+            "%{IncludeDir.ImGui}",
         }
     
         links

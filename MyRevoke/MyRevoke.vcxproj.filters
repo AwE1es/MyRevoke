@@ -13,9 +13,6 @@
     <Filter Include="MyRevoke\Platform">
       <UniqueIdentifier>{AB4408D6-175B-066C-60D2-918DCC27D7F3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MyRevoke\Platform\OpenGL">
-      <UniqueIdentifier>{7F9FE9EB-6BC4-386C-940F-1EFC8093378A}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MyRevoke\Platform\Windows">
       <UniqueIdentifier>{E56939C1-512C-6D4B-9ADC-FBD706DE4529}</UniqueIdentifier>
     </Filter>
@@ -64,15 +61,6 @@
     <ClInclude Include="src\MyRevoke\MouseBtnCodes.h">
       <Filter>MyRevoke</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_glfw.h">
-      <Filter>MyRevoke\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3.h">
-      <Filter>MyRevoke\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3_loader.h">
-      <Filter>MyRevoke\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h">
       <Filter>MyRevoke\Platform\Windows</Filter>
     </ClInclude>
@@ -88,6 +76,9 @@
     <ClCompile Include="src\MyRevoke\Application.cpp">
       <Filter>MyRevoke</Filter>
     </ClCompile>
+    <ClCompile Include="src\MyRevoke\ImGui\ImGuiBuild.cpp">
+      <Filter>MyRevoke\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiLayer.cpp">
       <Filter>MyRevoke\ImGui</Filter>
     </ClCompile>
@@ -99,12 +90,6 @@
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Log.cpp">
       <Filter>MyRevoke</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\imgui_impl_glfw.cpp">
-      <Filter>MyRevoke\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\imgui_impl_opengl3.cpp">
-      <Filter>MyRevoke\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp">
       <Filter>MyRevoke\Platform\Windows</Filter>

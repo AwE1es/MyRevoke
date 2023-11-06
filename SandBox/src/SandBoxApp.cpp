@@ -1,5 +1,6 @@
-#include<MyRevoke.h>
+#include <MyRevoke.h>
 #include "glm/glm.hpp"
+#include "imgui.h"
 
 class TestLayer : public Revoke::Layer
 {
@@ -11,6 +12,14 @@ public:
 	{
 		if (Revoke::Input::IsKeyPressed(RV_KEY_TAB))
 			RV_TRACE("TAB is pressed");
+	}
+
+	__declspec(dllimport) void OnImGuiDraw()
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("HI!");
+		ImGui::End();
+
 	}
 
 	void OnEvent(Revoke::Event& e) override
@@ -25,7 +34,6 @@ public:
 	SandBox()
 	{
 		PushLayer(new TestLayer());
-		PushOverlay(new Revoke::ImGuiLayer());
 	}
 	~SandBox()
 	{

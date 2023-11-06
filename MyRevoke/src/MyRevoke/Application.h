@@ -8,6 +8,7 @@
 #include "EventSystem/MouseEvent.h"
 #include "EventSystem/KeyEvent.h"
 #include "LayerStack.h"
+#include "MyRevoke/ImGui/ImGuiLayer.h"
 
 
 namespace Revoke
@@ -16,7 +17,7 @@ namespace Revoke
 	{
 	public:
 		Application();
-		virtual ~Application() {}
+		virtual ~Application();
 
 		void Run();
 
@@ -32,8 +33,11 @@ namespace Revoke
 		bool OnWindowsClose(WindowsCloseEvent e);
 
 		std::unique_ptr<Window> m_Window;
-		bool m_Run = true;
+
 		LayerStack m_LayerStack;
+		ImGuiLayer* m_ImGuiLayer;
+
+		bool m_Run = true;
 	private:
 		static Application* s_Instance;
 	};

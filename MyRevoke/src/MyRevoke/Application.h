@@ -13,7 +13,7 @@
 
 namespace Revoke
 {
-	class RV_API Application
+	class  Application
 	{
 	public:
 		Application();

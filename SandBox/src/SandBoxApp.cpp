@@ -14,11 +14,9 @@ public:
 			RV_TRACE("TAB is pressed");
 	}
 
-	__declspec(dllimport) void OnImGuiDraw()
+	void OnImGuiDraw()
 	{
-		ImGui::Begin("Test");
-		ImGui::Text("HI!");
-		ImGui::End();
+		
 
 	}
 

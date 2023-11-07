@@ -21,9 +21,10 @@ workspace "MyRevoke"
 
     project "MyRevoke"
         location "MyRevoke"
-        kind "SharedLib"
+        kind "StaticLib"
         language "C++"
-        staticruntime "off"
+        cppdialect "C++20"
+        staticruntime "on"
 
         targetdir ("bin/" .. outputdir .. "/%{prj.name}")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -58,7 +59,6 @@ workspace "MyRevoke"
         }
 
         filter "system:windows"
-            cppdialect "C++20"
             systemversion "latest"
 
             defines
@@ -67,13 +67,9 @@ workspace "MyRevoke"
                 "RV_BUILD_DLL",
                 "GLFW_INCLUDE_NONE",
                 "IMGUI_DEFINE_MATH_OPERATORS",
-                "RV_ASSERTS_ENABLE"
-            }
-
-            postbuildcommands
-            {
-               ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-            }
+                "RV_ASSERTS_ENABLE",
+                "_CRT_SECURE_NO_WARNINGS",
+            }          
 
         filter "configurations:Debug"
             defines "RV_DEBUG"
@@ -89,9 +85,9 @@ workspace "MyRevoke"
     project "SandBox"
         location "SandBox"
         kind "ConsoleApp"
-    
+        cppdialect "C++20"
         language "C++"
-        staticruntime "off"
+        staticruntime "on"
     
         targetdir ("bin/" .. outputdir .. "/%{prj.name}")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -116,7 +112,7 @@ workspace "MyRevoke"
         }
     
         filter "system:windows"
-            cppdialect "C++20"
+            
             systemversion "latest"
     
             defines

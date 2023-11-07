@@ -6,7 +6,7 @@
 
 
 namespace Revoke {
-	class RV_API LayerStack
+	class  LayerStack
 	{
 	public:
 		LayerStack();

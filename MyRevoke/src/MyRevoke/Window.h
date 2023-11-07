@@ -21,7 +21,7 @@ namespace Revoke {
 		                               
 	};
 
-	class RV_API Window // Inteface that going to be interprited by platform
+	class  Window // Inteface that going to be interprited by platform
 	{
 	public:
 		virtual ~Window() {}

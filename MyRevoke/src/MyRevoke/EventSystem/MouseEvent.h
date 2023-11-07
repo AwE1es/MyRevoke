@@ -7,7 +7,7 @@
 namespace Revoke
 {
 
-	class RV_API MouseMovedEvent: public Event
+	class  MouseMovedEvent: public Event
 	{
 	public:
 		
@@ -32,7 +32,7 @@ namespace Revoke
 		float m_MoveX, m_MoveY;
 	};
 
-	class RV_API MouseButtonEvent : public Event
+	class  MouseButtonEvent : public Event
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button; }
@@ -44,7 +44,7 @@ namespace Revoke
 		int m_Button;
 	};
 
-	class RV_API MouseButtonPressedEvent : public MouseButtonEvent
+	class  MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent( int presedButton)
@@ -62,7 +62,7 @@ namespace Revoke
 		virtual const char* GetName() const override { return "MouseButtonPressed"; }
 	};
 
-	class RV_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class  MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int releasedButton)
@@ -79,14 +79,14 @@ namespace Revoke
 		virtual EventType GetEventType() const override { return GetStaticType(); }
 		virtual const char* GetName() const override { return "MouseButtonReleased"; }
 	};
-	class RV_API MouseScrolledEvent : public Event
+	class  MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrolledEvent(float deltaX, float deltaY)
+		MouseScrolledEvent(int deltaX, int deltaY)
 			: m_DeltaX(deltaX), m_DeltaY(deltaY) {}
 
-		inline float GetDeltaX() const { return m_DeltaX; }
-		inline float GetDeltaY() const { return m_DeltaY; }
+		inline int GetDeltaX() const { return m_DeltaX; }
+		inline int GetDeltaY() const { return m_DeltaY; }
 
 		std::string ToString() const override
 		{

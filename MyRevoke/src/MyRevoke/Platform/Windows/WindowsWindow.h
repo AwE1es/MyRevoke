@@ -31,9 +31,9 @@ namespace Revoke
 
 		struct WindowData
 		{
-			std::string Title;
-			unsigned int Width, Height;
-			bool VSync;
+			std::string Title = "";
+			unsigned int Width = 0, Height = 0;
+			bool VSync = false;
 			std::function<void(Event&)> EventCallback;
 		};
 		WindowData m_Data;

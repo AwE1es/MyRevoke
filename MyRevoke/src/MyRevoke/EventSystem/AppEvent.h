@@ -5,7 +5,7 @@
 #include "rvpch.h"
 
 namespace Revoke {
-	class RV_API WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height)
@@ -31,7 +31,7 @@ namespace Revoke {
 		unsigned int m_Height;
 	};
 
-	class RV_API WindowsCloseEvent : public Event
+	class WindowsCloseEvent : public Event
 	{
 	public:
 		WindowsCloseEvent(){}

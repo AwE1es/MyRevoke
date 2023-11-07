@@ -7,7 +7,7 @@
 #include "spdlog/fmt/ostr.h"
 
 namespace Revoke{ 
-	class RV_API Log
+	class  Log
 	{
 	public:
 

@@ -8,7 +8,7 @@ namespace Revoke
 {
 
 	
-	class RV_API KeyEvent : public Event // abstructed class only for child clases (key pressed and key released)
+	class  KeyEvent : public Event // abstructed class only for child clases (key pressed and key released)
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
@@ -21,7 +21,7 @@ namespace Revoke
 		int m_KeyCode;
 	};
 
-	class RV_API KeyPressedEvent : public KeyEvent
+	class  KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatCount)
@@ -42,7 +42,7 @@ namespace Revoke
 	private:
 		int m_RepeatCount;
 	};
-	class RV_API KeyTypedEvent : public KeyEvent
+	class  KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode)
@@ -61,7 +61,7 @@ namespace Revoke
 		virtual const char* GetName() const override { return "KeyTyped"; }
 	};
 
-	class RV_API KeyReleasedEvent : public KeyEvent
+	class  KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)
@@ -79,7 +79,7 @@ namespace Revoke
 		virtual const char* GetName() const override { return "KeyReleased"; }
 
 	private:
-		int m_RepeatCount;
+		int m_RepeatCount = 0;
 	};
 
 

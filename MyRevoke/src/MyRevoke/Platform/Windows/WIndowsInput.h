@@ -4,7 +4,7 @@
 #include "MyRevoke/Input.h"
 
 namespace Revoke {
-	class RV_API WindowsInput : public Input
+	class  WindowsInput : public Input
 	{
 	protected:
 		virtual bool IsKeyPressedImplementation(int keycode) override;

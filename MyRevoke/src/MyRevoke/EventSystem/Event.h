@@ -25,7 +25,7 @@ namespace Revoke
 		EventCategoryMouseButton	= BIT(4)
 
 	};
-	class RV_API Event //abstract base class for all the events
+	class  Event //abstract base class for all the events
 	{
 		friend class EventDispatcher;
 	public:

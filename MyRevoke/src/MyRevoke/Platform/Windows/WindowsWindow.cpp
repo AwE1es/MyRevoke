@@ -136,7 +136,7 @@ namespace Revoke
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-				MouseScrolledEvent event((float)xOffset, (float)yOffset);
+				MouseScrolledEvent event((int)xOffset, (int)yOffset);
 				data.EventCallback(event);
 			});
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)

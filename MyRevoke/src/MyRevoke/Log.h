@@ -27,10 +27,10 @@ namespace Revoke{
 #define RV_CORE_WARN(...)	::Revoke::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define RV_CORE_INFO(...)	::Revoke::Log::GetCoreLogger()->info(__VA_ARGS__)
 #define RV_CORE_TRACE(...)	::Revoke::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define RV_CORE_FATAL(...)	::Revoke::Log::GetCoreLogger()->fatal(__VA_ARGS__)
+#define RV_CORE_FATAL(...)	::Revoke::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 #define RV_ERROR(...)		::Revoke::Log::GetClientLogger()->error(__VA_ARGS__)
 #define RV_WARN(...)		::Revoke::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define RV_INFO(...)		::Revoke::Log::GetClientLogger()->info(__VA_ARGS__)
 #define RV_TRACE(...)		::Revoke::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define RV_FATAL(...)		::Revoke::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define RV_FATAL(...)		::Revoke::Log::GetClientLogger()->critical(__VA_ARGS__)

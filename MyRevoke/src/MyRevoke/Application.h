@@ -9,7 +9,8 @@
 #include "EventSystem/KeyEvent.h"
 #include "LayerStack.h"
 #include "MyRevoke/ImGui/ImGuiLayer.h"
-
+#include "MyRevoke/Renderer/Shader.h"
+#include "MyRevoke/Renderer/Buffer.h"
 
 namespace Revoke
 {
@@ -38,6 +39,11 @@ namespace Revoke
 		ImGuiLayer* m_ImGuiLayer;
 
 		bool m_Run = true;
+
+
+		std::shared_ptr <Shader> m_Shader;
+		std::shared_ptr <VertexArray> m_VertexArray;
+	
 	private:
 		static Application* s_Instance;
 	};

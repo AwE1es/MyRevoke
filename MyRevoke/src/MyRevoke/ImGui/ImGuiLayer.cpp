@@ -19,8 +19,7 @@ Revoke::ImGuiLayer::ImGuiLayer()
 
 Revoke::ImGuiLayer::~ImGuiLayer()
 {
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui::DestroyContext();
+ 
 }
 
 void Revoke::ImGuiLayer::OnAttach()

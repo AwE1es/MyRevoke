@@ -1,9 +1,9 @@
 #pragma once
 
+#include "MyRevoke/Window.h"
+#include "MyRevoke/Renderer/GraphicsContex.h"
 
-#include"MyRevoke/Window.h"
-
-#include<GLFW/glfw3.h>
+#include <GLFW/glfw3.h>
 
 namespace Revoke
 {
@@ -28,6 +28,7 @@ namespace Revoke
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		RenderContex* m_Context;
 
 		struct WindowData
 		{

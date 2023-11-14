@@ -2,11 +2,13 @@
 
 #include "WindowsWindow.h"
 
-#include"MyRevoke/EventSystem/AppEvent.h"
-#include"MyRevoke/EventSystem/KeyEvent.h"
-#include"MyRevoke/EventSystem/MouseEvent.h"
+#include "MyRevoke/EventSystem/AppEvent.h"
+#include "MyRevoke/EventSystem/KeyEvent.h"
+#include "MyRevoke/EventSystem/MouseEvent.h"
 
-#include<glad/glad.h>
+#include "MyRevoke/Platform/OpenGL/OpenGLContex.h"
+
+
 
 
 namespace Revoke
@@ -41,6 +43,7 @@ namespace Revoke
 		m_Data.Width = settings.Width;
 		m_Data.Height = settings.Height;
 
+
 		RV_CORE_INFO("Window is initialized {0} ({1}, {2})", settings.Title, settings.Width, settings.Height);
 
 		if (!s_GLFWInitialization)
@@ -54,11 +57,13 @@ namespace Revoke
 			s_GLFWInitialization = true;
 		}
 
+
 		m_Window = glfwCreateWindow((int)settings.Width, (int)settings.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		RV_CORE_ASSERT(status, "Failed to initialize GLAD");
+		m_Context = new OpenGLContex(m_Window);
+		m_Context->Init();
+
+		
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -156,7 +161,8 @@ namespace Revoke
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
+	
 	}
 
 	void WindowsWindow::SetVSync(bool cond)

@@ -71,6 +71,12 @@
       <Filter>MyRevoke</Filter>
     </ClInclude>
     <ClInclude Include="src\rvpch.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\GraphicsContex.h" />
+    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLContex.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\Shader.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\Buffer.h" />
+    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp">
@@ -98,5 +104,10 @@
       <Filter>MyRevoke\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\rvpch.cpp" />
+    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLContex.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\Shader.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\Renderer.cpp" />
   </ItemGroup>
 </Project>

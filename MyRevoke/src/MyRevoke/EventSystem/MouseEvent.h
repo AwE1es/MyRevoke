@@ -82,11 +82,11 @@ namespace Revoke
 	class  MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrolledEvent(int deltaX, int deltaY)
+		MouseScrolledEvent(double deltaX, double deltaY)
 			: m_DeltaX(deltaX), m_DeltaY(deltaY) {}
 
-		inline int GetDeltaX() const { return m_DeltaX; }
-		inline int GetDeltaY() const { return m_DeltaY; }
+		inline double GetDeltaX() const { return m_DeltaX; }
+		inline double GetDeltaY() const { return m_DeltaY; }
 
 		std::string ToString() const override
 		{
@@ -101,7 +101,7 @@ namespace Revoke
 		virtual int GetCategoryFlags() const override { return EventCategoryMouse | EventCategoryInput; }
 
 	private:
-		int m_DeltaX, m_DeltaY;
+		double m_DeltaX, m_DeltaY;
 	};
 
 }

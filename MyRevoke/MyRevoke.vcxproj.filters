@@ -77,6 +77,11 @@
     <ClInclude Include="src\MyRevoke\Renderer\Buffer.h" />
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Renderer.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\Cmaera.h" />
+    <ClInclude Include="src\MyRevoke\Core\Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Application.cpp">
@@ -109,5 +114,9 @@
     <ClCompile Include="src\MyRevoke\Renderer\Buffer.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\Cmaera.cpp" />
   </ItemGroup>
 </Project>

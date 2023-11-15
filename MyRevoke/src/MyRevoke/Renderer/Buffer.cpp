@@ -9,10 +9,10 @@ namespace Revoke {
     {
         switch (Renderer::GetAPI())
         {
-        case RendererAPI::None:
+        case RendererAPI::API::None:
             RV_CORE_ASSERT(false, "RendererAPI None is not supported"); return nullptr;
             break;
-        case RendererAPI::OpenGL:
+        case RendererAPI::API::OpenGL:
             return new OpenGLVertexBuffer(vertices, size); 
             break;
         }
@@ -25,10 +25,10 @@ namespace Revoke {
     {
         switch (Renderer::GetAPI())
         {
-        case RendererAPI::None:
+        case RendererAPI::API::None:
             RV_CORE_ASSERT(false, "RendererAPI None is not supported"); return nullptr;
             break;
-        case RendererAPI::OpenGL:
+        case RendererAPI::API::OpenGL:
             return new OpenGLIndexBuffer(indices, size);
             break;
         }
@@ -39,10 +39,10 @@ namespace Revoke {
     {
         switch (Renderer::GetAPI())
         {
-        case RendererAPI::None:
+        case RendererAPI::API::None:
             RV_CORE_ASSERT(false, "RendererAPI None is not supported"); return nullptr;
             break;
-        case RendererAPI::OpenGL:
+        case RendererAPI::API::OpenGL:
             return new OpenGLVertexArrey();
             break;
         }

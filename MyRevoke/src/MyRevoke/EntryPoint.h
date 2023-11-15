@@ -8,7 +8,6 @@ extern Revoke::Application* Revoke::CreateApplication();
 int main(int argc, char** argv)
 {
 	Revoke::Log::Init();
-	std::cout << "MyRevoke engine is running :)\n";
 	auto app = Revoke::CreateApplication();
 	app->Run();
 	delete app;

@@ -2,6 +2,7 @@
 
 #include "MyRevoke/Core.h"
 #include "MyRevoke/EventSystem/Event.h"
+#include "MyRevoke/Core/Time.h"
 
 namespace Revoke {
 	class  Layer
@@ -12,7 +13,7 @@ namespace Revoke {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep deltaTime) {}
 		virtual void OnImGuiDraw() {}
 		virtual void OnEvent(Event& event) {}
 

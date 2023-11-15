@@ -1,6 +1,8 @@
 #include "rvpch.h"
 #include "Shader.h"
 
+#include "glm/glm.hpp"
+#include <glm/gtc/type_ptr.hpp> 
 #include <glad/glad.h>
 
 namespace Revoke {
@@ -123,5 +125,11 @@ namespace Revoke {
 	void Revoke::Shader::UnBind() const
 	{
 		glUseProgram(0);
+	}
+	void Shader::BindUniformMat4(std::string name, glm::mat4 ViewProjectionMatrix)
+	{
+		GLuint vpMatrixLocation = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniformMatrix4fv(vpMatrixLocation, 1, GL_FALSE, glm::value_ptr(ViewProjectionMatrix));
+
 	}
 } 

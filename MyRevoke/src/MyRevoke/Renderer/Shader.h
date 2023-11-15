@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "glm/glm.hpp"
 
 namespace Revoke
 {
@@ -13,6 +14,7 @@ namespace Revoke
 		void Bind() const;
 		void UnBind() const;
 
+		void BindUniformMat4(std::string name, glm::mat4 VPmatrix);
 	private:
 		uint32_t m_RendererID;
 	};

@@ -11,6 +11,9 @@
 #include "MyRevoke/ImGui/ImGuiLayer.h"
 #include "MyRevoke/Renderer/Shader.h"
 #include "MyRevoke/Renderer/Buffer.h"
+#include "MyRevoke/Renderer/Cmaera.h"
+
+#include "MyRevoke/Core/Time.h"
 
 namespace Revoke
 {
@@ -32,18 +35,16 @@ namespace Revoke
 
 	private:
 		bool OnWindowsClose(WindowsCloseEvent e);
-
+	private:
 		std::unique_ptr<Window> m_Window;
 
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_ImGuiLayer;
 
+		float m_LastFrame;
+
 		bool m_Run = true;
 
-
-		std::shared_ptr <Shader> m_Shader;
-		std::shared_ptr <VertexArray> m_VertexArray;
-	
 	private:
 		static Application* s_Instance;
 	};

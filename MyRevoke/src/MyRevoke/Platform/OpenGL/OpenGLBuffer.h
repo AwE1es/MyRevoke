@@ -49,8 +49,8 @@ namespace Revoke
 		virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuff)  override;
 		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuff)  override;
 
-		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffe() const override {	return m_VertexBuff;}
-		virtual const std::shared_ptr <IndexBuffer>& GetIndexBuffe() const override { return m_IndexBuff; }
+		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffer() const override {	return m_VertexBuff;}
+		virtual const std::shared_ptr <IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuff; }
 	private:
 		std::vector <std::shared_ptr <VertexBuffer>> m_VertexBuff;
 		std::shared_ptr <IndexBuffer> m_IndexBuff;

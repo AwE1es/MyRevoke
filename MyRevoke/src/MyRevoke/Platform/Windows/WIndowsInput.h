@@ -12,6 +12,7 @@ namespace Revoke {
 
 		virtual float GetMouseXImplementation() override;
 		virtual float GetMouseYImplementation() override;
+
 	};
 }
 

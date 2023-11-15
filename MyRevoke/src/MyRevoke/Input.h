@@ -19,6 +19,7 @@ namespace Revoke
 
 		virtual float GetMouseXImplementation() = 0;
 		virtual float GetMouseYImplementation() = 0;
+
 	private:
 		static Input* s_Intance;
 	};

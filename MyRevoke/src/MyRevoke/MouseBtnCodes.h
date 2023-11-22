@@ -1,3 +1,5 @@
+#pragma once
+
 
 //GLFW keys 
 #define 	RV_MOUSE_BUTTON_1   0

@@ -11,6 +11,7 @@ workspace "MyRevoke"
     IncludeDir ["ImGui"] = "MyRevoke/vendor/imgui"
     IncludeDir ["GLAD"] = "MyRevoke/vendor/GLAD/include"
     IncludeDir ["GLM"] = "MyRevoke/vendor/glm"
+    IncludeDir ["STB_IMAGE"] = "MyRevoke/vendor/stb_image"
 
     group "Dependencies"
         include "MyRevoke/vendor/GLFW"
@@ -35,10 +36,17 @@ workspace "MyRevoke"
         files
         {
             "%{prj.name}/src/**.h",
-            "%{prj.name}/src/**.cpp"
+            "%{prj.name}/src/**.cpp",
+            "%{prj.name}/vendor/glm/glm/**.hpp",
+            "%{prj.name}/vendor/glm/glm/**.inl",
+            "%{prj.name}/vendor/stb_image/stb_image.h",
+            "%{prj.name}/vendor/stb_image/stb_image.cpp",
            
         }
-
+        defines
+        {
+            "_CRT_SECURE_NO_WARNINGS"
+        }
 
         includedirs
         {
@@ -47,7 +55,8 @@ workspace "MyRevoke"
             "%{IncludeDir.GLFW}",
             "%{IncludeDir.GLAD}",
             "%{IncludeDir.ImGui}",
-            "%{IncludeDir.GLM}"
+            "%{IncludeDir.GLM}",
+            "%{IncludeDir.STB_IMAGE}"
         }
 
         links
@@ -95,7 +104,8 @@ workspace "MyRevoke"
         files
         {
             "%{prj.name}/src/**.h",
-            "%{prj.name}/src/**.cpp"
+            "%{prj.name}/src/**.cpp",
+          
         }
     
         includedirs

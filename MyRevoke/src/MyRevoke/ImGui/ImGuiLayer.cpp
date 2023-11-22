@@ -63,8 +63,8 @@ void Revoke::ImGuiLayer::OnDetach()
 
 void Revoke::ImGuiLayer::OnImGuiDraw()
 {
-	static bool show = true;
-	ImGui::ShowDemoWindow(&show);
+
+
 }
 
 

@@ -12,5 +12,7 @@ namespace Revoke
 		virtual void Clear() override;
 		virtual void DrawElements(const std::shared_ptr <VertexArray>& vertrexArray) override;
 		virtual void EnableBlending() override;
+
+		virtual void Init() override;
 	};
 }

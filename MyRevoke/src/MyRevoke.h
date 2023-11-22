@@ -14,6 +14,7 @@
 #include "MyRevoke/Renderer/RenderCommand.h"
 #include "MyRevoke/Renderer/Buffer.h"
 #include "MyRevoke/Renderer/Shader.h"
+#include "MyRevoke/Renderer/Texture.h"
 
 #include "MyRevoke/MouseBtnCodes.h"
 #include "MyRevoke/KeyCodes.h"

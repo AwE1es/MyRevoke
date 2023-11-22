@@ -37,7 +37,7 @@ namespace Revoke
 	{
 		auto it = std::find(m_LayersArr.begin(), m_LayersArr.end(), layer);
 
-		if (it != m_LayersArr.end())
+		if (it != m_LayersArr.begin() + m_LayerInsertInd)
 		{
 			m_LayersArr.erase(it);
 			layer->OnDetach();

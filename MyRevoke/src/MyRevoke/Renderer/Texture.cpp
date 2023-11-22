@@ -1,22 +1,23 @@
 #include "rvpch.h"
-#include "Shader.h"
+#include "Texture.h"
+
 #include "Renderer.h"
-#include "MyRevoke/Platform/OpenGL/OpenGlShader.h"
+#include "MyRevoke/Platform/OpenGL/OpenGLTexture2D.h"
 
-
-namespace Revoke {
-    Shader* Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
-    {
+namespace Revoke
+{
+	std::shared_ptr<Texture2D> Texture2D::Create(const char* path)
+	{
         switch (Renderer::GetAPI())
         {
         case RendererAPI::API::None:
             RV_CORE_ASSERT(false, "RendererAPI None is not supported"); return nullptr;
             break;
         case RendererAPI::API::OpenGL:
-            return new OpenGLShader(vertexSrc, fragmentSrc);
+            return std::make_shared<OpenGLTexture2D>(path);
             break;
         }
         RV_CORE_ASSERT(false, "RendererAPI is not correct")
             return nullptr;
-    }
+	}
 }

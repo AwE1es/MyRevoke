@@ -21,6 +21,7 @@ namespace Revoke
 		virtual void Clear() = 0;
 		virtual void DrawElements(const std::shared_ptr <VertexArray>& vertrexArray) = 0;
 		virtual void EnableBlending() = 0;
+		virtual void Init() = 0;
 
 		inline static API GetAPI() { return s_API; };
 	private:

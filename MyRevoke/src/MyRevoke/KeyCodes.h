@@ -1,4 +1,4 @@
-
+#pragma once
 
 
 //GLFW codes

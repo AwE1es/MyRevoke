@@ -3,6 +3,7 @@
 
 #include "MyRevoke/Renderer/Buffer.h"
 #include "MyRevoke/Renderer/RenderCommand.h"
+#include "MyRevoke/Platform/OpenGL/OpenGlShader.h"
 #include "Shader.h"
 #include "Cmaera.h"
 
@@ -18,11 +19,15 @@ namespace Revoke
 	void Renderer::End()
 	{
 	}
+	void Renderer::Init()
+	{
+		RenderCommand::Init();
+	}
 	void Renderer::Draw(const std::shared_ptr <Shader>& shader, const std::shared_ptr<VertexArray>& vertrexArray, const glm::mat4& transform)
 	{
 		shader->Bind();
-		shader->BindUniformMat4("u_PVmatrix", s_ViewProjectionMatrix);
-		shader->BindUniformMat4("u_TransformMatrix", transform);
+		std::static_pointer_cast<OpenGLShader>(shader)->BindUniformMat4("u_PVmatrix", s_ViewProjectionMatrix);
+		std::static_pointer_cast<OpenGLShader>(shader)->BindUniformMat4("u_TransformMatrix", transform);
 		vertrexArray->Bind();
 		RenderCommand::DrawElements(vertrexArray);
 	}

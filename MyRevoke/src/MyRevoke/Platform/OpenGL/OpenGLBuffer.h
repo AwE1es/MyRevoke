@@ -37,11 +37,11 @@ namespace Revoke
 		uint32_t m_RendererID, m_Count;
 	};
 
-	class OpenGLVertexArrey : public VertexArray
+	class OpenGLVertexArray : public VertexArray
 	{
 	public:
-		OpenGLVertexArrey();
-		virtual ~OpenGLVertexArrey();
+		OpenGLVertexArray();
+		virtual ~OpenGLVertexArray();
 
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
@@ -53,6 +53,7 @@ namespace Revoke
 		virtual const std::shared_ptr <IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuff; }
 	private:
 		std::vector <std::shared_ptr <VertexBuffer>> m_VertexBuff;
+		uint32_t m_VertexBufferIndexOffset = 0;
 		std::shared_ptr <IndexBuffer> m_IndexBuff;
 		uint32_t m_RendererID;
 	};

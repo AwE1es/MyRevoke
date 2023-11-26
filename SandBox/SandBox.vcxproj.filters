@@ -9,16 +9,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vendor\stb_image.h">
-      <Filter>vendor</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\SandBoxApp.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="vendor\stb_image.cpp">
-      <Filter>vendor</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Texture.shader" />
   </ItemGroup>
 </Project>

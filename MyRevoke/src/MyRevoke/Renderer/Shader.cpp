@@ -19,4 +19,18 @@ namespace Revoke {
         RV_CORE_ASSERT(false, "RendererAPI is not correct")
             return nullptr;
     }
+    Shader* Shader::Create(const std::string& path)
+    {
+        switch (Renderer::GetAPI())
+        {
+        case RendererAPI::API::None:
+            RV_CORE_ASSERT(false, "RendererAPI None is not supported"); return nullptr;
+            break;
+        case RendererAPI::API::OpenGL:
+            return new OpenGLShader(path);
+            break;
+        }
+        RV_CORE_ASSERT(false, "RendererAPI is not correct")
+            return nullptr;
+    }
 }

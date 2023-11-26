@@ -77,23 +77,23 @@ namespace Revoke {
 
 	//**********************************************************************************
 
-	OpenGLVertexArrey::OpenGLVertexArrey()
+	OpenGLVertexArray::OpenGLVertexArray()
 	{
 		glCreateVertexArrays(1, &m_RendererID);
 	}
-	OpenGLVertexArrey::~OpenGLVertexArrey()
+	OpenGLVertexArray::~OpenGLVertexArray()
 	{
 		glDeleteVertexArrays(1, &m_RendererID);
 	}
-	void OpenGLVertexArrey::Bind() const
+	void OpenGLVertexArray::Bind() const
 	{
 		glBindVertexArray(m_RendererID);
 	}
-	void OpenGLVertexArrey::UnBind() const
+	void OpenGLVertexArray::UnBind() const
 	{
 		glBindVertexArray(0);
 	}
-	void OpenGLVertexArrey::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuff) 
+	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuff)
 	{
 		glBindVertexArray(m_RendererID);
 		vertexBuff->Bind();
@@ -103,21 +103,20 @@ namespace Revoke {
 		uint32_t location = 0;
 		for (const auto& element : layout)
 		{
-			glEnableVertexAttribArray(location);
-			glVertexAttribPointer(location,
+			glEnableVertexAttribArray(location + m_VertexBufferIndexOffset);
+			glVertexAttribPointer(location + m_VertexBufferIndexOffset,
 				element.GetComponentCount(),
 				ShaderDataTypeToOpenGLDataType(element.Type),
 				element.Normalized ? GL_TRUE : GL_FALSE,
 				layout.GetStride(),
-				(const void*)(element.Offset));
-
+				(const void*)(intptr_t)element.Offset);
 			location++;
 		}
 		m_VertexBuff.push_back(vertexBuff);
-
+		m_VertexBufferIndexOffset += layout.GetElements().size();
 	}
 
-	void OpenGLVertexArrey::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuff) 
+	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuff)
 	{
 		glBindVertexArray(m_RendererID);
 		indexBuff->Bind();

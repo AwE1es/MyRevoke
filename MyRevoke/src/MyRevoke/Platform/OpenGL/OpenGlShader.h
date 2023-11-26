@@ -6,13 +6,14 @@
 
 #include "glm/glm.hpp"
 
-
+typedef unsigned int GLenum;
 namespace Revoke
 {
 	class OpenGLShader : public Shader
 	{
 	public:
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+		OpenGLShader(const std::string& path);
 		~OpenGLShader() override;
 
 		void Bind() const override;
@@ -33,6 +34,12 @@ namespace Revoke
 		int GetUniformLocation(std::string name) const;
 
 	private:
+
+		void InitShader(const std::unordered_map<GLenum, std::string>& shadersSoure);
+		std::unordered_map<GLenum, std::string> ProcesShader(const std::string& source);
+		GLenum ShaderTypeFromString(const std::string& type);
+		std::string ReadShader(const std::string& filepath);
+		
 		uint32_t m_RendererID;
 		mutable std::unordered_map<std::string, int> m_UniformLocations;
 	};

@@ -14,6 +14,7 @@ public:
 	TestLayer()
 		:Layer("Testing"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPos(0.0f)
 	{
+		/*
 			m_MeshColor = { 0.8f, 0.8f, 0.2f, 1.0f };
 			m_MeshLocation = { 0.25f, -0.25f };
 			m_MeshScale = { 0.5f, 0.5f };
@@ -40,6 +41,7 @@ public:
 			uint32_t indecies[3] = { 0, 1, 2 };
 			indexBuffer = Revoke::IndexBuffer::Create(indecies, 3);
 			m_VertexArray->SetIndexBuffer(indexBuffer);
+		*/
 
 		
 		//*****************************************************************************

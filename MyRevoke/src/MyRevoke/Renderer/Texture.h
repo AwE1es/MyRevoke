@@ -19,7 +19,7 @@ namespace Revoke
 	class Texture2D : public Texture
 	{
 	public:
-		static std::shared_ptr<Texture2D> Create(const char* path);
+		static Shared<Texture2D> Create(const char* path);
 
 	};
 }

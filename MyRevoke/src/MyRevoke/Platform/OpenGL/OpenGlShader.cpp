@@ -19,6 +19,13 @@ namespace Revoke {
 		std::string source = ReadShader(path);
 		auto shaderSources = ProcesShader(source);
 		InitShader(shaderSources);
+
+		// Extract name from filepath
+		auto lastSlash = path.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = path.rfind('.');
+		auto count = lastDot == std::string::npos ? path.size() - lastSlash : lastDot - lastSlash;
+		m_Name = path.substr(lastSlash, count);
 	}
 
 	Revoke::OpenGLShader::~OpenGLShader()

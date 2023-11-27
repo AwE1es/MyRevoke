@@ -15,7 +15,7 @@ namespace Revoke {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGLRendererAPI::DrawElements(const std::shared_ptr<VertexArray>& vertrexArray)
+	void OpenGLRendererAPI::DrawElements(const Shared<VertexArray>& vertrexArray)
 	{
 		glDrawElements(GL_TRIANGLES, vertrexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}

@@ -19,6 +19,8 @@ namespace Revoke
 		void Bind() const override;
 		void UnBind() const override;
 
+		virtual std::string GetName() const override { return m_Name; };
+
 		void BindMaterial(const std::string& name, const glm::vec4& color);
 
 		void BindUniformMat2(const std::string& name, const glm::mat2& value);
@@ -34,13 +36,14 @@ namespace Revoke
 		int GetUniformLocation(std::string name) const;
 
 	private:
-
 		void InitShader(const std::unordered_map<GLenum, std::string>& shadersSoure);
 		std::unordered_map<GLenum, std::string> ProcesShader(const std::string& source);
 		GLenum ShaderTypeFromString(const std::string& type);
 		std::string ReadShader(const std::string& filepath);
-		
+	private:
 		uint32_t m_RendererID;
+	private:
+		std::string m_Name;
 		mutable std::unordered_map<std::string, int> m_UniformLocations;
 	};
 }

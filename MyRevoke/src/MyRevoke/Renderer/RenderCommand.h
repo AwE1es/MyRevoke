@@ -15,7 +15,7 @@ namespace Revoke
 
 		inline static void Init() { s_RendererAPI->Init(); }
 		 
-		inline static void DrawElements(const std::shared_ptr <VertexArray>& vertrexArray) { s_RendererAPI->DrawElements(vertrexArray); }
+		inline static void DrawElements(const Shared <VertexArray>& vertrexArray) { s_RendererAPI->DrawElements(vertrexArray); }
 	private:
 		static RendererAPI* s_RendererAPI;
 	};

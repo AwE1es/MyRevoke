@@ -93,7 +93,7 @@ namespace Revoke {
 	{
 		glBindVertexArray(0);
 	}
-	void OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuff)
+	void OpenGLVertexArray::AddVertexBuffer(const Shared<VertexBuffer>& vertexBuff)
 	{
 		glBindVertexArray(m_RendererID);
 		vertexBuff->Bind();
@@ -116,7 +116,7 @@ namespace Revoke {
 		m_VertexBufferIndexOffset += layout.GetElements().size();
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuff)
+	void OpenGLVertexArray::SetIndexBuffer(const Shared<IndexBuffer>& indexBuff)
 	{
 		glBindVertexArray(m_RendererID);
 		indexBuff->Bind();

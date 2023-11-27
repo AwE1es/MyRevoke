@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 #ifdef RV_PLATFORM_WINDOWS
 	
@@ -12,6 +13,15 @@
 	#define RV_ASSERT(x, ...)
 #endif // RV_ASSERTS_ENABLE
 
+namespace Revoke {
+
+	template<typename T>
+	using Unique = std::unique_ptr<T>;
+
+	template<typename T>
+	using Shared = std::shared_ptr<T>;
+
+}
 
 #define BIT(x) (1 << x)
 #define RV_BIND_EVENT_FUNK(fn) std::bind(&fn, this, std::placeholders::_1)

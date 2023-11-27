@@ -18,7 +18,7 @@ namespace Revoke
 		static void End();
 		static void Init();
 
-		static void Draw(const std::shared_ptr <Shader>& shader, const std::shared_ptr <VertexArray>& vertrexArray, const glm::mat4& transform = glm::mat4(1.0f));
+		static void Draw(const Shared<Shader>& shader, const Shared<VertexArray>& vertrexArray, const glm::mat4& transform = glm::mat4(1.0f));
 	private:
 		static Renderer s_RendererAPI;
 		static glm::mat4 s_ViewProjectionMatrix;

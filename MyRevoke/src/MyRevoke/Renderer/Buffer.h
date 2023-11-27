@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 namespace Revoke
 {
@@ -113,7 +114,7 @@ namespace Revoke
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& GetLayout() const = 0;
 
-		static VertexBuffer* Create(float* vertices, uint32_t size);
+		static Shared <VertexBuffer> Create(float* vertices, uint32_t size);
 	};
 
 	class IndexBuffer
@@ -126,7 +127,7 @@ namespace Revoke
 
 		virtual uint32_t GetCount() const = 0;
 
-		static IndexBuffer* Create(uint32_t* indices, uint32_t size);
+		static Shared <IndexBuffer> Create(uint32_t* indices, uint32_t size);
 	};
 
 	class VertexArray
@@ -137,12 +138,12 @@ namespace Revoke
 		virtual void Bind() const = 0;
 		virtual void UnBind() const = 0;
 
-		virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuff)  = 0;
-		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuff)  = 0;
+		virtual void AddVertexBuffer(const Shared<VertexBuffer>& vertexBuff)  = 0;
+		virtual void SetIndexBuffer(const Shared<IndexBuffer>& indexBuff)  = 0;
 
-		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffer() const = 0;
-		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const = 0;
+		virtual const std::vector<Shared<VertexBuffer>>& GetVertexBuffer() const = 0;
+		virtual const Shared<IndexBuffer>& GetIndexBuffer() const = 0;
 
-		static VertexArray* Create();
+		static Shared <VertexArray> Create();
 	};
 }

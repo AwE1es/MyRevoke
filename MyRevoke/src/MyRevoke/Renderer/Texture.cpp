@@ -6,7 +6,7 @@
 
 namespace Revoke
 {
-	std::shared_ptr<Texture2D> Texture2D::Create(const char* path)
+    Shared<Texture2D> Texture2D::Create(const char* path)
 	{
         switch (Renderer::GetAPI())
         {

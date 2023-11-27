@@ -101,6 +101,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\Grid.shader" />
+    <None Include="Shaders\Mesh.shader" />
     <None Include="Shaders\Texture.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

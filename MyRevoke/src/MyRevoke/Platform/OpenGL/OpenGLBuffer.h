@@ -46,15 +46,15 @@ namespace Revoke
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
 		
-		virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuff)  override;
-		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuff)  override;
+		virtual void AddVertexBuffer(const Shared<VertexBuffer>& vertexBuff)  override;
+		virtual void SetIndexBuffer(const Shared<IndexBuffer>& indexBuff)  override;
 
-		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffer() const override {	return m_VertexBuff;}
-		virtual const std::shared_ptr <IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuff; }
+		virtual const std::vector<Shared<VertexBuffer>>& GetVertexBuffer() const override {	return m_VertexBuff;}
+		virtual const Shared <IndexBuffer>& GetIndexBuffer() const override { return m_IndexBuff; }
 	private:
-		std::vector <std::shared_ptr <VertexBuffer>> m_VertexBuff;
+		std::vector <Shared<VertexBuffer>> m_VertexBuff;
 		uint32_t m_VertexBufferIndexOffset = 0;
-		std::shared_ptr <IndexBuffer> m_IndexBuff;
+		Shared <IndexBuffer> m_IndexBuff;
 		uint32_t m_RendererID;
 	};
 }

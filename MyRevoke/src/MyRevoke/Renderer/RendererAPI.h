@@ -19,7 +19,7 @@ namespace Revoke
 	public:
 		virtual void SetClearColor(const glm::vec4 color) = 0;
 		virtual void Clear() = 0;
-		virtual void DrawElements(const std::shared_ptr <VertexArray>& vertrexArray) = 0;
+		virtual void DrawElements(const Shared <VertexArray>& vertrexArray) = 0;
 		virtual void EnableBlending() = 0;
 		virtual void Init() = 0;
 

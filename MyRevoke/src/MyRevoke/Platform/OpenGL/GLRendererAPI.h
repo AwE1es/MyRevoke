@@ -12,6 +12,7 @@ namespace Revoke
 		virtual void Clear() override;
 		virtual void DrawElements(const Shared<VertexArray>& vertrexArray) override;
 		virtual void EnableBlending() override;
+		virtual void WindowResize(float width, float height) override;
 
 		virtual void Init() override;
 	};

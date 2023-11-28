@@ -57,17 +57,41 @@
     <ClInclude Include="src\MyRevoke.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Application.h">
-      <Filter>src\MyRevoke</Filter>
+    <ClInclude Include="src\MyRevoke\Core\Application.h">
+      <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Core.h">
-      <Filter>src\MyRevoke</Filter>
+    <ClInclude Include="src\MyRevoke\Core\CameraController.h">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Core\Core.h">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Core\EntryPoint.h">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Core\Input.h">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Core\KeyCodes.h">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Core\Layer.h">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Core\LayerStack.h">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Core\Log.h">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Core\MouseBtnCodes.h">
+      <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Time.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\EntryPoint.h">
-      <Filter>src\MyRevoke</Filter>
+    <ClInclude Include="src\MyRevoke\Core\Window.h">
+      <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\EventSystem\AppEvent.h">
       <Filter>src\MyRevoke\EventSystem</Filter>
@@ -83,24 +107,6 @@
     </ClInclude>
     <ClInclude Include="src\MyRevoke\ImGui\ImGuiLayer.h">
       <Filter>src\MyRevoke\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Input.h">
-      <Filter>src\MyRevoke</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\KeyCodes.h">
-      <Filter>src\MyRevoke</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Layer.h">
-      <Filter>src\MyRevoke</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\LayerStack.h">
-      <Filter>src\MyRevoke</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Log.h">
-      <Filter>src\MyRevoke</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\MouseBtnCodes.h">
-      <Filter>src\MyRevoke</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.h">
       <Filter>src\MyRevoke\Platform\OpenGL</Filter>
@@ -146,9 +152,6 @@
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Renderer\Texture.h">
       <Filter>src\MyRevoke\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Window.h">
-      <Filter>src\MyRevoke</Filter>
     </ClInclude>
     <ClInclude Include="src\rvpch.h">
       <Filter>src</Filter>
@@ -1406,23 +1409,26 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MyRevoke\Application.cpp">
-      <Filter>src\MyRevoke</Filter>
+    <ClCompile Include="src\MyRevoke\Core\Application.cpp">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Core\CameraController.cpp">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Core\Layer.cpp">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Core\LayerStack.cpp">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Core\Log.cpp">
+      <Filter>src\MyRevoke\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiBuild.cpp">
       <Filter>src\MyRevoke\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiLayer.cpp">
       <Filter>src\MyRevoke\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Layer.cpp">
-      <Filter>src\MyRevoke</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\LayerStack.cpp">
-      <Filter>src\MyRevoke</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Log.cpp">
-      <Filter>src\MyRevoke</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.cpp">
       <Filter>src\MyRevoke\Platform\OpenGL</Filter>

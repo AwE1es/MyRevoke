@@ -1,19 +1,21 @@
 #pragma once
 
 #include "Core.h"
+#include "Time.h"
 
 #include "Window.h"
-#include "EventSystem/Event.h"
-#include "EventSystem/AppEvent.h"
-#include "EventSystem/MouseEvent.h"
-#include "EventSystem/KeyEvent.h"
 #include "LayerStack.h"
+
+#include "MyRevoke/EventSystem/Event.h"
+#include "MyRevoke/EventSystem/AppEvent.h"
+#include "MyRevoke/EventSystem/MouseEvent.h"
+#include "MyRevoke/EventSystem/KeyEvent.h"
+
 #include "MyRevoke/ImGui/ImGuiLayer.h"
 #include "MyRevoke/Renderer/Shader.h"
 #include "MyRevoke/Renderer/Buffer.h"
 #include "MyRevoke/Renderer/Cmaera.h"
 
-#include "MyRevoke/Core/Time.h"
 
 namespace Revoke
 {
@@ -35,6 +37,7 @@ namespace Revoke
 
 	private:
 		bool OnWindowsClose(WindowsCloseEvent e);
+		bool OnWindowResize(WindowResizeEvent e);
 	private:
 		std::unique_ptr<Window> m_Window;
 

@@ -127,7 +127,8 @@ workspace "MyRevoke"
     
             defines
             {
-                "RV_PLATFORM_WINDOWS"
+                "RV_PLATFORM_WINDOWS",
+                "_CRT_SECURE_NO_WARNINGS"
             }
     
         filter "configurations:Debug"

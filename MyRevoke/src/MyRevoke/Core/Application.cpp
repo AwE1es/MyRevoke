@@ -3,8 +3,8 @@
 #include "Log.h"
 #include "Input.h"
 
-#include "Renderer/Renderer.h"
-#include "Renderer/RenderCommand.h"
+#include "MyRevoke/Renderer/Renderer.h"
+#include "MyRevoke/Renderer/RenderCommand.h"
 
 #include "GLFW/glfw3.h"
 
@@ -23,6 +23,7 @@ namespace Revoke
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(RV_BIND_EVENT_FUNK(Application::OnEvent));
+
 
 		Renderer::Init();
 
@@ -61,7 +62,7 @@ namespace Revoke
 		EventDispatcher eDispatcher(e);
 		
 		eDispatcher.Dispatch<WindowsCloseEvent>(RV_BIND_EVENT_FUNK(Application::OnWindowsClose));
-
+		eDispatcher.Dispatch<WindowResizeEvent>(RV_BIND_EVENT_FUNK(Application::OnWindowResize));
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
@@ -82,6 +83,11 @@ namespace Revoke
 	bool Application::OnWindowsClose(WindowsCloseEvent e)
 	{
 		m_Run = false;
+		return true;
+	}
+	bool Application::OnWindowResize(WindowResizeEvent e)
+	{
+		RenderCommand::OnResize((float)e.GetWidth(), (float)e.GetHeight());
 		return true;
 	}
 }

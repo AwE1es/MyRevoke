@@ -58,7 +58,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\MyRevoke\vendor\spdlog\include;..\MyRevoke\src;..\MyRevoke\vendor\glm;..\MyRevoke\vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -75,7 +75,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\MyRevoke\vendor\spdlog\include;..\MyRevoke\src;..\MyRevoke\vendor\glm;..\MyRevoke\vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -99,11 +99,6 @@
     <ProjectReference Include="..\MyRevoke\MyRevoke.vcxproj">
       <Project>{775274B4-631F-CFBF-8C38-BD677864044E}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\Grid.shader" />
-    <None Include="Shaders\Mesh.shader" />
-    <None Include="Shaders\Texture.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

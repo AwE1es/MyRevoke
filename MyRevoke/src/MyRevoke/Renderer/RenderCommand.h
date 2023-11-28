@@ -12,6 +12,7 @@ namespace Revoke
 		inline static void ClearColor(const glm::vec4 color) { s_RendererAPI->SetClearColor(color); }
 		inline static void Clear() { s_RendererAPI->Clear(); }
 		inline static void EnableBlending() { s_RendererAPI->EnableBlending(); }
+		inline static void OnResize(float width, float height) { s_RendererAPI->WindowResize(width,  height); };
 
 		inline static void Init() { s_RendererAPI->Init(); }
 		 

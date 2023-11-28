@@ -1,11 +1,12 @@
 #pragma once
 // ONLY FOR USE BY APPLICATION --------------------------------------------
 
-#include "MyRevoke/Application.h"
-#include "MyRevoke/Layer.h"
-#include "MyRevoke/Log.h"
+#include "MyRevoke/Core/Application.h"
+#include "MyRevoke/Core/Layer.h"
+#include "MyRevoke/Core/Log.h"
 #include "MyRevoke/ImGui/ImGuiLayer.h"
-#include "MyRevoke/Input.h"
+#include "MyRevoke/Core/Input.h"
+#include "MyRevoke/Core/CameraController.h"
 
 #include "MyRevoke/Core/Time.h"
 
@@ -16,11 +17,11 @@
 #include "MyRevoke/Renderer/Shader.h"
 #include "MyRevoke/Renderer/Texture.h"
 
-#include "MyRevoke/MouseBtnCodes.h"
-#include "MyRevoke/KeyCodes.h"
+#include "MyRevoke/Core/MouseBtnCodes.h"
+#include "MyRevoke/Core/KeyCodes.h"
 
 #include "rvpch.h"
 
 // Entry Point ------------------------------------------------------------
 
-#include"MyRevoke/EntryPoint.h"
+#include"MyRevoke/Core/EntryPoint.h"

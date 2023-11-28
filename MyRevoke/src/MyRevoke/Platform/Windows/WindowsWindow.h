@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MyRevoke/Window.h"
+#include "MyRevoke/Core/Window.h"
 #include "MyRevoke/Renderer/GraphicsContex.h"
 
 #include <GLFW/glfw3.h>

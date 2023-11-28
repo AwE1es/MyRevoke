@@ -1,7 +1,8 @@
 #pragma once
 
+#include "MyRevoke/Core/Core.h"
+
 #include <string>
-#include "MyRevoke/Core.h"
 #include <unordered_map>
 
 namespace Revoke

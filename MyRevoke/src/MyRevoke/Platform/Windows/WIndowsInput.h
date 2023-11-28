@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MyRevoke/Core.h"
-#include "MyRevoke/Input.h"
+#include "MyRevoke/Core/Core.h"
+#include "MyRevoke/Core/Input.h"
 
 namespace Revoke {
 	class  WindowsInput : public Input

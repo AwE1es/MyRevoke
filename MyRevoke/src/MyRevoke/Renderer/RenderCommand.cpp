@@ -6,5 +6,6 @@
 namespace Revoke
 {
 	RendererAPI* RenderCommand::s_RendererAPI = new OpenGLRendererAPI;
+
 }
  

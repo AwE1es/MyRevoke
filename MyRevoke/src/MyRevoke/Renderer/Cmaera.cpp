@@ -11,13 +11,14 @@ namespace Revoke
 		CalculateProjectionMatrix(left, right, bottom, top);
 	}
 
+
 	void Camera::CalculateViewMatrix()
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_Pos);
 		m_ViewMatrix = glm::inverse(transform);
 	}
 
-	void Camera::SetCameraPropeties(glm::vec3 cameraPos)
+	void Camera::SetCameraPos(glm::vec3 cameraPos)
 	{
 		m_Pos = cameraPos;
 		CalculateViewMatrix();

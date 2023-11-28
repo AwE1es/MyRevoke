@@ -22,6 +22,7 @@ namespace Revoke
 		virtual void DrawElements(const Shared <VertexArray>& vertrexArray) = 0;
 		virtual void EnableBlending() = 0;
 		virtual void Init() = 0;
+		virtual void WindowResize(float width, float height) = 0;
 
 		inline static API GetAPI() { return s_API; };
 	private:

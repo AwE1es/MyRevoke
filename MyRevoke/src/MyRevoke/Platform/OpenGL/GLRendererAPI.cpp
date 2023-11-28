@@ -24,6 +24,10 @@ namespace Revoke {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
+	void OpenGLRendererAPI::WindowResize(float width, float height)
+	{
+		glViewport(0, 0, width, height);
+	}
 	void OpenGLRendererAPI::Init()
 	{
 		glEnable(GL_BLEND);

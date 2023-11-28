@@ -1,8 +1,9 @@
 #pragma once
 
-#include "MyRevoke/Core.h"
+#include "Core.h"
+#include "Time.h"
+
 #include "MyRevoke/EventSystem/Event.h"
-#include "MyRevoke/Core/Time.h"
 
 namespace Revoke {
 	class  Layer

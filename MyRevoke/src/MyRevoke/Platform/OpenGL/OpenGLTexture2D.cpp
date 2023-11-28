@@ -1,7 +1,7 @@
 #include "rvpch.h"
 
 #include "OpenGLTexture2D.h"
-#include "MyRevoke/Core.h"
+#include "MyRevoke/Core/Core.h"
 
 #include "stb_image.h"
 #include "glad/glad.h"

@@ -12,6 +12,7 @@
 
 #include "MyRevoke/Renderer/Cmaera.h"
 #include "MyRevoke/Renderer/Renderer.h"
+#include "MyRevoke/Renderer/Renderer2D.h"
 #include "MyRevoke/Renderer/RenderCommand.h"
 #include "MyRevoke/Renderer/Buffer.h"
 #include "MyRevoke/Renderer/Shader.h"
@@ -23,5 +24,3 @@
 #include "rvpch.h"
 
 // Entry Point ------------------------------------------------------------
-
-#include"MyRevoke/Core/EntryPoint.h"

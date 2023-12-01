@@ -1,4 +1,4 @@
-#include "MyRevoke/Renderer/Texture.h"
+ #include "MyRevoke/Renderer/Texture.h"
 
 
 namespace Revoke
@@ -6,7 +6,8 @@ namespace Revoke
 	class OpenGLTexture2D : public Texture2D
 	{
 	public:
-		OpenGLTexture2D(const char* path);
+		OpenGLTexture2D(const std::string& path);
+		OpenGLTexture2D(int width, int height);
 		virtual ~OpenGLTexture2D() ;
 
 		virtual uint32_t GetWidth() const override { return m_Width; };
@@ -15,6 +16,8 @@ namespace Revoke
 
 		virtual void Bind(uint32_t slot) const override;
 		virtual void UnBind() const override;
+
+		virtual void SetData(void* data, uint32_t size) override;
 
 	private:
 		uint32_t m_Width, m_Height;

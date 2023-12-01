@@ -18,6 +18,7 @@ namespace Revoke {
 	void OpenGLRendererAPI::DrawElements(const Shared<VertexArray>& vertrexArray)
 	{
 		glDrawElements(GL_TRIANGLES, vertrexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	void OpenGLRendererAPI::EnableBlending()
 	{

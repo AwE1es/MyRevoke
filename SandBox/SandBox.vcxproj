@@ -93,6 +93,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Sandbox2D.cpp" />
+    <ClCompile Include="src\Sandbox2D.h" />
     <ClCompile Include="src\SandBoxApp.cpp" />
   </ItemGroup>
   <ItemGroup>

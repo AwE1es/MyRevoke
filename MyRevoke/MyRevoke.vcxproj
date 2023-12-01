@@ -129,6 +129,7 @@
     <ClInclude Include="src\MyRevoke\Renderer\GraphicsContex.h" />
     <ClInclude Include="src\MyRevoke\Renderer\RenderCommand.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Renderer.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\Renderer2D.h" />
     <ClInclude Include="src\MyRevoke\Renderer\RendererAPI.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Shader.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Texture.h" />
@@ -570,6 +571,7 @@
     <ClCompile Include="src\MyRevoke\Renderer\Cmaera.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\Renderer2d.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Shader.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Texture.cpp" />

@@ -12,10 +12,9 @@
     <ClCompile Include="src\SandBoxApp.cpp">
       <Filter>src</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\Texture.shader" />
-    <None Include="Shaders\Grid.shader" />
-    <None Include="Shaders\Mesh.shader" />
+    <ClCompile Include="src\Sandbox2D.h">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sandbox2D.cpp" />
   </ItemGroup>
 </Project>

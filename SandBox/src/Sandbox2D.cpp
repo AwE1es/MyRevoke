@@ -87,16 +87,33 @@ void Renderer2DTest::OnUpdate(Revoke::Timestep deltaTime)
 		ImGui::DragFloat2("Transforms: ", glm::value_ptr(m_MeshScale), 0.01f, 0.01f, 250.0f);
 		ImGui::DragFloat2("Location: ", glm::value_ptr(m_MeshLocation), 0.01f);
 
+		float totalFrameTime = 0.0f;
+		float displayUpdateInterval = 0.25f;  
 
 		for (auto& result : m_ProfileResults)
 		{
+			totalFrameTime += result.Time;
 			char label[50];
-			strcpy(label, "%.3fms ");
-			strcat(label, result.Name);
-			ImGui::Text(label, result.Time);
+			sprintf(label, "%.3fms %s", result.Time, result.Name);
+			ImGui::Text(label);
 		}
-		m_ProfileResults.clear();
 
+		float averageFrameTime = totalFrameTime / m_ProfileResults.size();
+		float frameRate = 1000.0f / averageFrameTime;
+
+		static float timeSinceLastUpdate = 0.0f;
+		timeSinceLastUpdate += ImGui::GetIO().DeltaTime;
+		
+		if (timeSinceLastUpdate >= displayUpdateInterval)
+		{
+			m_Framerate = frameRate;
+			timeSinceLastUpdate = 0.0f;
+		}
+		char frameRateLabel[50];
+		sprintf(frameRateLabel, "FPS: %.2f FPS", m_Framerate);
+		ImGui::Text(frameRateLabel);
+
+		m_ProfileResults.clear();
 
 		ImGui::End();
 	}

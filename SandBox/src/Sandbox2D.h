@@ -29,6 +29,7 @@ private:
 	glm::vec2 m_MeshLocation; 
 	glm::vec2 m_MeshScale; 
 
+	float m_Framerate = 0.0f;
 
 	struct ProfileResult
 	{

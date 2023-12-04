@@ -22,14 +22,19 @@ public:
 	
 
 private:
-
-
-	//Textures
 	Revoke::Shared <Revoke::Texture> m_Texture2D;
-
 	Revoke::OrthoCameraController m_CameraController2D;
 
 	glm::vec4 m_MeshColor; 
 	glm::vec2 m_MeshLocation; 
 	glm::vec2 m_MeshScale; 
+
+
+	struct ProfileResult
+	{
+		const char* Name;
+		float Time;
+	};
+
+	std::vector<ProfileResult> m_ProfileResults;
 };

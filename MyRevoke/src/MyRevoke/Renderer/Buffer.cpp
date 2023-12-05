@@ -21,7 +21,7 @@ namespace Revoke {
     }
 
 
-    Shared<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t size)
+    Shared<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t count)
     {
         switch (Renderer::GetAPI())
         {
@@ -29,7 +29,7 @@ namespace Revoke {
             RV_CORE_ASSERT(false, "RendererAPI None is not supported"); return nullptr;
             break;
         case RendererAPI::API::OpenGL:
-            return std::make_shared <OpenGLIndexBuffer>(indices, size);
+            return std::make_shared <OpenGLIndexBuffer>(indices, count);
             break;
         }
         RV_CORE_ASSERT(false, "RendererAPI is not correct")

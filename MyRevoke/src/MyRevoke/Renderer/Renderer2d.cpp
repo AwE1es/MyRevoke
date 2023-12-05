@@ -9,7 +9,7 @@
 namespace Revoke
 {
 
-	struct Renderer2DData
+	struct Data2D
 	{
 		Shared <VertexArray> QuadVA;
 		Shared <VertexArray> TriangleVA;
@@ -17,11 +17,11 @@ namespace Revoke
 		Shared <Texture> WhiteTexture;
 	};
 
-	static Renderer2DData* s_Data;
+	static Data2D* s_Data;
 
 	void Renderer2D::Init()
 	{
-		s_Data = new Renderer2DData();
+		s_Data = new Data2D();
 
 		QuadInit();
 		TriangleInit();

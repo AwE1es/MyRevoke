@@ -22,7 +22,7 @@ public:
 	
 
 private:
-	Revoke::Shared <Revoke::Texture> m_Texture2D;
+	Revoke::Shared <Revoke::Texture2D> m_Texture2D;
 	Revoke::OrthoCameraController m_CameraController2D;
 
 	glm::vec4 m_MeshColor; 

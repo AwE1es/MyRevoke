@@ -26,8 +26,9 @@ namespace Revoke
 		virtual void SetUniformVec2(const std::string& name, const glm::vec2& value) override { BindUniformVec2(name, value); }
 		virtual void SetUniformVec3(const std::string& name, const glm::vec3& value) override { BindUniformVec3(name, value); }
 		virtual void SetUniformVec4(const std::string& name, const glm::vec4& value) override { BindUniformVec4(name, value); }
-		virtual void SetUniformInt(const std::string name, int value) override { BindUniformInt(name, value); }
-		virtual void SetUniformFloat(const std::string name, float value) override { BindUniformFloat(name, value); };
+		virtual void SetUniformIntArr(const std::string name, const int* values, const uint32_t count) override { BindUniformIntArr(name, values, count); }
+		virtual void SetUniformInt(const std::string name, const int value) override { BindUniformInt(name, value); }
+		virtual void SetUniformFloat(const std::string name, const float value) override { BindUniformFloat(name, value); };
 
 
 
@@ -41,8 +42,9 @@ namespace Revoke
 		void BindUniformVec2(const std::string& name, const glm::vec2& value);
 		void BindUniformVec3(const std::string& name, const glm::vec3& value);
 		void BindUniformVec4(const std::string& name, const glm::vec4& value);
-		void BindUniformInt(const std::string name, int value);
-		void BindUniformFloat(const std::string name, float value);
+		void BindUniformIntArr(const std::string name, const int* values, const uint32_t count);
+		void BindUniformInt(const std::string name, const int value);
+		void BindUniformFloat(const std::string name, const float value);
 
 		int GetUniformLocation(std::string name) const;
 

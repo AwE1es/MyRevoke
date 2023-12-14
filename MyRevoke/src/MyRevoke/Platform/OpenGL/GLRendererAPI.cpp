@@ -15,9 +15,10 @@ namespace Revoke {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGLRendererAPI::DrawElements(const Shared<VertexArray>& vertrexArray)
+	void OpenGLRendererAPI::DrawElements(const Shared<VertexArray>& vertrexArray, uint32_t count )
 	{
-		glDrawElements(GL_TRIANGLES, vertrexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		uint32_t _count = count ? vertrexArray->GetIndexBuffer()->GetCount() : count;
+		glDrawElements(GL_TRIANGLES, _count, GL_UNSIGNED_INT, nullptr);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	void OpenGLRendererAPI::EnableBlending()

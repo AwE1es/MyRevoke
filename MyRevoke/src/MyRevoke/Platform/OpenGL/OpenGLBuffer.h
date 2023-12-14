@@ -8,12 +8,15 @@ namespace Revoke
 	{
 	public:
 		OpenGLVertexBuffer(float* vertices, uint32_t size);
+		OpenGLVertexBuffer(uint32_t size);
 		~OpenGLVertexBuffer();
 						
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
 
 		virtual void SetLayout(const BufferLayout& layout) override;
+		virtual void InitData(const void* data, uint32_t size) override;
+
 		virtual const BufferLayout& GetLayout() const override { return m_Layout; }
 
 	private:

@@ -571,7 +571,7 @@
     <ClCompile Include="src\MyRevoke\Renderer\Cmaera.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\MyRevoke\Renderer\Renderer2d.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Shader.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Texture.cpp" />

@@ -1479,6 +1479,6 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Renderer\Renderer2d.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

@@ -79,13 +79,18 @@ namespace Revoke {
 		GLuint location = (GLuint)GetUniformLocation(name);
 		glUniform4f(location, value.x, value.y, value.z, value.w);
 	}
-	void OpenGLShader::BindUniformInt(const std::string name, int value)
+	void OpenGLShader::BindUniformIntArr(const std::string name, const int* values, const uint32_t count)
+	{
+		GLuint location = (GLuint)GetUniformLocation(name);
+		glUniform1iv(location, count, values);
+	}
+	void OpenGLShader::BindUniformInt(const std::string name, const int value)
 	{
 		GLuint location = (GLuint)GetUniformLocation(name);
 		glUniform1i(location, value);
 	}
 
-	void OpenGLShader::BindUniformFloat(const std::string name, float value)
+	void OpenGLShader::BindUniformFloat(const std::string name, const float value)
 	{
 		GLuint location = (GLuint)GetUniformLocation(name);
 		glUniform1f(location, value);

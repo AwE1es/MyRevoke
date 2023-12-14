@@ -2,33 +2,37 @@
 #version 330 core
 			
 layout(location = 0) in vec3 a_Pos;
-layout(location = 1) in vec2 a_TexCoord;
+layout(location = 1) in vec4 a_Color;
+layout(location = 2) in vec2 a_TexCoord;
+layout(location = 3) in float a_TexIndex;
 
 uniform mat4 u_PVmatrix;	
-uniform mat4 u_TransformMatrix;
 
 out vec2 v_TexCoord;
-
+out vec4 v_Color;
+out float v_TexIndex;
 
 void main()
 {
+	v_TexIndex = a_TexIndex;
 	v_TexCoord = a_TexCoord;
-	gl_Position = u_PVmatrix * u_TransformMatrix * vec4(a_Pos, 1.0);
+	v_Color = a_Color;
+	gl_Position = u_PVmatrix * vec4(a_Pos, 1.0);
 }
 
 
 #type fragment
 #version 330 core
 
-layout(location = 0) out vec4 o_Color;
+layout(location = 0) out vec4 color;
 
 in vec2 v_TexCoord;
+in vec4 v_Color;
+in float v_TexIndex;
 
-uniform sampler2D u_Texture;
-uniform vec4 u_Color;
-uniform float u_TextureScale;
+uniform sampler2D u_Textures[32];
 
 void main()
 {
-	o_Color = texture(u_Texture, v_TexCoord * u_TextureScale) * u_Color;
+	color = texture(u_Textures[int(v_TexIndex)], v_TexCoord * 1.0) * v_Color;
 }

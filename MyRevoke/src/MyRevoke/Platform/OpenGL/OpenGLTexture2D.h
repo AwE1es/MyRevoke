@@ -12,6 +12,7 @@ namespace Revoke
 
 		virtual uint32_t GetWidth() const override { return m_Width; };
 		virtual uint32_t GetHeight() const override { return m_Height; };
+		virtual uint32_t GetID() const override { return m_RendererID; }
 
 
 		virtual void Bind(uint32_t slot) const override;

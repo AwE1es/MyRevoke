@@ -1,6 +1,7 @@
 #include "Sandbox2D.h"
 
-
+#include <chrono>
+#include <string>
 
 
 template<typename Fn>
@@ -56,14 +57,12 @@ void Renderer2DTest::OnDetach()
 {
 
 }
+static int numberOfQuads = 0;
 void Renderer2DTest::OnUpdate(Revoke::Timestep deltaTime)
 {
 	PROFILE_SCOPE("Sandbox2D::OnUpdate");
-
+	Revoke::Renderer2D::ResetStatistics();
 	m_CameraController2D.OnUpdate(deltaTime);
-
-	glm::mat4 objTrasnform = glm::translate(glm::mat4(1.0f), glm::vec3(m_MeshLocation, 0.0f));
-	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
 	Revoke::RenderCommand::ClearColor({ 0.2f, 0.2f, 0.2f, 1.0f });
 	Revoke::RenderCommand::Clear();
@@ -74,8 +73,15 @@ void Renderer2DTest::OnUpdate(Revoke::Timestep deltaTime)
 	{
 		PROFILE_SCOPE("Renderer Draw");
 		Revoke::Renderer2D::DrawQuad(m_MeshLocation, m_MeshScale, m_Texture2D);
-		Revoke::Renderer2D::DrawQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, m_MeshColor);
-		Revoke::Renderer2D::DrawTriangle({ 0.f, 0.0f }, { 0.8f, 0.8f }, m_MeshColor);
+		for (int i = -100; i < 100; i++) 
+		{
+			for (int j = -100; j < 100; j++)
+			{
+				Revoke::Renderer2D::DrawQuad({ i, j}, { 0.8f, 0.8f }, { 0.0f, 0.4f, 0.5f, 1.0f });
+			}
+		}
+		Revoke::Renderer2D::DrawQuad(m_MeshLocation, m_MeshScale, m_Texture2D);
+		//Revoke::Renderer2D::DrawTriangle({ 0.f, 0.0f }, { 0.8f, 0.8f }, m_MeshColor);
 	}
 	Revoke::Renderer2D::End();
 
@@ -88,6 +94,13 @@ void Renderer2DTest::OnUpdate(Revoke::Timestep deltaTime)
 		ImGui::DragFloat2("Transforms: ", glm::value_ptr(m_MeshScale), 0.01f, 0.01f, 250.0f);
 		ImGui::DragFloat2("Location: ", glm::value_ptr(m_MeshLocation), 0.01f);
 
+		auto stats = Revoke::Renderer2D::GetStats();
+		ImGui::Text("Renderer Stats");
+		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+		ImGui::Text("Quad Count: %d", stats.QuadCount);
+		ImGui::Text("Index Count: %d", stats.GetTotalIndexCount());
+		ImGui::Text("Vertex Count: %d", stats.GetTotalVertexCount());
+		ImGui::Text("---------------------");
 		float totalFrameTime = 0.0f;
 		float displayUpdateInterval = 0.25f;  
 
@@ -114,9 +127,12 @@ void Renderer2DTest::OnUpdate(Revoke::Timestep deltaTime)
 		sprintf(frameRateLabel, "FPS: %.2f FPS", m_Framerate);
 		ImGui::Text(frameRateLabel);
 
+	
+
 		m_ProfileResults.clear();
 
 		ImGui::End();
+		numberOfQuads = 0;
 	}
 
 	void Renderer2DTest::OnEvent(Revoke::Event& e) 

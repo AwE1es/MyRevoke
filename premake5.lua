@@ -1,6 +1,6 @@
 workspace "MyRevoke"
     architecture "x64"
-    startproject "SandBox"
+    startproject "RevokeCraft"
 
     configurations { "Debug", "Release" }
 
@@ -91,7 +91,57 @@ workspace "MyRevoke"
             optimize "On"
 
 
-    project "SandBox"
+    project "RevokeCraft"
+        location "RevokeCraft"
+        kind "ConsoleApp"
+        cppdialect "C++20"
+        language "C++"
+        staticruntime "on"
+    
+        targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+        objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    
+        files
+        {
+            "%{prj.name}/src/**.h",
+            "%{prj.name}/src/**.cpp",
+          
+        }
+    
+        includedirs
+        {
+            "MyRevoke/vendor/spdlog/include",
+            "MyRevoke/src",
+            "%{IncludeDir.GLM}",
+            "%{IncludeDir.ImGui}",
+        }
+    
+        links
+        {
+            "MyRevoke"
+        }
+    
+        filter "system:windows"
+            
+            systemversion "latest"
+    
+            defines
+            {
+                "RV_PLATFORM_WINDOWS",
+                "_CRT_SECURE_NO_WARNINGS"
+            }
+    
+        filter "configurations:Debug"
+            defines "RV_DEBUG"
+            runtime "Debug"
+            symbols "On"
+    
+        filter "configurations:Release"
+            defines "RV_RELEASE"
+            runtime "Release"
+            optimize "On"
+
+            project "SandBox"
         location "SandBox"
         kind "ConsoleApp"
         cppdialect "C++20"

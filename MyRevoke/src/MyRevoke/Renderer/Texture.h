@@ -17,7 +17,6 @@ namespace Revoke
 
 		virtual void SetData(void* data, uint32_t size) = 0;
 
-		
 	};
 
 	class Texture2D : public Texture

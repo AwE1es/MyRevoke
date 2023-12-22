@@ -56,6 +56,10 @@ namespace Revoke
 			m_Window->OnUpdate();
 		}
 	}
+	void Application::Close()
+	{
+		m_Run = false;
+	}
 	void Application::OnEvent(Event& e)
 	{
 		

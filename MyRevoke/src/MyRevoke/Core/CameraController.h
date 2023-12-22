@@ -20,6 +20,7 @@ namespace Revoke {
 
 		void OnEvent(Event& e);
 		void OnUpdate(const Timestep& ts);
+		void OnResize(float width, float height);
 
 		Camera& GetCamera() { return m_Camera; }
 	private:

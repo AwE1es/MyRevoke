@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{D43924E3-4019-A37E-4931-2E55B58F09E0}</ProjectGuid>
+    <ProjectGuid>{21805B7A-8D35-D46F-162A-CE4682DECA73}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>SandBox</RootNamespace>
+    <RootNamespace>RevokeCraft</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,16 +42,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\bin\Debug-windows-x86_64\SandBox\</OutDir>
-    <IntDir>..\bin-int\Debug-windows-x86_64\SandBox\</IntDir>
-    <TargetName>SandBox</TargetName>
+    <OutDir>..\bin\Debug-windows-x86_64\RevokeCraft\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\RevokeCraft\</IntDir>
+    <TargetName>RevokeCraft</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Release-windows-x86_64\SandBox\</OutDir>
-    <IntDir>..\bin-int\Release-windows-x86_64\SandBox\</IntDir>
-    <TargetName>SandBox</TargetName>
+    <OutDir>..\bin\Release-windows-x86_64\RevokeCraft\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\RevokeCraft\</IntDir>
+    <TargetName>RevokeCraft</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -93,11 +93,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Sandbox2D.h" />
+    <ClInclude Include="src\CraftLayer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\SandBoxApp.cpp" />
-    <ClCompile Include="src\Sandbox2D.cpp" />
+    <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\CraftLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyRevoke\MyRevoke.vcxproj">

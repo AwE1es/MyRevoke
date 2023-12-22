@@ -62,8 +62,17 @@ void Revoke::ImGuiLayer::OnDetach()
 
 void Revoke::ImGuiLayer::OnImGuiDraw()
 {
+	
+}
 
-
+void Revoke::ImGuiLayer::OnEvent(Event& e)
+{
+	if (m_BlockEvents)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		e.Handled |= e.IsCategory(EventCategoryMouse) & io.WantCaptureMouse;
+		e.Handled |= e.IsCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+	}
 }
 
 

@@ -12,6 +12,8 @@ workspace "MyRevoke"
     IncludeDir ["GLAD"] = "MyRevoke/vendor/GLAD/include"
     IncludeDir ["GLM"] = "MyRevoke/vendor/glm"
     IncludeDir ["STB_IMAGE"] = "MyRevoke/vendor/stb_image"
+    IncludeDir ["ENTT"] = "MyRevoke/vendor/entt"
+
 
     group "Dependencies"
         include "MyRevoke/vendor/GLFW"
@@ -56,7 +58,8 @@ workspace "MyRevoke"
             "%{IncludeDir.GLAD}",
             "%{IncludeDir.ImGui}",
             "%{IncludeDir.GLM}",
-            "%{IncludeDir.STB_IMAGE}"
+            "%{IncludeDir.STB_IMAGE}",
+            "%{IncludeDir.ENTT}",
         }
 
         links
@@ -64,7 +67,7 @@ workspace "MyRevoke"
             "GLAD",
             "GLFW",
             "ImGui",
-            "opengl32.lib"
+            "opengl32.lib",
         }
 
         filter "system:windows"
@@ -114,6 +117,7 @@ workspace "MyRevoke"
             "MyRevoke/src",
             "%{IncludeDir.GLM}",
             "%{IncludeDir.ImGui}",
+            "%{IncludeDir.ENTT}",
         }
     
         links
@@ -141,7 +145,8 @@ workspace "MyRevoke"
             runtime "Release"
             optimize "On"
 
-            project "SandBox"
+
+        project "SandBox"
         location "SandBox"
         kind "ConsoleApp"
         cppdialect "C++20"
@@ -164,6 +169,7 @@ workspace "MyRevoke"
             "MyRevoke/src",
             "%{IncludeDir.GLM}",
             "%{IncludeDir.ImGui}",
+            "%{IncludeDir.ENTT}",
         }
     
         links

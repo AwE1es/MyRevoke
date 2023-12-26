@@ -47,9 +47,6 @@ namespace Revoke
 		:Layer("Testing"), m_CameraController2D(1280.0f / 720.0f)
 	{
 
-		m_MeshColor = { 1.0f, 1.0f, 0.0f, 1.0f };
-		m_MeshLocation = { -1.0f, 0.0f };
-		m_MeshScale = { 0.8f, 0.8f };
 	}
 	void CraftLayer::OnAttach()
 	{
@@ -59,6 +56,14 @@ namespace Revoke
 		frameBufferStats.Width = 1280;
 		frameBufferStats.Height = 720;
 		m_FrameBuffer = FrameBuffers::Create(frameBufferStats);
+		m_Scene = std::make_shared<Scene>();
+
+		//Entity Creation
+		auto square = m_Scene->CreateEntity("Square1");
+		square.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 0.2f, 0.5f, 1.0f));
+		
+		m_SquereEntity = square;
+
 	}
 	void CraftLayer::OnDetach()
 	{
@@ -93,16 +98,19 @@ namespace Revoke
 
 		{
 			PROFILE_SCOPE("Renderer Draw");
-			Revoke::Renderer2D::DrawQuad(m_MeshLocation, m_MeshScale, m_Texture2D);
-			for (int i = -100; i < 100; i++)
+
+
+			
+			for (int i = -10; i < 10; i++)
 			{
-				for (int j = -100; j < 100; j++)
+				for (int j = -10; j < 10; j++)
 				{
 					Revoke::Renderer2D::DrawQuad({ i, j }, { 0.8f, 0.8f }, { 0.0f, 0.4f, 0.5f, 1.0f });
 				}
 			}
-			Revoke::Renderer2D::DrawQuad(m_MeshLocation, m_MeshScale, m_Texture2D);
-			//Revoke::Renderer2D::DrawTriangle({ 0.f, 0.0f }, { 0.8f, 0.8f }, m_MeshColor);
+			Revoke::Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, m_Texture2D);
+			m_Scene->OnUpdate(deltaTime);
+			
 		}
 		Revoke::Renderer2D::End();
 		m_FrameBuffer->UnBind();
@@ -172,9 +180,17 @@ namespace Revoke
 
 		//-----------Settings-------------------------------------------------
 		ImGui::Begin("Settings");
-		ImGui::ColorEdit4("Mesh Color: ", glm::value_ptr(m_MeshColor));
-		ImGui::DragFloat2("Transforms: ", glm::value_ptr(m_MeshScale), 0.01f, 0.01f, 250.0f);
-		ImGui::DragFloat2("Location: ", glm::value_ptr(m_MeshLocation), 0.01f);
+		if (m_SquereEntity)
+		{
+			ImGui::Separator();
+			auto& tag = m_SquereEntity.GetComponent<NameCpmponent>().Name;
+			ImGui::Text("%s", tag.c_str());
+
+			auto& squareColor = m_SquereEntity.GetComponent<SpriteRendererComponent>().Color;
+			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
+			ImGui::Separator();
+		}
+
 
 		auto stats = Revoke::Renderer2D::GetStats();
 		ImGui::Text("Renderer Stats");

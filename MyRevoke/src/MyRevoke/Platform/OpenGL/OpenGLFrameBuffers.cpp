@@ -5,6 +5,7 @@
 
 namespace Revoke
 {
+    static const uint32_t s_MaxFramebufferSize = 8192;
 
     OpenGLFrameBuffers::OpenGLFrameBuffers(const FrameBufferStats& stats)
         : m_Stats(stats)
@@ -72,6 +73,11 @@ namespace Revoke
     }
     void OpenGLFrameBuffers::Resize(uint32_t width, uint32_t height)
     {
+        if (width == 0 || height == 0 || width > s_MaxFramebufferSize || height > s_MaxFramebufferSize)
+        {
+            RV_CORE_WARN("Attempted to rezize framebuffer to {0}, {1}", width, height);
+            return;
+        }
         m_Stats.Width = width;
         m_Stats.Height = height;
 

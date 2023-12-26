@@ -1,6 +1,5 @@
 #include "MyRevoke.h"
 
-
 #include "imgui.h"
 
 #include "glm/glm.hpp"
@@ -28,10 +27,9 @@ namespace Revoke
 		OrthoCameraController m_CameraController2D;
 
 		Shared<FrameBuffers> m_FrameBuffer;
+		Shared<Scene> m_Scene;
 
-		glm::vec4 m_MeshColor;
-		glm::vec2 m_MeshLocation;
-		glm::vec2 m_MeshScale;
+		Entity m_SquereEntity;
 
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		bool m_ViewportFocused = false;

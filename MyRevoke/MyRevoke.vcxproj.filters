@@ -28,6 +28,9 @@
     <Filter Include="src\MyRevoke\Renderer">
       <UniqueIdentifier>{D494F305-4001-AF00-09F5-465E7520D168}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\MyRevoke\Scene">
+      <UniqueIdentifier>{0B9DD8FC-F780-9952-60E1-93A54CE483D4}</UniqueIdentifier>
+    </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
     </Filter>
@@ -161,6 +164,15 @@
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Renderer\Texture.h">
       <Filter>src\MyRevoke\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Scene\Components.h">
+      <Filter>src\MyRevoke\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Scene\Entity.h">
+      <Filter>src\MyRevoke\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Scene\Scene.h">
+      <Filter>src\MyRevoke\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\rvpch.h">
       <Filter>src</Filter>
@@ -1489,6 +1501,12 @@
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Renderer\Texture.cpp">
       <Filter>src\MyRevoke\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Scene\Entity.cpp">
+      <Filter>src\MyRevoke\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Scene\Scene.cpp">
+      <Filter>src\MyRevoke\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\rvpch.cpp">
       <Filter>src</Filter>

@@ -19,6 +19,10 @@
 #include "MyRevoke/Renderer/Texture.h"
 #include "MyRevoke/Renderer/FrameBuffers.h"
 
+#include "MyRevoke/Scene/Scene.h"
+#include "MyRevoke/Scene/Entity.h"
+#include "MyRevoke/Scene/Components.h"
+
 #include "MyRevoke/Core/MouseBtnCodes.h"
 #include "MyRevoke/Core/KeyCodes.h"
 

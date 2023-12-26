@@ -28,6 +28,7 @@ namespace Revoke
 
 		Shared <VertexArray> TriangleVA;
 		Shared <VertexBuffer> TriangleVB;
+
 		Shared <Shader> Shader;
 		Shared <Texture2D> WhiteTexture;
 
@@ -38,6 +39,8 @@ namespace Revoke
 
 		std::array<Shared <Texture2D>, MaxTextures> Textures;
 		uint32_t TextureIndex = 1;
+
+		glm::vec4 QuadVertexPositions[4];
 
 		Renderer2D::Stats Statistic;
 	};
@@ -68,6 +71,11 @@ namespace Revoke
 		s_Data->Shader->SetUniformIntArr("u_Textures", samplers, s_Data->MaxTextures);
 
 		s_Data->Textures[0] = s_Data->WhiteTexture;
+
+		s_Data->QuadVertexPositions[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
+		s_Data->QuadVertexPositions[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
+		s_Data->QuadVertexPositions[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
+		s_Data->QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
 	}
 
 	void Renderer2D::Shutdown()
@@ -81,8 +89,8 @@ namespace Revoke
 		s_Data->Shader->SetUniformMat4("u_PVmatrix", camera.GetPVMatrix());
 
 		s_Data->QuadIndexCount = 0;
-		s_Data->TextureIndex = 1;
 		s_Data->QuadVertexBufferPointer = s_Data->QuadVertexBufferBase;
+		s_Data->TextureIndex = 1;
 	}
 
 	void Renderer2D::End()
@@ -103,36 +111,46 @@ namespace Revoke
 	//Color Draw
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2 size, const glm::vec4& color)
 	{
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+
+		DrawQuad(transform, color);
+
 		if (s_Data->QuadIndexCount >= Data2D::MaxIndices)
 			NewBatch();
 
+/*
+#ifdef RV_DEBUG
 		s_Data->QuadVertexBufferPointer->Position = position;
 		s_Data->QuadVertexBufferPointer->Color = color;
 		s_Data->QuadVertexBufferPointer->TexCoord = { 0.0f, 0.0f };
 		s_Data->QuadVertexBufferPointer->TexIndex = 0.0f;
-		s_Data->QuadVertexBufferPointer ++;
+		s_Data->QuadVertexBufferPointer++;
 
 		s_Data->QuadVertexBufferPointer->Position = { position.x + size.x, position.y, 0.0f };
 		s_Data->QuadVertexBufferPointer->Color = color;
 		s_Data->QuadVertexBufferPointer->TexCoord = { 1.0f, 0.0f };
 		s_Data->QuadVertexBufferPointer->TexIndex = 0.0f;
-		s_Data->QuadVertexBufferPointer ++;
+		s_Data->QuadVertexBufferPointer++;
 
 		s_Data->QuadVertexBufferPointer->Position = { position.x + size.x, position.y + size.y, 0.0f };
 		s_Data->QuadVertexBufferPointer->Color = color;
 		s_Data->QuadVertexBufferPointer->TexCoord = { 1.0f, 1.0f };
 		s_Data->QuadVertexBufferPointer->TexIndex = 0.0f;
-		s_Data->QuadVertexBufferPointer ++;
+		s_Data->QuadVertexBufferPointer++;
 
 		s_Data->QuadVertexBufferPointer->Position = { position.x , position.y + size.y, 0.0f };
 		s_Data->QuadVertexBufferPointer->Color = color;
 		s_Data->QuadVertexBufferPointer->TexCoord = { 0.0f, 1.0f };
 		s_Data->QuadVertexBufferPointer->TexIndex = 0.0f;
-		s_Data->QuadVertexBufferPointer ++;
+		s_Data->QuadVertexBufferPointer++;
 
 		s_Data->QuadIndexCount += 6;
 
 		s_Data->Statistic.QuadCount++;
+#endif 
+*/
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const glm::vec4& color)
@@ -143,6 +161,47 @@ namespace Revoke
 	//Texture Draw
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2 size, const Shared<Texture2D>& texture)
 	{
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+
+		DrawQuad(transform, texture);
+
+	}
+
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const Shared<Texture2D>& texture)
+	{
+		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
+	}
+
+	void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
+	{
+
+		constexpr size_t quadVertexCount = 4;
+		const float textureIndex = 0.0f; // White Texture
+		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+
+		if (s_Data->QuadIndexCount >= Data2D::MaxIndices)
+			NewBatch();
+
+		for (size_t i = 0; i < quadVertexCount; i++)
+		{
+			s_Data->QuadVertexBufferPointer->Position = transform * s_Data->QuadVertexPositions[i];
+			s_Data->QuadVertexBufferPointer->Color = color;
+			s_Data->QuadVertexBufferPointer->TexCoord = textureCoords[i];
+			s_Data->QuadVertexBufferPointer->TexIndex = textureIndex;
+			s_Data->QuadVertexBufferPointer++;
+		}
+
+		s_Data->QuadIndexCount += 6;
+
+		s_Data->Statistic.QuadCount++;
+	}
+
+	void Renderer2D::DrawQuad(const glm::mat4& transform, const Shared<Texture2D>& texture)
+	{
+		constexpr size_t quadVertexCount = 4;
+		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
 		if (s_Data->QuadIndexCount >= Data2D::MaxIndices)
 			NewBatch();
@@ -160,44 +219,25 @@ namespace Revoke
 
 		if (textureIndex == 0.0f)
 		{
+			if (s_Data->TextureIndex >= Data2D::MaxTextures)
+				NewBatch();
 			textureIndex = (float)s_Data->TextureIndex;
 			s_Data->Textures[s_Data->TextureIndex] = texture;
 			s_Data->TextureIndex++;
 		}
 
-		s_Data->QuadVertexBufferPointer->Position = position;
-		s_Data->QuadVertexBufferPointer->Color = whiteColor;
-		s_Data->QuadVertexBufferPointer->TexCoord = { 0.0f, 0.0f };
-		s_Data->QuadVertexBufferPointer->TexIndex = textureIndex;
-		s_Data->QuadVertexBufferPointer++;
-
-		s_Data->QuadVertexBufferPointer->Position = { position.x + size.x, position.y, 0.0f };
-		s_Data->QuadVertexBufferPointer->Color = whiteColor;
-		s_Data->QuadVertexBufferPointer->TexCoord = { 1.0f, 0.0f };
-		s_Data->QuadVertexBufferPointer->TexIndex = textureIndex;
-		s_Data->QuadVertexBufferPointer++;
-
-		s_Data->QuadVertexBufferPointer->Position = { position.x + size.x, position.y + size.y, 0.0f };
-		s_Data->QuadVertexBufferPointer->Color = whiteColor;
-		s_Data->QuadVertexBufferPointer->TexCoord = { 1.0f, 1.0f };
-		s_Data->QuadVertexBufferPointer->TexIndex = textureIndex;
-		s_Data->QuadVertexBufferPointer++;
-
-		s_Data->QuadVertexBufferPointer->Position = { position.x , position.y + size.y, 0.0f };
-		s_Data->QuadVertexBufferPointer->Color = whiteColor;
-		s_Data->QuadVertexBufferPointer->TexCoord = { 0.0f, 1.0f };
-		s_Data->QuadVertexBufferPointer->TexIndex = textureIndex;
-		s_Data->QuadVertexBufferPointer++;
+		for (size_t i = 0; i < quadVertexCount; i++)
+		{
+			s_Data->QuadVertexBufferPointer->Position = transform * s_Data->QuadVertexPositions[i];
+			s_Data->QuadVertexBufferPointer->Color = whiteColor;
+			s_Data->QuadVertexBufferPointer->TexCoord = textureCoords[i];
+			s_Data->QuadVertexBufferPointer->TexIndex = textureIndex;
+			s_Data->QuadVertexBufferPointer++;
+		}
 
 		s_Data->QuadIndexCount += 6;
 
 		s_Data->Statistic.QuadCount++;
-
-	}
-
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const Shared<Texture2D>& texture)
-	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
 	}
 
 	void Renderer2D::DrawTriangle(const glm::vec3& position, const glm::vec2 size, const glm::vec4& color)
@@ -313,8 +353,8 @@ namespace Revoke
 	{
 		End();
 		s_Data->QuadIndexCount = 0;
-		s_Data->TextureIndex = 1;
 		s_Data->QuadVertexBufferPointer = s_Data->QuadVertexBufferBase;
+		s_Data->TextureIndex = 1;
 	}
 
 	Renderer2D::Stats Renderer2D::GetStats()

@@ -58,7 +58,7 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;_CRT_SECURE_NO_WARNINGS;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -79,7 +79,7 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;_CRT_SECURE_NO_WARNINGS;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -135,6 +135,9 @@
     <ClInclude Include="src\MyRevoke\Renderer\RendererAPI.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Shader.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Texture.h" />
+    <ClInclude Include="src\MyRevoke\Scene\Components.h" />
+    <ClInclude Include="src\MyRevoke\Scene\Entity.h" />
+    <ClInclude Include="src\MyRevoke\Scene\Scene.h" />
     <ClInclude Include="src\rvpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
@@ -579,6 +582,8 @@
     <ClCompile Include="src\MyRevoke\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Shader.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Texture.cpp" />
+    <ClCompile Include="src\MyRevoke\Scene\Entity.cpp" />
+    <ClCompile Include="src\MyRevoke\Scene\Scene.cpp" />
     <ClCompile Include="src\rvpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

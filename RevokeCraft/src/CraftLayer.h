@@ -24,13 +24,16 @@ namespace Revoke
 
 	private:
 		Shared <Texture2D> m_Texture2D;
-		OrthoCameraController m_CameraController2D;
 
 		Shared<FrameBuffers> m_FrameBuffer;
+
 		Shared<Scene> m_Scene;
 
 		Entity m_SquereEntity;
+		Entity m_CameraEntity;
+		Entity m_SecondCamera;
 
+		bool m_PrimaryCamera = true;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		bool m_ViewportFocused = false;
 		bool m_ViewportHovered = false;

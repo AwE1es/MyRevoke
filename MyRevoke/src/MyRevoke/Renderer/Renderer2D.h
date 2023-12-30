@@ -2,7 +2,6 @@
 #include "RenderCommand.h"
 #include "RendererAPI.h"
 
-
 #include "Shader.h"
 #include "Cmaera.h"
 #include "Texture.h"
@@ -20,7 +19,7 @@ namespace Revoke
 		static void Init();
 		static void Shutdown();
 
-		static void Begin(Camera& camera);
+		static void Begin(const Camera& camera, const glm::mat4 transform);
 		static void End();
 
 		static void DrawQuad(const glm::vec3& position, const glm::vec2 size, const glm::vec4& color);

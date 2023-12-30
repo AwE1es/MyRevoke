@@ -10,12 +10,18 @@
 
 namespace Revoke
 {
-	glm::mat4 Renderer::s_ViewProjectionMatrix = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f , 0.0f, 0.0f, 0.0f, 0.0f , 0.0f, 0.0f, 0.0f, 0.0f };
-
+	
 	void Renderer::Begin(Camera& camera)
 	{
-		
-		s_ViewProjectionMatrix = camera.GetPVMatrix();
+		//glm::mat4 viewProj = camera.GetProjection() * glm::inverse(transform);
+
+		//s_Data.TextureShader->Bind();
+		//s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+
+		//s_Data.QuadIndexCount = 0;
+		//s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+
+		//s_Data.TextureSlotIndex = 1;
 	}
 	void Renderer::End()
 	{
@@ -29,7 +35,6 @@ namespace Revoke
 	void Renderer::Draw(const Shared<Shader>& shader, const Shared<VertexArray>& vertrexArray, const glm::mat4& transform)
 	{
 		shader->Bind();
-		std::static_pointer_cast<OpenGLShader>(shader)->BindUniformMat4("u_PVmatrix", s_ViewProjectionMatrix);
 		std::static_pointer_cast<OpenGLShader>(shader)->BindUniformMat4("u_TransformMatrix", transform);
 		vertrexArray->Bind();
 		RenderCommand::DrawElements(vertrexArray);

@@ -1,7 +1,8 @@
 #pragma once
+#include "SceneCamera.h"
+#include "ScriptEntity.h"
 
 #include <string>
-
 #include <glm/glm.hpp>
 
 namespace Revoke
@@ -37,4 +38,29 @@ namespace Revoke
 			:Color(color) {}
 	};
 
+	struct CameraComponent
+	{
+		SceneCamera Camera;
+		bool isMain = true;
+		bool FixedAspectRatio = false;
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+		
+	};
+
+	struct NativeScriptComponent
+	{
+		ScriptEntity* Instance = nullptr;
+
+		ScriptEntity* (*InstantiateScript)();
+		void (*DestroyScript)(NativeScriptComponent*);
+
+		template<typename T>
+		void Bind()
+		{
+			InstantiateScript = []() { return static_cast<ScriptEntity*>(new T()); };
+			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+		}
+	};
 }

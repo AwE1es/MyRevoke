@@ -4,31 +4,17 @@
 
 namespace Revoke
 {
-
 	class Camera
 	{
 	public:
-		Camera(float left, float right, float bottom, float top);
+		Camera() = default;
+		Camera(const glm::mat4& projection)
+			: m_ProjectionMatrix(projection) {}
 
-		void SetCameraPos(glm::vec3 camPos);
-		void SetFov(float left, float right, float bottom, float top);
+		virtual ~Camera() = default;
 
-		glm::mat4 GetPVMatrix() const { return m_ProjectionViewMatrix; }
-		glm::mat4 GetViewMatrix() const { return  m_ViewMatrix; }
 		glm::mat4 GetProjectionMatrix() const { return  m_ProjectionMatrix; }
-
-		void CalculateProjectionMatrix(float left, float right, float bottom, float top);
-		
-	private:
-		void CalculateViewMatrix();
-	private:
-		glm::vec3 m_Pos;
-		glm::vec3 m_Front;
-		glm::vec3 m_Up;
-
-		glm::mat4 m_ProjectionMatrix;
-		glm::mat4 m_ViewMatrix;
-		glm::mat4 m_ProjectionViewMatrix;
-
+	protected:
+		glm::mat4 m_ProjectionMatrix = glm::mat4(1.0f);
 	};
 }

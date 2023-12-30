@@ -101,7 +101,6 @@
   <ItemGroup>
     <ClInclude Include="src\MyRevoke.h" />
     <ClInclude Include="src\MyRevoke\Core\Application.h" />
-    <ClInclude Include="src\MyRevoke\Core\CameraController.h" />
     <ClInclude Include="src\MyRevoke\Core\Core.h" />
     <ClInclude Include="src\MyRevoke\Core\EntryPoint.h" />
     <ClInclude Include="src\MyRevoke\Core\Input.h" />
@@ -138,6 +137,8 @@
     <ClInclude Include="src\MyRevoke\Scene\Components.h" />
     <ClInclude Include="src\MyRevoke\Scene\Entity.h" />
     <ClInclude Include="src\MyRevoke\Scene\Scene.h" />
+    <ClInclude Include="src\MyRevoke\Scene\SceneCamera.h" />
+    <ClInclude Include="src\MyRevoke\Scene\ScriptEntity.h" />
     <ClInclude Include="src\rvpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
@@ -559,7 +560,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Core\Application.cpp" />
-    <ClCompile Include="src\MyRevoke\Core\CameraController.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Layer.cpp" />
     <ClCompile Include="src\MyRevoke\Core\LayerStack.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Log.cpp" />
@@ -574,7 +574,6 @@
     <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\MyRevoke\Renderer\Cmaera.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\FrameBuffers.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Renderer.cpp" />
@@ -584,6 +583,7 @@
     <ClCompile Include="src\MyRevoke\Renderer\Texture.cpp" />
     <ClCompile Include="src\MyRevoke\Scene\Entity.cpp" />
     <ClCompile Include="src\MyRevoke\Scene\Scene.cpp" />
+    <ClCompile Include="src\MyRevoke\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\rvpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

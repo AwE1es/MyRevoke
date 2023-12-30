@@ -44,12 +44,14 @@ namespace Revoke
 
 
 	CraftLayer::CraftLayer()
-		:Layer("Testing"), m_CameraController2D(1280.0f / 720.0f)
+		:Layer("Testing")
 	{
 
 	}
 	void CraftLayer::OnAttach()
 	{
+
+
 		m_Texture2D = Texture2D::Create("Textures/Triangle_Texture.png");
 		
 		FrameBufferStats frameBufferStats;
@@ -63,6 +65,46 @@ namespace Revoke
 		square.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 0.2f, 0.5f, 1.0f));
 		
 		m_SquereEntity = square;
+
+		m_CameraEntity = m_Scene->CreateEntity("Camera Entity");
+		m_CameraEntity.AddComponent<CameraComponent>();
+
+		m_SecondCamera = m_Scene->CreateEntity("Clip-Space Entity");
+		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
+		cc.isMain = false;
+
+		class CameraController : public ScriptEntity
+		{
+		public:
+			void OnCreate()
+			{
+				auto& transform = GetComponent<TransformComponent>().Transform;
+				transform[3][0] = rand() % 10 - 5.0f;
+			}
+
+			void OnDestroy()
+			{
+			}
+
+			void OnUpdate(Timestep ts)
+			{
+				auto& transform = GetComponent<TransformComponent>().Transform;
+				float speed = 5.0f;
+
+				if (Input::IsKeyPressed(RV_KEY_A))
+					transform[3][0] -= speed * ts;
+				if (Input::IsKeyPressed(RV_KEY_D))
+					transform[3][0] += speed * ts;
+				if (Input::IsKeyPressed(RV_KEY_W))
+					transform[3][1] += speed * ts;
+				if (Input::IsKeyPressed(RV_KEY_S))
+					transform[3][1] -= speed * ts;
+			}
+		};
+
+		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+
+		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 
 	}
 	void CraftLayer::OnDetach()
@@ -80,12 +122,13 @@ namespace Revoke
 			(spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
 		{
 			m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_CameraController2D.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+
+			m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		}
 
 
 		if (m_ViewportFocused)
-			m_CameraController2D.OnUpdate(deltaTime);
+			//m_CameraController2D.OnUpdate(deltaTime);
 
 		Renderer2D::ResetStatistics();
 
@@ -94,25 +137,8 @@ namespace Revoke
 		RenderCommand::Clear();
 		RenderCommand::EnableBlending();
 
-		Renderer2D::Begin(m_CameraController2D.GetCamera());
+		m_Scene->OnUpdate(deltaTime);
 
-		{
-			PROFILE_SCOPE("Renderer Draw");
-
-
-			
-			for (int i = -10; i < 10; i++)
-			{
-				for (int j = -10; j < 10; j++)
-				{
-					Revoke::Renderer2D::DrawQuad({ i, j }, { 0.8f, 0.8f }, { 0.0f, 0.4f, 0.5f, 1.0f });
-				}
-			}
-			Revoke::Renderer2D::DrawQuad({ 0.0f, 1.0f }, { 1.0f, 1.0f }, m_Texture2D);
-			m_Scene->OnUpdate(deltaTime);
-			
-		}
-		Revoke::Renderer2D::End();
 		m_FrameBuffer->UnBind();
 
 	}
@@ -190,8 +216,23 @@ namespace Revoke
 			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
 			ImGui::Separator();
 		}
+		ImGui::Separator();
 
+		ImGui::DragFloat3("Camera Transform",
+			glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
 
+		if (ImGui::Checkbox("Camera A", &m_PrimaryCamera))
+		{
+			m_CameraEntity.GetComponent<CameraComponent>().isMain = m_PrimaryCamera;
+			m_SecondCamera.GetComponent<CameraComponent>().isMain = !m_PrimaryCamera;
+		}
+
+		auto& camera = m_SecondCamera.GetComponent<CameraComponent>().Camera;
+		float orthoSize = camera.GetOrthographicSize();
+		if (ImGui::DragFloat("Second Camera Ortho Size", &orthoSize))
+			camera.SetOrthographicSize(orthoSize);
+
+		ImGui::Separator();
 		auto stats = Revoke::Renderer2D::GetStats();
 		ImGui::Text("Renderer Stats");
 		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
@@ -248,7 +289,7 @@ namespace Revoke
 
 	void CraftLayer::OnEvent(Revoke::Event& e)
 	{
-		m_CameraController2D.OnEvent(e);
+		//m_CameraController2D.OnEvent(e);
 	}
 
 }

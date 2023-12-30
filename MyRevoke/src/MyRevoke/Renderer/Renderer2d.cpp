@@ -83,10 +83,13 @@ namespace Revoke
 		delete s_Data;
 	}
 
-	void Renderer2D::Begin(Camera& camera)
+	void Renderer2D::Begin(const Camera& camera, const glm::mat4 transform)
 	{
+
+		glm::mat4 viewProj = camera.GetProjectionMatrix() * glm::inverse(transform);
+
 		s_Data->Shader->Bind();
-		s_Data->Shader->SetUniformMat4("u_PVmatrix", camera.GetPVMatrix());
+		s_Data->Shader->SetUniformMat4("u_PVmatrix", viewProj);
 
 		s_Data->QuadIndexCount = 0;
 		s_Data->QuadVertexBufferPointer = s_Data->QuadVertexBufferBase;

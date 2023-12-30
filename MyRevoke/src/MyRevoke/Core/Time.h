@@ -13,6 +13,8 @@ namespace Revoke
 
 		inline float GetSeconds() const { return m_Time; }
 		inline float GetMiliSeconds() const { return m_Time / 10000.0f; }
+		
+		operator float() const { return m_Time; }
 	private:
 		float m_Time;
 	};

@@ -6,7 +6,6 @@
 #include "MyRevoke/Core/Log.h"
 #include "MyRevoke/ImGui/ImGuiLayer.h"
 #include "MyRevoke/Core/Input.h"
-#include "MyRevoke/Core/CameraController.h"
 
 #include "MyRevoke/Core/Time.h"
 
@@ -22,6 +21,7 @@
 #include "MyRevoke/Scene/Scene.h"
 #include "MyRevoke/Scene/Entity.h"
 #include "MyRevoke/Scene/Components.h"
+#include "MyRevoke/Scene/ScriptEntity.h"
 
 #include "MyRevoke/Core/MouseBtnCodes.h"
 #include "MyRevoke/Core/KeyCodes.h"

@@ -7,13 +7,13 @@
 
 namespace Revoke
 {
-	struct NameCpmponent
+	struct NameComponent
 	{
 		std::string Name;
 
-		NameCpmponent() = default;
-		NameCpmponent(const NameCpmponent&) = default;
-		NameCpmponent(const std::string& name)
+		NameComponent() = default;
+		NameComponent(const NameComponent&) = default;
+		NameComponent(const std::string& name)
 			:Name(name) {}
 	};
 

@@ -22,20 +22,4 @@ public:
 	
 
 private:
-	Revoke::Shared <Revoke::Texture2D> m_Texture2D;
-	
-
-	glm::vec4 m_MeshColor; 
-	glm::vec2 m_MeshLocation; 
-	glm::vec2 m_MeshScale; 
-
-	float m_Framerate = 0.0f;
-
-	struct ProfileResult
-	{
-		const char* Name;
-		float Time;
-	};
-
-	std::vector<ProfileResult> m_ProfileResults;
 };

@@ -1,4 +1,5 @@
 #include "MyRevoke.h"
+#include "SceneUi.h"
 
 #include "imgui.h"
 
@@ -33,6 +34,8 @@ namespace Revoke
 		Entity m_CameraEntity;
 		Entity m_SecondCamera;
 
+		ObjectsPannel m_ObjPannel;
+
 		bool m_PrimaryCamera = true;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		bool m_ViewportFocused = false;
@@ -45,7 +48,5 @@ namespace Revoke
 			const char* Name;
 			float Time;
 		};
-
-		std::vector<ProfileResult> m_ProfileResults;
 	};
 }

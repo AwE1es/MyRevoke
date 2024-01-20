@@ -1,5 +1,4 @@
 #pragma once
-// ONLY FOR USE BY APPLICATION --------------------------------------------
 
 #include "MyRevoke/Core/Application.h"
 #include "MyRevoke/Core/Layer.h"
@@ -27,5 +26,3 @@
 #include "MyRevoke/Core/KeyCodes.h"
 
 #include "rvpch.h"
-
-// Entry Point ------------------------------------------------------------

@@ -23,7 +23,7 @@ namespace Revoke
     {
         Entity entity = { m_Registry.create(), this };
         entity.AddComponent<TransformComponent>();
-        auto& entName = entity.AddComponent<NameCpmponent>();
+        auto& entName = entity.AddComponent<NameComponent>();
         
         entName.Name = name.empty() ? "UnNamed Entity" : name;
         return entity;

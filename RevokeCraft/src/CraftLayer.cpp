@@ -53,14 +53,35 @@ namespace Revoke
 				auto& transform = GetComponent<TransformComponent>().Transform;
 				float speed = 5.0f;
 
-				if (Input::IsKeyPressed(RV_KEY_A))
-					transform[3][0] -= speed * ts;
-				if (Input::IsKeyPressed(RV_KEY_D))
-					transform[3][0] += speed * ts;
-				if (Input::IsKeyPressed(RV_KEY_W))
-					transform[3][1] += speed * ts;
-				if (Input::IsKeyPressed(RV_KEY_S))
-					transform[3][1] -= speed * ts;
+				auto& camera = GetComponent<CameraComponent>().Camera;
+				if (camera.GetProjectionType() == SceneCamera::Projection::Orthographic)
+				{
+					if (Input::IsKeyPressed(RV_KEY_A))
+						transform[3][0] -= speed * ts;
+					if (Input::IsKeyPressed(RV_KEY_D))
+						transform[3][0] += speed * ts;
+					if (Input::IsKeyPressed(RV_KEY_W))
+						transform[3][1] += speed * ts;
+					if (Input::IsKeyPressed(RV_KEY_S))
+						transform[3][1] -= speed * ts;
+				}
+				else
+				{
+					RV_TRACE("Mouse x -> ", Input::GetMouseX());
+					RV_TRACE("Mouse x -> ", Input::GetMouseY());
+					if (Input::IsKeyPressed(RV_KEY_A))
+						transform[3][0] -= speed * ts;
+					if (Input::IsKeyPressed(RV_KEY_D))
+						transform[3][0] += speed * ts;
+					if (Input::IsKeyPressed(RV_KEY_SPACE))
+						transform[3][1] += speed * ts;
+					if (Input::IsKeyPressed(RV_KEY_LEFT_SHIFT))
+						transform[3][1] -= speed * ts;
+					if (Input::IsKeyPressed(RV_KEY_W))
+						transform[3][2] -= speed * ts;
+					if (Input::IsKeyPressed(RV_KEY_S))
+						transform[3][2] += speed * ts;
+				}
 			}
 		};
 

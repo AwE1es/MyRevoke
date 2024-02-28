@@ -37,7 +37,7 @@ namespace Revoke {
 		Projection GetProjectionType() const { return m_ProjectionType; }
 		void SetProjectionType(const Projection& projectionType) { m_ProjectionType = projectionType; RecalculateProjection(); }
 
-	private:
+	
 		void RecalculateProjection();
 	private:
 		Projection m_ProjectionType = Projection::Orthographic;

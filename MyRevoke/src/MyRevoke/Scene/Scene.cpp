@@ -49,7 +49,7 @@ namespace Revoke
 
 
         Camera* mainCamera = nullptr;
-        glm::mat4* cameraTransform = nullptr;
+        glm::mat4 cameraTransform;
 
         auto view = m_Registry.view<TransformComponent, CameraComponent>();
 
@@ -60,20 +60,29 @@ namespace Revoke
             if (camera.isMain)
             {
                 mainCamera = &camera.Camera;
-                cameraTransform = &transform.Transform;
+                cameraTransform = transform.GetTransform();
                 break;
             }
         }
 
         if (mainCamera)
-            Renderer2D::Begin(mainCamera->GetProjectionMatrix(), *cameraTransform);
+            Renderer2D::Begin(mainCamera->GetProjectionMatrix(), cameraTransform);
 
         auto group1 = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
         for (auto entity : group1)
         {
             auto [transform, sprite] = group1.get<TransformComponent, SpriteRendererComponent>(entity);
 
-            Renderer2D::DrawQuad(transform, sprite.Color);
+            if (sprite.TexturePath == "")
+            {
+                Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+            }
+            else
+            {
+                Shared <Texture2D> texture;
+                texture = Texture2D::Create(sprite.TexturePath);
+                Renderer2D::DrawQuad(transform.GetTransform(), texture);
+            }
         }
 
         Renderer2D::End();
@@ -91,5 +100,9 @@ namespace Revoke
                 cameraComponent.Camera.SetViewportSize(width, height);
         }
 
+    }
+    void Scene::RemoveEntity(Entity ent)
+    {
+       m_Registry.destroy(ent);
     }
 };

@@ -13,8 +13,6 @@ namespace Revoke
 	}
 	void CraftLayer::OnAttach()
 	{
-
-		m_Texture2D = Texture2D::Create("Textures/Triangle_Texture.png");
 		
 		FrameBufferStats frameBufferStats;
 		frameBufferStats.Width = 1280;
@@ -23,15 +21,25 @@ namespace Revoke
 		m_Scene = std::make_shared<Scene>();
 
 		//Entity Creation
-		auto square = m_Scene->CreateEntity("Square1");
-		square.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 0.2f, 0.5f, 1.0f));
-		
-		m_SquereEntity = square;
+		{
+			auto square = m_Scene->CreateEntity("Square B");
+			square.AddComponent<SpriteRendererComponent>(glm::vec4(0.1f, 0.2f, 0.55f, 1.0f));
+		}
 
-		m_CameraEntity = m_Scene->CreateEntity("Camera Entity");
+		{
+			auto square = m_Scene->CreateEntity("Square A");
+			square.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 0.2f, 0.5f, 1.0f));
+		}
+
+		{
+			auto square = m_Scene->CreateEntity("Teiangle Texture");
+			square.AddComponent<SpriteRendererComponent>("Textures/Triangle_Texture.png");
+		}
+
+		m_CameraEntity = m_Scene->CreateEntity("Main Camera");
 		m_CameraEntity.AddComponent<CameraComponent>();
 
-		m_SecondCamera = m_Scene->CreateEntity("Clip-Space Entity");
+		m_SecondCamera = m_Scene->CreateEntity("Second Camera");
 		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
 		cc.isMain = false;
 
@@ -40,8 +48,8 @@ namespace Revoke
 		public:
 			void OnCreate()
 			{
-				auto& transform = GetComponent<TransformComponent>().Transform;
-				transform[3][0] = rand() % 10 - 5.0f;
+				auto& transform = GetComponent<TransformComponent>();
+				transform.Position.x = rand() % 10 - 5.0f;
 			}
 
 			void OnDestroy()
@@ -50,37 +58,37 @@ namespace Revoke
 
 			void OnUpdate(Timestep ts)
 			{
-				auto& transform = GetComponent<TransformComponent>().Transform;
+				auto& transform = GetComponent<TransformComponent>().Position;
 				float speed = 5.0f;
 
 				auto& camera = GetComponent<CameraComponent>().Camera;
 				if (camera.GetProjectionType() == SceneCamera::Projection::Orthographic)
 				{
 					if (Input::IsKeyPressed(RV_KEY_A))
-						transform[3][0] -= speed * ts;
+						transform.x -= speed * ts;
 					if (Input::IsKeyPressed(RV_KEY_D))
-						transform[3][0] += speed * ts;
+						transform.x += speed * ts;
 					if (Input::IsKeyPressed(RV_KEY_W))
-						transform[3][1] += speed * ts;
+						transform.y += speed * ts;
 					if (Input::IsKeyPressed(RV_KEY_S))
-						transform[3][1] -= speed * ts;
+						transform.y -= speed * ts;
 				}
 				else
 				{
-					RV_TRACE("Mouse x -> ", Input::GetMouseX());
-					RV_TRACE("Mouse x -> ", Input::GetMouseY());
+					//RV_TRACE("Mouse x -> ", Input::GetMouseX());
+					//RV_TRACE("Mouse x -> ", Input::GetMouseY());
 					if (Input::IsKeyPressed(RV_KEY_A))
-						transform[3][0] -= speed * ts;
+						transform.x -= speed * ts;
 					if (Input::IsKeyPressed(RV_KEY_D))
-						transform[3][0] += speed * ts;
+						transform.x += speed * ts;
 					if (Input::IsKeyPressed(RV_KEY_SPACE))
-						transform[3][1] += speed * ts;
+						transform.y += speed * ts;
 					if (Input::IsKeyPressed(RV_KEY_LEFT_SHIFT))
-						transform[3][1] -= speed * ts;
+						transform.y -= speed * ts;
 					if (Input::IsKeyPressed(RV_KEY_W))
-						transform[3][2] -= speed * ts;
+						transform.z -= speed * ts;
 					if (Input::IsKeyPressed(RV_KEY_S))
-						transform[3][2] += speed * ts;
+						transform.z += speed * ts;
 				}
 			}
 		};

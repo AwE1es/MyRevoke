@@ -113,6 +113,8 @@ namespace Revoke {
 
 		const auto& layout = vertexBuff->GetLayout();
 
+
+		// - location
 		uint32_t location = 0;
 		for (const auto& element : layout)
 		{

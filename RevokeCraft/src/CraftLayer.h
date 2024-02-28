@@ -24,13 +24,11 @@ namespace Revoke
 
 
 	private:
-		Shared <Texture2D> m_Texture2D;
 
 		Shared<FrameBuffers> m_FrameBuffer;
 
 		Shared<Scene> m_Scene;
 
-		Entity m_SquereEntity;
 		Entity m_CameraEntity;
 		Entity m_SecondCamera;
 

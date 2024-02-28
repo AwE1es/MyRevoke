@@ -22,6 +22,7 @@ namespace Revoke
 
 		m_CurrentScene->m_Registry.each([&](auto entityID)
 			{
+				bool entityExist = true;
 				Entity entity{ entityID , m_CurrentScene.get() };
 				auto& entityName = entity.GetComponent<NameComponent>().Name;
 				ImGuiTreeNodeFlags flags = ((m_SelectedEntity == entity) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
@@ -31,6 +32,15 @@ namespace Revoke
 					m_SelectedEntity = entity;
 				}
 
+				//if (ImGui::BeginPopupContextItem(0, 1 | ImGuiPopupFlags_NoOpenOverItems))
+				//{
+				//	if (ImGui::MenuItem("Delete Entity"))
+				//	{
+				//		entityExist = false;
+				//	}
+				//	ImGui::EndPopup();
+				//}
+
 				if (opened)
 				{
 					ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow;
@@ -39,10 +49,25 @@ namespace Revoke
 						ImGui::TreePop();
 					ImGui::TreePop();
 				}
+				if (!entityExist)
+				{
+					m_CurrentScene->RemoveEntity(entity);
+					if(m_SelectedEntity == entity)
+						m_SelectedEntity = {};
+				}
 			});
 
 		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
 			m_SelectedEntity = {};
+
+		if (ImGui::BeginPopupContextWindow(0, 1 | ImGuiPopupFlags_NoOpenOverItems))
+		{
+			if (ImGui::MenuItem("Create Entity"))
+			{
+				m_CurrentScene->CreateEntity("Empty Entity");
+			}
+			ImGui::EndPopup();
+		}
 
 		ImGui::End();
 
@@ -51,28 +76,40 @@ namespace Revoke
 		{
 			if (m_SelectedEntity.HasComponent<NameComponent>())
 			{
-				auto& tag = m_SelectedEntity.GetComponent<NameComponent>().Name;
+				auto& name = m_SelectedEntity.GetComponent<NameComponent>().Name;
 
 				char buffer[256];
 				memset(buffer, 0, sizeof(buffer));
-				strcpy_s(buffer, 256, tag.c_str());
+				strcpy_s(buffer, 256, name.c_str());
 				if (ImGui::InputText("Name", buffer, sizeof(buffer)))
 				{
-					tag = std::string(buffer);
+					name = std::string(buffer);
 				}
-
 			}
+		
 			if (m_SelectedEntity.HasComponent<TransformComponent>())
 			{
 				if (ImGui::TreeNodeEx((void*)typeid(TransformComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Transform"))
 				{
-					auto& transform = m_SelectedEntity.GetComponent<TransformComponent>().Transform;
-					ImGui::DragFloat3("Position", glm::value_ptr(transform[3]), 0.1f);
+					auto& transformComponent = m_SelectedEntity.GetComponent<TransformComponent>();
+		
+					ImGui::DragFloat3("Position", glm::value_ptr(transformComponent.Position), 0.1f);
+					ImGui::DragFloat3("Rotation", glm::value_ptr(transformComponent.Rotation), 0.1f);
+					ImGui::DragFloat3("Scale", glm::value_ptr(transformComponent.Scale), 0.1f);
 
 					ImGui::TreePop();
 				}
 			}
-
+			if (m_SelectedEntity.HasComponent<SpriteRendererComponent>())
+			{
+				if (ImGui::TreeNodeEx((void*)typeid(SpriteRendererComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Color"))
+				{
+					auto& color = m_SelectedEntity.GetComponent<SpriteRendererComponent>().Color;
+					ImGui::ColorEdit4("Color", glm::value_ptr(color));
+					 
+					ImGui::TreePop();
+				}
+			}
 			if (m_SelectedEntity.HasComponent<CameraComponent>())
 			{
 				if (ImGui::TreeNodeEx((void*)typeid(CameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Camera"))
@@ -133,6 +170,27 @@ namespace Revoke
 					}
 					ImGui::TreePop();
 				}
+			}
+
+			if (ImGui::Button("Add Component"))
+				ImGui::OpenPopup("Add Component");
+
+			//TODO add all components
+			
+			if (ImGui::BeginPopup("Add Component"))
+			{
+				if (ImGui::MenuItem("Sprite Renderer"))
+				{
+					m_SelectedEntity.AddComponent<SpriteRendererComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+
+				if (ImGui::MenuItem("Camera"))
+				{
+					m_SelectedEntity.AddComponent<CameraComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+				ImGui::EndPopup();
 			}
 		}
 		ImGui::End();

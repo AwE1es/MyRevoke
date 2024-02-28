@@ -4,6 +4,7 @@
 
 #include <string>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace Revoke
 {
@@ -19,33 +20,54 @@ namespace Revoke
 
 	struct TransformComponent
 	{
-		glm::mat4 Transform{ 1.0f };
+		glm::vec3 Position = { 0.0f, 0.0f, 0.0f };
+		glm::vec3 Rotation = { 0.0f, 0.0f , 0.0f };
+		glm::vec3 Scale = { 1.0f, 1.0f, 1.0f };
 
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
-		TransformComponent(const glm::mat4& transform)
-			:Transform(transform) {}
-		operator glm::mat4&() { return Transform; }
+		TransformComponent(const glm::vec3& pos)
+			:Position(pos) {}
+
+		glm::mat4 GetTransform() const
+		{
+			glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), Rotation.x, { 1,0,0 }) *
+				glm::rotate(glm::mat4(1.0f), Rotation.y, { 0,1,0 }) *
+				glm::rotate(glm::mat4(1.0f), Rotation.z, { 0,0,1 });
+
+			return glm::translate(glm::mat4(1.0f), Position) * rotation * glm::scale(glm::mat4(1.0f), Scale);
+		}
+
 	};
 
 	struct SpriteRendererComponent
 	{
 		glm::vec4 Color{ 1.0f };
+		std::string TexturePath = "";
 
 		SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const glm::vec4& color )
 			:Color(color) {}
+
+		SpriteRendererComponent(const std::string texturePath)
+		: TexturePath(texturePath) {}
 	};
 
 	struct CameraComponent
 	{
 		SceneCamera Camera;
 		bool isMain = true;
-		bool FixedAspectRatio = false;
 
+		bool FixedAspectRatio = false;
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
+
+		void RecalculateProjection()
+		{
+			Camera.RecalculateProjection();
+		}
+	
 		
 	};
 

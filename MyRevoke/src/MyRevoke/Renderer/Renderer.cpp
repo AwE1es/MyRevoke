@@ -25,6 +25,7 @@ namespace Revoke
 	}
 	void Renderer::End()
 	{
+		Renderer2D::Shutdown();
 	}
 
 	void Renderer::Init()

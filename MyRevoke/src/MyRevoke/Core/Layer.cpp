@@ -8,5 +8,4 @@ namespace Revoke
 		: m_DebugName(name)
 	{
 	}
-	Layer::~Layer() {}
 }

@@ -23,17 +23,12 @@ namespace Revoke
 		//Entity Creation
 		{
 			auto square = m_Scene->CreateEntity("Square B");
-			square.AddComponent<SpriteRendererComponent>(glm::vec4(0.1f, 0.2f, 0.55f, 1.0f));
+			square.AddComponent<SpriteRendererComponent>(glm::vec4(0.1f, 0.4f, 0.55f, 1.0f));
 		}
-
+	
 		{
-			auto square = m_Scene->CreateEntity("Square A");
-			square.AddComponent<SpriteRendererComponent>(glm::vec4(0.0f, 0.2f, 0.5f, 1.0f));
-		}
-
-		{
-			auto square = m_Scene->CreateEntity("Teiangle Texture");
-			square.AddComponent<SpriteRendererComponent>("Textures/Triangle_Texture.png");
+			auto triangle = m_Scene->CreateEntity("Traingle Texture");
+			triangle.AddComponent<SpriteRendererComponent>("Textures/Triangle_Texture.png");
 		}
 
 		m_CameraEntity = m_Scene->CreateEntity("Main Camera");

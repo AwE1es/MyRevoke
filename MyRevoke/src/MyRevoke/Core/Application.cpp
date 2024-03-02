@@ -17,7 +17,6 @@ namespace Revoke
 	Application::Application()
 	
 	{
-	
 		RV_CORE_ASSERT(!s_Instance, "Applicatio already exist");
 		s_Instance = this;
 
@@ -33,7 +32,7 @@ namespace Revoke
 	}
 	Application::~Application()
 	{
-	
+		Renderer::End();
 	}
 	void Application::Run()
 	{
@@ -68,21 +67,23 @@ namespace Revoke
 		eDispatcher.Dispatch<WindowsCloseEvent>(RV_BIND_EVENT_FUNK(Application::OnWindowsClose));
 		eDispatcher.Dispatch<WindowResizeEvent>(RV_BIND_EVENT_FUNK(Application::OnWindowResize));
 
-		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend();++it)
 		{
-			(*--it)->OnEvent(e);
 			if (e.Handled)
 				break;
+			(*it)->OnEvent(e);
 		}
 
 	}
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 	void Application::PushOverlay(Layer* layer)
 	{
 		m_LayerStack.PushOverlay(layer);
+		layer->OnAttach();
 	}
 	bool Application::OnWindowsClose(WindowsCloseEvent e)
 	{

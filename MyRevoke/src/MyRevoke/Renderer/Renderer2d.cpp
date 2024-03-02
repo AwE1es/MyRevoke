@@ -80,7 +80,7 @@ namespace Revoke
 
 	void Renderer2D::Shutdown()
 	{
-		delete s_Data;
+		delete[] s_Data->QuadVertexBufferBase;
 	}
 
 	void Renderer2D::Begin(const Camera& camera, const glm::mat4 transform)

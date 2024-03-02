@@ -55,7 +55,7 @@ namespace Revoke
 
         for (auto entity : view)
         {
-            const auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+            auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 
             if (camera.isMain)
             {
@@ -66,26 +66,29 @@ namespace Revoke
         }
 
         if (mainCamera)
-            Renderer2D::Begin(mainCamera->GetProjectionMatrix(), cameraTransform);
-
-        auto group1 = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-        for (auto entity : group1)
         {
-            auto [transform, sprite] = group1.get<TransformComponent, SpriteRendererComponent>(entity);
+            Renderer2D::Begin(*mainCamera, cameraTransform);
 
-            if (sprite.TexturePath == "")
+            auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+            for (auto entity : group)
             {
-                Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+                auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+                if (sprite.TexturePath == "")
+                {
+                    Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+                }
+                else
+                {
+                    Shared <Texture2D> texture;
+                    texture = Texture2D::Create(sprite.TexturePath);
+                    Renderer2D::DrawQuad(transform.GetTransform(), texture);
+                }
             }
-            else
-            {
-                Shared <Texture2D> texture;
-                texture = Texture2D::Create(sprite.TexturePath);
-                Renderer2D::DrawQuad(transform.GetTransform(), texture);
-            }
+            Renderer2D::End();
         }
 
-        Renderer2D::End();
+      
     }
     void Scene::OnViewportResize(uint32_t width, uint32_t height)
     {

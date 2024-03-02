@@ -105,4 +105,44 @@ namespace Revoke
     {
        m_Registry.destroy(ent);
     }
+
+    
+    template<typename T>
+    void Scene::OnComponentAdded(Entity entity, T& component)
+    {
+       
+    }
+
+    template<>
+    void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component)
+    {
+
+    }
+    template<>
+    void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent& component)
+    {
+        component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
+    }
+    template<>
+    void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component)
+    {
+
+    }
+    template<>
+    void Scene::OnComponentAdded<NameComponent>(Entity entity, NameComponent& component)
+    {
+
+    }
+    template<>
+    void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
+    {
+
+    }
+    
+    template void Scene::OnComponentAdded(Entity, TransformComponent&);
+    template void Scene::OnComponentAdded(Entity, CameraComponent&);
+    template void Scene::OnComponentAdded(Entity, SpriteRendererComponent&);
+    template void Scene::OnComponentAdded(Entity, NameComponent&);
+    template void Scene::OnComponentAdded(Entity, NativeScriptComponent&);
 };
+

@@ -5,12 +5,21 @@
 #include "Components.h"
 #include "Entity.h"
 
+#include <fstream>
+
+#include <yaml-cpp/yaml.h>
 #include <glm/glm.hpp>
 
 namespace Revoke
 {
 
     Scene::Scene()
+    {
+
+    }
+
+    Scene::Scene(std::string name)
+        :m_Name(name)
     {
 
     }
@@ -109,6 +118,20 @@ namespace Revoke
        m_Registry.destroy(ent);
     }
 
+    Entity Scene::GetMainCamera() 
+    {
+        auto view = m_Registry.view<CameraComponent>();
+        for (auto ent : view)
+        {
+            const auto& camera = view.get<CameraComponent>(ent);
+            if (camera.isMain)
+            {
+               
+                return Entity{ ent, this };
+            }
+        }
+        return {};
+    }
     
     template<typename T>
     void Scene::OnComponentAdded(Entity entity, T& component)

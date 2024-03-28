@@ -1,6 +1,7 @@
 #include "SceneUi.h"
 
 #include "imgui.h"
+
 #include <glm/gtc/type_ptr.hpp>
 
 namespace Revoke
@@ -14,6 +15,7 @@ namespace Revoke
 	void ObjectsPannel::SetScene(Shared<Scene> currentScene)
 	{
 		m_CurrentScene = currentScene;
+		m_SelectedEntity = {};
 	}
 
 	void ObjectsPannel::OnImGuiRender()

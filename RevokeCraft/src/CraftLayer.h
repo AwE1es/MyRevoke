@@ -22,6 +22,12 @@ namespace Revoke
 		void OnImGuiDraw() override;
 		void OnEvent(Event& e) override;
 
+		bool OnKeyPressed(KeyPressedEvent& e);
+
+		void NewScene();
+		void OpenScene();
+		void SaveAs();
+		void Save();
 
 	private:
 
@@ -40,6 +46,8 @@ namespace Revoke
 		bool m_ViewportHovered = false;
 
 		float m_Framerate = 0.0f;
+
+		int m_GizmoType = -1;
 
 		struct ProfileResult
 		{

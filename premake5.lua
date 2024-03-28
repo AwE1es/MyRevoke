@@ -13,13 +13,16 @@ workspace "MyRevoke"
     IncludeDir ["GLM"] = "MyRevoke/vendor/glm"
     IncludeDir ["STB_IMAGE"] = "MyRevoke/vendor/stb_image"
     IncludeDir ["ENTT"] = "MyRevoke/vendor/entt"
+    IncludeDir ["yaml_cpp"] = "MyRevoke/vendor/yaml-cpp/include"
+    IncludeDir ["ImGuizmo"] = "MyRevoke/vendor/ImGuizmo"
 
 
     group "Dependencies"
         include "MyRevoke/vendor/GLFW"
         include "MyRevoke/vendor/GLAD"
         include "MyRevoke/vendor/imgui"
-
+        include "MyRevoke/vendor/yaml-cpp"
+        
     group ""
 
     project "MyRevoke"
@@ -43,7 +46,8 @@ workspace "MyRevoke"
             "%{prj.name}/vendor/glm/glm/**.inl",
             "%{prj.name}/vendor/stb_image/stb_image.h",
             "%{prj.name}/vendor/stb_image/stb_image.cpp",
-           
+            "%{prj.name}/vendor/ImGuizmo/ImGuizmo.cpp",
+            "%{prj.name}/vendor/ImGuizmo/ImGuizmo.h",
         }
         defines
         {
@@ -60,6 +64,8 @@ workspace "MyRevoke"
             "%{IncludeDir.GLM}",
             "%{IncludeDir.STB_IMAGE}",
             "%{IncludeDir.ENTT}",
+            "%{IncludeDir.yaml_cpp}",
+            "%{IncludeDir.ImGuizmo}",
         }
 
         links
@@ -67,9 +73,11 @@ workspace "MyRevoke"
             "GLAD",
             "GLFW",
             "ImGui",
+            "yaml-cpp",
             "opengl32.lib",
         }
-
+        filter "files:vendor/ImGuizmo/**.cpp"
+            flags {"NoPCH"}
         filter "system:windows"
             systemversion "latest"
 
@@ -81,6 +89,7 @@ workspace "MyRevoke"
                 "IMGUI_DEFINE_MATH_OPERATORS",
                 "RV_ASSERTS_ENABLE",
                 "_CRT_SECURE_NO_WARNINGS",
+                "YAML_CPP_STATIC_DEFINE",
             }          
 
         filter "configurations:Debug"
@@ -118,11 +127,12 @@ workspace "MyRevoke"
             "%{IncludeDir.GLM}",
             "%{IncludeDir.ImGui}",
             "%{IncludeDir.ENTT}",
+            "%{IncludeDir.ImGuizmo}",
         }
     
         links
         {
-            "MyRevoke"
+            "MyRevoke",
         }
     
         filter "system:windows"

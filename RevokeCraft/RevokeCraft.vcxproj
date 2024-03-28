@@ -59,7 +59,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\MyRevoke\vendor\spdlog\include;..\MyRevoke\src;..\MyRevoke\vendor\glm;..\MyRevoke\vendor\imgui;..\MyRevoke\vendor\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\MyRevoke\vendor\spdlog\include;..\MyRevoke\src;..\MyRevoke\vendor\glm;..\MyRevoke\vendor\imgui;..\MyRevoke\vendor\entt;..\MyRevoke\vendor\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -76,7 +76,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\MyRevoke\vendor\spdlog\include;..\MyRevoke\src;..\MyRevoke\vendor\glm;..\MyRevoke\vendor\imgui;..\MyRevoke\vendor\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\MyRevoke\vendor\spdlog\include;..\MyRevoke\src;..\MyRevoke\vendor\glm;..\MyRevoke\vendor\imgui;..\MyRevoke\vendor\entt;..\MyRevoke\vendor\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>

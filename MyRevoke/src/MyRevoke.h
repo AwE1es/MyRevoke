@@ -18,6 +18,7 @@
 #include "MyRevoke/Renderer/FrameBuffers.h"
 
 #include "MyRevoke/Scene/Scene.h"
+#include "MyRevoke/Scene/Serealizer.h"
 #include "MyRevoke/Scene/Entity.h"
 #include "MyRevoke/Scene/Components.h"
 #include "MyRevoke/Scene/ScriptEntity.h"

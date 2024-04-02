@@ -3,6 +3,7 @@
 #include "entt.hpp"
 
 #include "MyRevoke/Core/Time.h"
+#include "MyRevoke/Renderer/EditorCamera.h"
 
 
 namespace Revoke
@@ -18,7 +19,8 @@ namespace Revoke
 			
 			Entity CreateEntity(const std::string name = std::string());
 
-			void OnUpdate(Timestep ts);
+			void OnRuntimeUpdate(Timestep ts);
+			void OnEditorUpdate(Timestep ts, EditorCamera& camera);
 			void OnViewportResize(uint32_t width, uint32_t height);
 
 			void RemoveEntity(Entity ent);

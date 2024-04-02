@@ -112,23 +112,65 @@ namespace Revoke {
 		vertexBuff->Bind();
 
 		const auto& layout = vertexBuff->GetLayout();
-
-
-		// - location
-		uint32_t location = 0;
 		for (const auto& element : layout)
 		{
-			glEnableVertexAttribArray(location + m_VertexBufferIndexOffset);
-			glVertexAttribPointer(location + m_VertexBufferIndexOffset,
-				element.GetComponentCount(),
-				ShaderDataTypeToOpenGLDataType(element.Type),
-				element.Normalized ? GL_TRUE : GL_FALSE,
-				layout.GetStride(),
-				(const void*)(intptr_t)element.Offset);
-			location++;
+			switch (element.Type)
+			{
+			case ShaderDataTypes::Float:
+			case ShaderDataTypes::Float2:
+			case ShaderDataTypes::Float3:
+			case ShaderDataTypes::Float4:
+			{
+				glEnableVertexAttribArray(m_VertexBufferIndexOffset);
+				glVertexAttribPointer(m_VertexBufferIndexOffset,
+					element.GetComponentCount(),
+					ShaderDataTypeToOpenGLDataType(element.Type),
+					element.Normalized ? GL_TRUE : GL_FALSE,
+					layout.GetStride(),
+					(const void*)element.Offset);
+				m_VertexBufferIndexOffset++;
+				break;
+			}
+			case ShaderDataTypes::Int:
+			case ShaderDataTypes::Int2:
+			case ShaderDataTypes::Int3:
+			case ShaderDataTypes::Int4:
+			case ShaderDataTypes::Bool:
+			{
+				glEnableVertexAttribArray(m_VertexBufferIndexOffset);
+				glVertexAttribIPointer(m_VertexBufferIndexOffset,
+					element.GetComponentCount(),
+					ShaderDataTypeToOpenGLDataType(element.Type),
+					layout.GetStride(),
+					(const void*)element.Offset);
+				m_VertexBufferIndexOffset++;
+				break;
+			}
+			case ShaderDataTypes::Mat3:
+			case ShaderDataTypes::Mat4:
+			
+			{
+				uint8_t count = element.GetComponentCount();
+				for (uint8_t i = 0; i < count; i++)
+				{
+					glEnableVertexAttribArray(m_VertexBufferIndexOffset);
+					glVertexAttribPointer(m_VertexBufferIndexOffset,
+						count,
+						ShaderDataTypeToOpenGLDataType(element.Type),
+						element.Normalized ? GL_TRUE : GL_FALSE,
+						layout.GetStride(),
+						(const void*)(element.Offset + sizeof(float) * count * i));
+					glVertexAttribDivisor(m_VertexBufferIndexOffset, 1);
+					m_VertexBufferIndexOffset++;
+				}
+				break;
+			}
+			default:
+				RV_CORE_ASSERT(false, "Unknown ShaderDataType!");
+			}
 		}
+
 		m_VertexBuff.push_back(vertexBuff);
-		m_VertexBufferIndexOffset += layout.GetElements().size();
 	}
 
 	void OpenGLVertexArray::SetIndexBuffer(const Shared<IndexBuffer>& indexBuff)

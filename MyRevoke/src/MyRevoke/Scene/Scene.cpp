@@ -38,7 +38,7 @@ namespace Revoke
         return entity;
     }
 
-    void Scene::OnUpdate(Timestep ts)
+    void Scene::OnRuntimeUpdate(Timestep ts)
     {
 
         {
@@ -82,22 +82,28 @@ namespace Revoke
             for (auto entity : group)
             {
                 auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-
-                if (sprite.TexturePath == "")
-                {
-                    Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
-                }
-                else
-                {
-                    Shared <Texture2D> texture;
-                    texture = Texture2D::Create(sprite.TexturePath);
-                    Renderer2D::DrawQuad(transform.GetTransform(), texture);
-                }
+                Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+           
             }
             Renderer2D::End();
         }
 
       
+    }
+    void Scene::OnEditorUpdate(Timestep ts, EditorCamera& camera)
+    {
+        Renderer2D::Begin(camera);
+
+        auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+        for (auto entity : group)
+        {
+            auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+            Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+           
+      
+        }
+        Renderer2D::End();
     }
     void Scene::OnViewportResize(uint32_t width, uint32_t height)
     {

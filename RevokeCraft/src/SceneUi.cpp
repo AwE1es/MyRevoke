@@ -197,4 +197,8 @@ namespace Revoke
 		}
 		ImGui::End();
 	}
+	void ObjectsPannel::SetSelectedEntity(Entity entity)
+	{
+		m_SelectedEntity = entity;
+	}
 }

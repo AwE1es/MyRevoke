@@ -128,6 +128,7 @@
     <ClInclude Include="src\MyRevoke\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Buffer.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Cmaera.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\EditorCamera.h" />
     <ClInclude Include="src\MyRevoke\Renderer\FrameBuffers.h" />
     <ClInclude Include="src\MyRevoke\Renderer\GraphicsContex.h" />
     <ClInclude Include="src\MyRevoke\Renderer\RenderCommand.h" />
@@ -580,10 +581,11 @@
     <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\EditorCamera.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\FrameBuffers.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\MyRevoke\Renderer\Renderer2d.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Shader.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Texture.cpp" />

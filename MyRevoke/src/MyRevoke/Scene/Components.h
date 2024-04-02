@@ -71,7 +71,7 @@ namespace Revoke
 		
 	};
 
-	struct NativeScriptComponent
+	struct NativeScriptComponent //TODO: Move out with entt include
 	{
 		ScriptEntity* Instance = nullptr;
 

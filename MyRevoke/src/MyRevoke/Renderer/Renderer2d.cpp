@@ -14,6 +14,9 @@ namespace Revoke
 		glm::vec4 Color;
 		glm::vec2 TexCoord;
 		float TexIndex;
+
+
+		int EntityId = 0;
 	};
 
 	struct Data2D
@@ -96,6 +99,19 @@ namespace Revoke
 		s_Data->TextureIndex = 1;
 	}
 
+	void Renderer2D::Begin(const EditorCamera& camera)
+	{
+
+		glm::mat4 viewProj = camera.GetViewProjection();
+
+		s_Data->Shader->Bind();
+		s_Data->Shader->SetUniformMat4("u_PVmatrix", viewProj);
+
+		s_Data->QuadIndexCount = 0;
+		s_Data->QuadVertexBufferPointer = s_Data->QuadVertexBufferBase;
+		s_Data->TextureIndex = 1;
+	}
+
 	void Renderer2D::End()
 	{
 		//Drawing
@@ -112,13 +128,13 @@ namespace Revoke
 	}
 
 	//Color Draw
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2 size, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2 size, const glm::vec4& color, int entityID)
 	{
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
-		DrawQuad(transform, color);
+		DrawQuad(transform, color, entityID);
 
 		if (s_Data->QuadIndexCount >= Data2D::MaxIndices)
 			NewBatch();
@@ -156,28 +172,28 @@ namespace Revoke
 */
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const glm::vec4& color, int entityID)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, color);
+		DrawQuad({ position.x, position.y, 0.0f }, size, color, entityID);
 	}
 
 	//Texture Draw
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2 size, const Shared<Texture2D>& texture)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2 size, const Shared<Texture2D>& texture, int entityID)
 	{
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
-		DrawQuad(transform, texture);
+		DrawQuad(transform, texture, entityID);
 
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const Shared<Texture2D>& texture)
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const Shared<Texture2D>& texture, int entityID)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, texture);
+		DrawQuad({ position.x, position.y, 0.0f }, size, texture, entityID);
 	}
 
-	void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color, int entityID)
 	{
 
 		constexpr size_t quadVertexCount = 4;
@@ -193,6 +209,7 @@ namespace Revoke
 			s_Data->QuadVertexBufferPointer->Color = color;
 			s_Data->QuadVertexBufferPointer->TexCoord = textureCoords[i];
 			s_Data->QuadVertexBufferPointer->TexIndex = textureIndex;
+			s_Data->QuadVertexBufferPointer->EntityId = entityID;
 			s_Data->QuadVertexBufferPointer++;
 		}
 
@@ -201,7 +218,7 @@ namespace Revoke
 		s_Data->Statistic.QuadCount++;
 	}
 
-	void Renderer2D::DrawQuad(const glm::mat4& transform, const Shared<Texture2D>& texture)
+	void Renderer2D::DrawQuad(const glm::mat4& transform, const Shared<Texture2D>& texture, int entityID)
 	{
 		constexpr size_t quadVertexCount = 4;
 		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
@@ -235,6 +252,7 @@ namespace Revoke
 			s_Data->QuadVertexBufferPointer->Color = whiteColor;
 			s_Data->QuadVertexBufferPointer->TexCoord = textureCoords[i];
 			s_Data->QuadVertexBufferPointer->TexIndex = textureIndex;
+			s_Data->QuadVertexBufferPointer->EntityId = entityID;
 			s_Data->QuadVertexBufferPointer++;
 		}
 
@@ -284,6 +302,11 @@ namespace Revoke
 		DrawTriangle({ position.x, position.y, 0.0f }, size, texture);
 	}
 
+	void Renderer2D::DrawSprite(const glm::mat4& transform, SpriteRendererComponent& sprite, int entityID)
+	{
+		DrawQuad(transform, sprite.Color, entityID);
+	}
+
 	void Renderer2D::QuadInit()
 	{
 		s_Data->QuadVA = VertexArray::Create();
@@ -294,7 +317,8 @@ namespace Revoke
 			{ShaderDataTypes::Float3, "a_Position", false},
 			{ShaderDataTypes::Float4, "a_Color", false},
 			{ShaderDataTypes::Float2, "a_TexCoord", false},
-			{ShaderDataTypes::Float,  "a_TexIndex", false}
+			{ShaderDataTypes::Float,  "a_TexIndex", false},
+			{ShaderDataTypes::Int,  "a_EntityID", false}
 		};
 		s_Data->QuadVB->SetLayout(quadLayout);
 

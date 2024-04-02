@@ -19,82 +19,13 @@ namespace Revoke
 	{
 		
 		FrameBufferStats frameBufferStats;
+		frameBufferStats.Attachments = { FramebufferTextureFormat::RGBA8,FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::DEPTH24STENCIL8 };
 		frameBufferStats.Width = 1280;
 		frameBufferStats.Height = 720;
 		m_FrameBuffer = FrameBuffers::Create(frameBufferStats);
 		m_Scene = std::make_shared<Scene>("Main scene");
 
-		//Entity Creation
-		{
-			auto square = m_Scene->CreateEntity("Square B");
-			square.AddComponent<SpriteRendererComponent>(glm::vec4(0.1f, 0.4f, 0.55f, 1.0f));
-		}
-	
-		{
-			auto triangle = m_Scene->CreateEntity("Traingle Texture");
-			triangle.AddComponent<SpriteRendererComponent>("Textures/Triangle_Texture.png");
-		}
-
-		m_CameraEntity = m_Scene->CreateEntity("Main Camera");
-		m_CameraEntity.AddComponent<CameraComponent>();
-
-		m_SecondCamera = m_Scene->CreateEntity("Second Camera");
-		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
-		cc.isMain = false;
-
-		class CameraController : public ScriptEntity
-		{
-		public:
-			void OnCreate()
-			{
-				auto& transform = GetComponent<TransformComponent>();
-				transform.Position.x = rand() % 10 - 5.0f;
-			}
-
-			void OnDestroy()
-			{
-			}
-
-			void OnUpdate(Timestep ts)
-			{
-				auto& transform = GetComponent<TransformComponent>().Position;
-				float speed = 5.0f;
-
-				auto& camera = GetComponent<CameraComponent>().Camera;
-				if (camera.GetProjectionType() == SceneCamera::Projection::Orthographic)
-				{
-					if (Input::IsKeyPressed(RV_KEY_A))
-						transform.x -= speed * ts;
-					if (Input::IsKeyPressed(RV_KEY_D))
-						transform.x += speed * ts;
-					if (Input::IsKeyPressed(RV_KEY_W))
-						transform.y += speed * ts;
-					if (Input::IsKeyPressed(RV_KEY_S))
-						transform.y -= speed * ts;
-				}
-				else
-				{
-					//RV_TRACE("Mouse x -> ", Input::GetMouseX());
-					//RV_TRACE("Mouse x -> ", Input::GetMouseY());
-					if (Input::IsKeyPressed(RV_KEY_A))
-						transform.x -= speed * ts;
-					if (Input::IsKeyPressed(RV_KEY_D))
-						transform.x += speed * ts;
-					if (Input::IsKeyPressed(RV_KEY_SPACE))
-						transform.y += speed * ts;
-					if (Input::IsKeyPressed(RV_KEY_LEFT_SHIFT))
-						transform.y -= speed * ts;
-					if (Input::IsKeyPressed(RV_KEY_W))
-						transform.z -= speed * ts;
-					if (Input::IsKeyPressed(RV_KEY_S))
-						transform.z += speed * ts;
-				}
-			}
-		};
-
-		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-
-		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
 		m_ObjPannel.SetScene(m_Scene);
 
@@ -112,8 +43,14 @@ namespace Revoke
 			(spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
 		{
 			m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
 
 			m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		}
+
+		if (m_ViewportFocused)
+		{
+			m_EditorCamera.OnUpdate(deltaTime);
 		}
 
 		Renderer2D::ResetStatistics();
@@ -123,8 +60,23 @@ namespace Revoke
 		RenderCommand::Clear();
 		RenderCommand::EnableBlending();
 
-		m_Scene->OnUpdate(deltaTime);
+		m_FrameBuffer->ClearColorTextureAttachment(1, -1);
 
+		m_Scene->OnEditorUpdate(deltaTime, m_EditorCamera);
+
+		auto [mx, my] = ImGui::GetMousePos();
+		mx -= m_ViewportBounds[0].x;
+		my -= m_ViewportBounds[0].y;
+		glm::vec2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
+		my = viewportSize.y - my;
+		int mouseX = (int)mx;
+		int mouseY = (int)my;
+		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
+		{
+			int pixelData = m_FrameBuffer->ReadPixel(1, mouseX, mouseY);
+			m_HoveredEntity = pixelData == -1 ? Entity() : Entity((entt::entity)pixelData, m_Scene.get());
+		}
+		
 		m_FrameBuffer->UnBind();
 
 	}
@@ -191,6 +143,12 @@ namespace Revoke
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");
 
+		auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
+		auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+		auto viewportOffset = ImGui::GetWindowPos();
+		m_ViewportBounds[0] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
+		m_ViewportBounds[1] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
+
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
 		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused && !m_ViewportHovered);
@@ -198,20 +156,25 @@ namespace Revoke
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 		m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 		uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
-		//-----------ViewPort-------------------------------------------------
+	
 		Entity selectedEntity = m_ObjPannel.GetSelectedEntity();
 
 		ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+
+		
+
+		//-----------Guizmo---------------------------------------------------
 		if (selectedEntity && m_GizmoType != -1)
 		{
 			ImGuizmo::SetOrthographic(false);
 			ImGuizmo::SetDrawlist();
-			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
 
-			auto mainCameraEntt = m_Scene->GetMainCamera();
-			const auto& cameraComponent = mainCameraEntt.GetComponent<CameraComponent>().Camera;
-			const glm::mat4& cameraProjection = cameraComponent.GetProjectionMatrix();
-			glm::mat4 cameraView = glm::inverse(mainCameraEntt.GetComponent<TransformComponent>().GetTransform());
+			ImGuizmo::SetRect(m_ViewportBounds[0].x, m_ViewportBounds[0].y, m_ViewportBounds[1].x - m_ViewportBounds[0].x, m_ViewportBounds[1].y - m_ViewportBounds[0].y);
+
+
+			auto mainCameraEntt = m_EditorCamera;
+			const glm::mat4& cameraProjection = m_EditorCamera.GetProjectionMatrix();
+			glm::mat4 cameraView = m_EditorCamera.GetViewMatrix();
 
 			auto& entityTransformsComponent = selectedEntity.GetComponent<TransformComponent>();
 			glm::mat4 tranforms = entityTransformsComponent.GetTransform();
@@ -226,7 +189,7 @@ namespace Revoke
 		
 			ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection), (ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(tranforms), nullptr, snap ? snapValues : nullptr);
 
-			if (ImGuizmo::IsUsing())
+			if (ImGuizmo::IsUsing() && !Input::IsKeyPressed(RV_KEY_LEFT_ALT))
 			{
 				glm::vec3 translation, rotation, scale;
 				DecomposeTransform(tranforms, translation, rotation, scale);
@@ -248,10 +211,24 @@ namespace Revoke
 
 	void CraftLayer::OnEvent(Revoke::Event& e)
 	{
+		m_EditorCamera.OnEvent(e);
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(RV_BIND_EVENT_FUNK(CraftLayer::OnKeyPressed));
+		dispatcher.Dispatch<MouseButtonPressedEvent>(RV_BIND_EVENT_FUNK(CraftLayer::OnMouseBtnPressed));
 	}
-
+	bool CraftLayer::OnMouseBtnPressed(MouseButtonPressedEvent& e)
+	{
+		if (e.GetMouseButton() == RV_MOUSE_BUTTON_1 && !Input::IsKeyPressed(RV_KEY_LEFT_ALT))
+		{
+			if (m_ViewportHovered && !ImGuizmo::IsOver())
+			{
+				m_ObjPannel.SetSelectedEntity(m_HoveredEntity);
+			}
+			return true;
+		}
+		return false;
+	}
 	bool CraftLayer::OnKeyPressed(KeyPressedEvent& e)
 	{
 		switch (e.GetKeyCode())

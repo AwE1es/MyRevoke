@@ -1444,6 +1444,7 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Math\Math.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\EditorCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Core\Application.cpp">
@@ -1503,7 +1504,7 @@
     <ClCompile Include="src\MyRevoke\Renderer\Renderer.cpp">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Renderer\Renderer2d.cpp">
+    <ClCompile Include="src\MyRevoke\Renderer\Renderer2D.cpp">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Renderer\RendererAPI.cpp">
@@ -1537,5 +1538,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Math\Math.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\EditorCamera.cpp" />
   </ItemGroup>
 </Project>

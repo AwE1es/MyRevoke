@@ -22,6 +22,7 @@ namespace Revoke
 		void OnImGuiDraw() override;
 		void OnEvent(Event& e) override;
 
+		bool OnMouseBtnPressed(MouseButtonPressedEvent& e);
 		bool OnKeyPressed(KeyPressedEvent& e);
 
 		void NewScene();
@@ -38,12 +39,18 @@ namespace Revoke
 		Entity m_CameraEntity;
 		Entity m_SecondCamera;
 
+		Entity m_HoveredEntity;
+
+		EditorCamera m_EditorCamera;
+
 		ObjectsPannel m_ObjPannel;
 
 		bool m_PrimaryCamera = true;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		bool m_ViewportFocused = false;
 		bool m_ViewportHovered = false;
+
+		glm::vec2 m_ViewportBounds[2];
 
 		float m_Framerate = 0.0f;
 

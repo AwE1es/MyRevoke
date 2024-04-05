@@ -6,19 +6,22 @@
 
 namespace Revoke
 {
-	static const std::filesystem::path s_AssetsDirectory = "assets";
+	const std::filesystem::path g_AssetsDirectory = "assets";
 
 	ContentBrowser::ContentBrowser()
-		:m_CurrendDir(s_AssetsDirectory)
+		:m_CurrendDir(g_AssetsDirectory)
 	{
 
+		//TODO: Change to white icons
+		m_FolderIcon = Texture2D::Create("resourses/icons/ContentBrowser/Folder_Icon.png");
+		m_FileIcon = Texture2D::Create("resourses/icons/ContentBrowser/File_Icon.png");
 	}
 
 	void ContentBrowser::OnImGuiRender()
 	{
 		ImGui::Begin("Content Browser");
 
-		if (m_CurrendDir != std::filesystem::path(s_AssetsDirectory))
+		if (m_CurrendDir != std::filesystem::path(g_AssetsDirectory))
 		{
 			if (ImGui::Button("<-"))
 			{
@@ -26,29 +29,58 @@ namespace Revoke
 			}
 		}
 
+		static float padding = 16.0f;
+		static float thumbnailSize = 95.0f;
+		float cellSize = thumbnailSize + padding;
+		float panelWidth = ImGui::GetContentRegionAvail().x;
+		float panelHeight = ImGui::GetContentRegionAvail().y;
+		int columnCount = (int)(panelWidth / cellSize);
+		if (columnCount < 1)
+			columnCount = 1;
+
+		ImGui::Columns(columnCount, 0, false);
+
+		int i = 0;
 		//Does not support multiple language!!!
 		for (auto entryPath : std::filesystem::directory_iterator(m_CurrendDir))
 		{
+			ImGui::PushID(i++);
+
 			std::string pathString = entryPath.path().string();
-			auto relativePath = std::filesystem::relative(entryPath.path(), s_AssetsDirectory);
+			auto relativePath = std::filesystem::relative(entryPath.path(), g_AssetsDirectory);
 			std::string fileNameString = relativePath.filename().string();
 
-			if(entryPath.is_directory())
+			Shared<Texture2D> icon = entryPath.is_directory() ? m_FolderIcon : m_FileIcon;
+
+			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1.0f, 1.0f, 1.0f, 0.05f));
+			ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 15.0f);
+			ImGui::ImageButton((ImTextureID)icon->GetID(), { thumbnailSize, thumbnailSize }, { 0,1 }, { 1, 0 });
+			ImGui::PopStyleVar();
+			ImGui::PopStyleColor();
+
+			if (ImGui::BeginDragDropSource())
 			{
-				if (ImGui::Button(fileNameString.c_str()))
+				const wchar_t* pathForDragDrop = relativePath.c_str();
+				ImGui::SetDragDropPayload("CONTENT_BROWSER_PAYLOAD", pathForDragDrop, (wcslen(pathForDragDrop) + 1) * sizeof(wchar_t), ImGuiCond_Once);
+				ImGui::EndDragDropSource();
+			}
+
+			if(ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+			{
+				if (entryPath.is_directory())
 				{
 					m_CurrendDir /= entryPath.path().filename();
 				}
-			}
-			else
-			{
-				if (ImGui::Button(fileNameString.c_str()))
-				{
-					
-				}
-			}
-		}
 
+			}
+			ImGui::TextWrapped(fileNameString.c_str());
+			
+			ImGui::NextColumn();
+			ImGui::PopID();
+		}
+			ImGui::Columns(1);
+			ImGui::SliderFloat("ThumbnailSize ", &thumbnailSize, 16, 512);
+			ImGui::SliderFloat("Padding ", &thumbnailSize, 0, 32);
 		ImGui::End();
 	}
 }

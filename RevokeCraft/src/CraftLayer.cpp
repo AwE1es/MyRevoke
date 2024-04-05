@@ -12,6 +12,8 @@
 
 namespace Revoke
 {
+	extern const std::filesystem::path g_AssetsDirectory = "assets";
+
 	CraftLayer::CraftLayer()
 		:Layer("CraftLayer")
 	{
@@ -164,6 +166,16 @@ namespace Revoke
 
 		ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
+		if (ImGui::BeginDragDropTarget())
+		{
+			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_PAYLOAD"))
+			{
+				const wchar_t* path = (const wchar_t*)payload->Data;
+				OpenScene(std::filesystem::path(g_AssetsDirectory) / path);
+			}
+
+			ImGui::EndDragDropTarget();
+		}
 		
 
 		//-----------Guizmo---------------------------------------------------
@@ -301,13 +313,19 @@ namespace Revoke
 
 		if (!path.empty())
 		{
-			m_Scene = std::make_shared<Scene>();
-			m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_ObjPannel.SetScene(m_Scene);
-
-			Serealizer sceneSerealizer(m_Scene);
-			sceneSerealizer.DeSerealize(path);
+			OpenScene(path);
 		}
+	}
+	void CraftLayer::OpenScene(const std::filesystem::path& path)
+	{
+
+		m_Scene = std::make_shared<Scene>();
+		m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		m_ObjPannel.SetScene(m_Scene);
+
+		Serealizer sceneSerealizer(m_Scene);
+		sceneSerealizer.DeSerealize(path.string());
+		
 	}
 
 	void CraftLayer::SaveAs()

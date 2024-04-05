@@ -6,6 +6,7 @@
 
 namespace Revoke
 {
+	extern const std::filesystem::path g_AssetsDirectory;
 
 	ObjectsPannel::ObjectsPannel(Shared<Scene> currentScene)
 		:m_CurrentScene(currentScene)
@@ -106,8 +107,23 @@ namespace Revoke
 			{
 				if (ImGui::TreeNodeEx((void*)typeid(SpriteRendererComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Color"))
 				{
-					auto& color = m_SelectedEntity.GetComponent<SpriteRendererComponent>().Color;
-					ImGui::ColorEdit4("Color", glm::value_ptr(color));
+					auto& spriteComponent = m_SelectedEntity.GetComponent<SpriteRendererComponent>();
+					ImGui::ColorEdit4("Color", glm::value_ptr(spriteComponent.Color));
+					
+					ImGui::Button("Texture");
+
+					if (ImGui::BeginDragDropTarget())
+					{
+						if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_PAYLOAD"))
+						{
+							const wchar_t* path = (const wchar_t*)payload->Data;
+							std::filesystem::path texturePath = std::filesystem::path(g_AssetsDirectory) / path;
+
+							spriteComponent.Texture = Texture2D::Create(texturePath.string());
+						}
+
+						ImGui::EndDragDropTarget();
+					}
 					 
 					ImGui::TreePop();
 				}

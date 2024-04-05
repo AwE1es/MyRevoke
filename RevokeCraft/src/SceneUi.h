@@ -1,5 +1,8 @@
 #pragma once
 #include "MyRevoke.h"
+#include "MyRevoke/Core/Core.h"
+
+#include <filesystem>
 
 namespace Revoke
 {

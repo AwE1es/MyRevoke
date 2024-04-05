@@ -304,7 +304,14 @@ namespace Revoke
 
 	void Renderer2D::DrawSprite(const glm::mat4& transform, SpriteRendererComponent& sprite, int entityID)
 	{
-		DrawQuad(transform, sprite.Color, entityID);
+		if (sprite.Texture)
+		{
+			DrawQuad(transform, sprite.Texture, entityID);
+		}
+		else
+		{
+			DrawQuad(transform, sprite.Color, entityID);
+		}
 	}
 
 	void Renderer2D::QuadInit()

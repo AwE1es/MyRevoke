@@ -8,6 +8,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "MyRevoke/Renderer/Texture.h"
+
 namespace Revoke
 {
 	struct NameComponent
@@ -43,15 +45,15 @@ namespace Revoke
 	struct SpriteRendererComponent
 	{
 		glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };
-		std::string TexturePath = "";
+		Shared<Texture2D> Texture;
 
 		SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const glm::vec4& color )
 			:Color(color) {}
 
-		SpriteRendererComponent(const std::string texturePath)
-		: TexturePath(texturePath) {}
+		SpriteRendererComponent(Shared<Texture2D> texture)
+		: Texture(texture) {}
 	};
 
 	struct CameraComponent

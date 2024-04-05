@@ -5,6 +5,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp> 
 
+#include <filesystem>
+
 #include "SceneUi.h"
 #include "ContentBrowser.h"
 
@@ -28,6 +30,7 @@ namespace Revoke
 
 		void NewScene();
 		void OpenScene();
+		void OpenScene(const std::filesystem::path& path);
 		void SaveAs();
 		void Save();
 

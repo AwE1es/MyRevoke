@@ -1,11 +1,12 @@
 #include "MyRevoke.h"
-#include "SceneUi.h"
 
-#include "imgui.h"
-
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp" 
+#include <imgui.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp> 
+
+#include "SceneUi.h"
+#include "ContentBrowser.h"
 
 namespace Revoke
 {
@@ -44,6 +45,7 @@ namespace Revoke
 		EditorCamera m_EditorCamera;
 
 		ObjectsPannel m_ObjPannel;
+		ContentBrowser m_ContentBrowserPanel;
 
 		bool m_PrimaryCamera = true;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };

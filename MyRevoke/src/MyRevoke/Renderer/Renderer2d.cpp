@@ -69,7 +69,7 @@ namespace Revoke
 			samplers[i] = i;
 		}
 
-		s_Data->Shader = Shader::Create("Shaders/Main.shader");
+		s_Data->Shader = Shader::Create("assets/Shaders/Main.shader");
 		s_Data->Shader->Bind();
 		s_Data->Shader->SetUniformIntArr("u_Textures", samplers, s_Data->MaxTextures);
 

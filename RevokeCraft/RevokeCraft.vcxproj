@@ -93,10 +93,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ContentBrowser.h" />
     <ClInclude Include="src\CraftLayer.h" />
     <ClInclude Include="src\SceneUi.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ContentBrowser.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\CraftLayer.cpp" />
     <ClCompile Include="src\SceneUi.cpp" />

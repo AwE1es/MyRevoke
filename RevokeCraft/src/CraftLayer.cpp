@@ -2,9 +2,11 @@
 
 #include <chrono>
 #include <string>
-#include "SceneUi.h"
+
 #include "MyRevoke/Platform/Windows/FileExplorer.h"
 #include "MyRevoke/Math/Math.h"
+
+
 
 #include <ImGuizmo.h>
 
@@ -139,6 +141,7 @@ namespace Revoke
 	
 		//--------------------------------------------------------------------
 		m_ObjPannel.OnImGuiRender();
+		m_ContentBrowserPanel.OnImGuiRender();
 		//-----------ViewPort-------------------------------------------------
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");

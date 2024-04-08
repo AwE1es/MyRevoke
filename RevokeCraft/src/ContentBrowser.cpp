@@ -12,7 +12,6 @@ namespace Revoke
 		:m_CurrendDir(g_AssetsDirectory)
 	{
 
-		//TODO: Change to white icons
 		m_FolderIcon = Texture2D::Create("resourses/icons/ContentBrowser/Folder_Icon.png");
 		m_FileIcon = Texture2D::Create("resourses/icons/ContentBrowser/File_Icon.png");
 	}

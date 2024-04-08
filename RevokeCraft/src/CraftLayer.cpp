@@ -6,8 +6,6 @@
 #include "MyRevoke/Platform/Windows/FileExplorer.h"
 #include "MyRevoke/Math/Math.h"
 
-
-
 #include <ImGuizmo.h>
 
 namespace Revoke
@@ -52,11 +50,7 @@ namespace Revoke
 			m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		}
 
-		if (m_ViewportFocused)
-		{
-			m_EditorCamera.OnUpdate(deltaTime);
-		}
-
+	
 		Renderer2D::ResetStatistics();
 
 		m_FrameBuffer->Bind();
@@ -66,7 +60,25 @@ namespace Revoke
 
 		m_FrameBuffer->ClearColorTextureAttachment(1, -1);
 
-		m_Scene->OnEditorUpdate(deltaTime, m_EditorCamera);
+		//TODO: Fix the picking in a play mode!!!
+		switch (m_ToolBar.GetSceneState())
+		{
+		case SceneState::Editor:
+		{
+			if (m_ViewportFocused)
+			{
+				m_EditorCamera.OnUpdate(deltaTime);
+			}
+
+			m_Scene->OnEditorUpdate(deltaTime, m_EditorCamera);
+			break;
+		}
+		case SceneState::Runtime:
+		{
+			m_Scene->OnRuntimeUpdate(deltaTime);
+			break;
+		}
+		}
 
 		auto [mx, my] = ImGui::GetMousePos();
 		mx -= m_ViewportBounds[0].x;
@@ -217,6 +229,7 @@ namespace Revoke
 		}
 
 
+		m_ToolBar.OnImGuiRender();
 
 		ImGui::End();
 		ImGui::PopStyleVar();
@@ -300,6 +313,7 @@ namespace Revoke
 		return false;
 	}
 
+	//------------------------------------------------------------------------
 	void CraftLayer::NewScene()
 	{
 		m_Scene = std::make_shared<Scene>("New scene");

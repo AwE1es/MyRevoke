@@ -1,0 +1,38 @@
+#include "rvpch.h"
+
+#include "ToolBar.h"
+#include <imgui.h>
+
+namespace Revoke
+{
+	ToolBar::ToolBar()
+	{
+		m_PlayIcon = Texture2D::Create("resourses/icons/Toolbar/Play_Icon.png");
+		m_StopIcon = Texture2D::Create("resourses/icons/Toolbar/Stop_Icon.png");
+	}
+	void ToolBar::OnImGuiRender()
+	{
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 2));
+		ImGui::PushStyleVar(ImGuiStyleVar_ItemInnerSpacing, ImVec2(0, 0));
+		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.3f, 0.3f, 0.3f, 0.5f));
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.3f, 0.3f, 0.3f, 0.5f));
+		ImGui::Begin("##toolbar",nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+		float size = ImGui::GetWindowHeight() - 6.0f;
+		ImGui::SameLine((ImGui::GetWindowContentRegionMax().x * 0.05f) - (size * 0.5f));
+		Shared<Texture2D> icon = m_SceneState == SceneState::Editor ? m_PlayIcon : m_StopIcon;
+		if (ImGui::ImageButton((ImTextureID)icon->GetID(), ImVec2(size,size), ImVec2(0, 0), ImVec2(1,1), 0))
+		{
+			if (m_SceneState == SceneState::Editor)
+				m_SceneState = SceneState::Runtime;
+			else
+				m_SceneState = SceneState::Editor;
+		}
+
+		ImGui::PopStyleVar(2);
+		ImGui::PopStyleColor(3);
+		ImGui::End();
+
+	}
+}

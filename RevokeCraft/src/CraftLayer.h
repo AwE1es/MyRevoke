@@ -9,6 +9,7 @@
 
 #include "SceneUi.h"
 #include "ContentBrowser.h"
+#include "ToolBar.h"
 
 namespace Revoke
 {
@@ -27,6 +28,9 @@ namespace Revoke
 
 		bool OnMouseBtnPressed(MouseButtonPressedEvent& e);
 		bool OnKeyPressed(KeyPressedEvent& e);
+
+		void OnScenePlay();
+		void OnSceneStop();
 
 		void NewScene();
 		void OpenScene();
@@ -49,6 +53,7 @@ namespace Revoke
 
 		ObjectsPannel m_ObjPannel;
 		ContentBrowser m_ContentBrowserPanel;
+		ToolBar m_ToolBar;
 
 		bool m_PrimaryCamera = true;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };

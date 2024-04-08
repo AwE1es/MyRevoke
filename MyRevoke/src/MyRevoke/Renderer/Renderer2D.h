@@ -1,5 +1,5 @@
 #pragma once
-#include "RenderCommand.h"
+
 #include "RendererAPI.h"
 
 #include "Shader.h"
@@ -16,7 +16,6 @@ namespace Revoke
 	class Renderer2D
 	{
 	public:
-		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 
 		static void Init();
 		static void Shutdown();

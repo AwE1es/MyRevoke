@@ -3,8 +3,7 @@
 #include "Log.h"
 #include "Input.h"
 
-#include "MyRevoke/Renderer/Renderer.h"
-#include "MyRevoke/Renderer/RenderCommand.h"
+#include "MyRevoke/Renderer/Renderer2D.h"
 
 #include "GLFW/glfw3.h"
 
@@ -20,11 +19,12 @@ namespace Revoke
 		RV_CORE_ASSERT(!s_Instance, "Applicatio already exist");
 		s_Instance = this;
 
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window = std::make_shared<Window>();
 		m_Window->SetEventCallback(RV_BIND_EVENT_FUNK(Application::OnEvent));
 
 
-		Renderer::Init();
+		RendererAPI::Init();
+		Renderer2D::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -32,7 +32,7 @@ namespace Revoke
 	}
 	Application::~Application()
 	{
-		Renderer::End();
+		Renderer2D::Shutdown();
 	}
 	void Application::Run()
 	{
@@ -92,7 +92,7 @@ namespace Revoke
 	}
 	bool Application::OnWindowResize(WindowResizeEvent e)
 	{
-		RenderCommand::OnResize((float)e.GetWidth(), (float)e.GetHeight());
+		RendererAPI::WindowResize((float)e.GetWidth(), (float)e.GetHeight());
 		return true;
 	}
 }

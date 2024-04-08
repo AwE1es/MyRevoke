@@ -3,7 +3,7 @@
 #include <chrono>
 #include <string>
 
-#include "MyRevoke/Platform/Windows/FileExplorer.h"
+#include "MyRevoke/Utility/FileExplorer.h"
 #include "MyRevoke/Math/Math.h"
 
 #include <ImGuizmo.h>
@@ -54,9 +54,9 @@ namespace Revoke
 		Renderer2D::ResetStatistics();
 
 		m_FrameBuffer->Bind();
-		RenderCommand::ClearColor({ 0.2f, 0.2f, 0.2f, 1.0f });
-		RenderCommand::Clear();
-		RenderCommand::EnableBlending();
+		RendererAPI::SetClearColor({ 0.2f, 0.2f, 0.2f, 1.0f });
+		RendererAPI::Clear();
+		RendererAPI::EnableBlending();
 
 		m_FrameBuffer->ClearColorTextureAttachment(1, -1);
 

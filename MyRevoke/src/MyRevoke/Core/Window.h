@@ -4,6 +4,7 @@
 
 #include "Core.h"
 #include "MyRevoke/EventSystem/Event.h"
+#include "MyRevoke/Renderer/GraphicContex.h"
 
 
 namespace Revoke {
@@ -21,24 +22,38 @@ namespace Revoke {
 		                               
 	};
 
-	class  Window // Inteface that going to be interprited by platform
+	class Window
 	{
 	public:
-		virtual ~Window() {}
-		virtual void OnUpdate() = 0;
+		Window(const WindowSettings& settings = WindowSettings());
 
-		virtual unsigned int GetWidth() const = 0;
-		virtual unsigned int GetHeight() const = 0;
+		~Window();
 
-		//Atributes
+		void OnUpdate();
 
-		virtual void SetEventCallback(const std::function<void(Event&)>& callback) = 0;
-		virtual void SetVSync(bool enabled) = 0;
-		virtual bool IsVSync() const = 0; 
+		unsigned int GetWidth() const { return m_Data.Width; }
+		unsigned int GetHeight() const { return m_Data.Height; }
 
-		virtual void* GetCoreWindow() const = 0;
+		inline void SetEventCallback(const std::function<void(Event&)>& callback) { m_Data.EventCallback = callback; }
+		void SetVSync(bool enable);
+		bool IsVSync() const;
 
-		static Window* Create(const WindowSettings& props = WindowSettings());
+		inline void* GetCoreWindow() const { return m_Window; }
+	private:
+		void Init(const WindowSettings& settings);
+		void Shutdown();
+	private:
+		GLFWwindow* m_Window;
+		RenderContex* m_Context;
+
+		struct WindowData
+		{
+			std::string Title = "";
+			unsigned int Width = 0, Height = 0;
+			bool VSync = false;
+			std::function<void(Event&)> EventCallback;
+		};
+		WindowData m_Data;
 
 	};
 }

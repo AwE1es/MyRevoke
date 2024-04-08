@@ -43,7 +43,7 @@ namespace Revoke
 		bool OnWindowsClose(WindowsCloseEvent e);
 		bool OnWindowResize(WindowResizeEvent e);
 	private:
-		std::unique_ptr<Window> m_Window;
+		Shared<Window> m_Window;
 
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_ImGuiLayer;

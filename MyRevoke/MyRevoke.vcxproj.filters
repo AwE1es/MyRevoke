@@ -111,19 +111,7 @@
     <ClInclude Include="src\MyRevoke\ImGui\ImGuiLayer.h">
       <Filter>src\MyRevoke\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.h">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLContex.h">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\Windows\FileExplorer.h">
-      <Filter>src\MyRevoke\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h">
-      <Filter>src\MyRevoke\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\Windows\WindowsWindow.h">
+    <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h">
       <Filter>src\MyRevoke\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Renderer\Buffer.h">
@@ -133,15 +121,6 @@
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Renderer\FrameBuffers.h">
-      <Filter>src\MyRevoke\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Renderer\GraphicsContex.h">
-      <Filter>src\MyRevoke\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Renderer\RenderCommand.h">
-      <Filter>src\MyRevoke\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Renderer\Renderer.h">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Renderer\Renderer2D.h">
@@ -1433,6 +1412,7 @@
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Math\Math.h" />
     <ClInclude Include="src\MyRevoke\Renderer\EditorCamera.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\GraphicContex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Core\Application.cpp">
@@ -1453,31 +1433,13 @@
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiLayer.cpp">
       <Filter>src\MyRevoke\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.cpp">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLContex.cpp">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\Windows\FileExplorer.cpp">
-      <Filter>src\MyRevoke\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp">
-      <Filter>src\MyRevoke\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\Windows\WindowsWindow.cpp">
+    <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp">
       <Filter>src\MyRevoke\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Renderer\Buffer.cpp">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Renderer\FrameBuffers.cpp">
-      <Filter>src\MyRevoke\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Renderer\RenderCommand.cpp">
-      <Filter>src\MyRevoke\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Renderer\Renderer.cpp">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Renderer\Renderer2D.cpp">
@@ -1515,5 +1477,8 @@
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Math\Math.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\EditorCamera.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\GraphicContex.cpp" />
+    <ClCompile Include="src\MyRevoke\Core\Window.cpp" />
+    <ClCompile Include="src\MyRevoke\Core\Input.cpp" />
   </ItemGroup>
 </Project>

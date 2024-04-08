@@ -120,7 +120,7 @@ namespace Revoke
 		{
 			s_Data->Textures[i]->Bind(i);
 		}
-		RenderCommand::DrawElements(s_Data->QuadVA, s_Data->QuadIndexCount);
+		RendererAPI::DrawElements(s_Data->QuadVA, s_Data->QuadIndexCount);
 		s_Data->Statistic.DrawCalls++;
 	}
 

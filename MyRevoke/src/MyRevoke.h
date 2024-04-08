@@ -9,9 +9,7 @@
 #include "MyRevoke/Core/Time.h"
 
 #include "MyRevoke/Renderer/Cmaera.h"
-#include "MyRevoke/Renderer/Renderer.h"
 #include "MyRevoke/Renderer/Renderer2D.h"
-#include "MyRevoke/Renderer/RenderCommand.h"
 #include "MyRevoke/Renderer/Buffer.h"
 #include "MyRevoke/Renderer/Shader.h"
 #include "MyRevoke/Renderer/Texture.h"

@@ -1,14 +1,14 @@
 #include "rvpch.h"
 
-#include "WindowsWindow.h"
+#include "Window.h"
 
 #include "MyRevoke/EventSystem/AppEvent.h"
 #include "MyRevoke/EventSystem/KeyEvent.h"
 #include "MyRevoke/EventSystem/MouseEvent.h"
 
-#include "MyRevoke/Platform/OpenGL/OpenGLContex.h"
+#include "MyRevoke/Renderer/GraphicContex.h"
 
-
+#include <GLFW/glfw3.h>
 
 
 namespace Revoke
@@ -17,26 +17,23 @@ namespace Revoke
 
 	static void GLFWErrorCallBack(int error, const char* description)
 	{
-		
+
 		RV_CORE_ERROR("GLFW Error ({0}: {1}", error, description);
 	}
 
-	WindowsWindow::WindowsWindow(const WindowSettings& settings)
+
+	Window::Window(const WindowSettings& settings)
 	{
 		Init(settings);
 	}
 
-	Window* Window::Create(const WindowSettings& settings)
-	{
-		return new WindowsWindow(settings);
-	}
 
-	WindowsWindow::~WindowsWindow()
+	Window::~Window()
 	{
 		Shutdown();
 	}
 
-	void WindowsWindow::Init(const WindowSettings& settings)
+	void Window::Init(const WindowSettings& settings)
 	{
 
 		m_Data.Title = settings.Title;
@@ -60,10 +57,10 @@ namespace Revoke
 
 		m_Window = glfwCreateWindow((int)settings.Width, (int)settings.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
-		m_Context = new OpenGLContex(m_Window);
+		m_Context = new RenderContex(m_Window);
 		m_Context->Init();
 
-		
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -152,19 +149,19 @@ namespace Revoke
 			});
 	}
 
-	void WindowsWindow::Shutdown()
+	void Window::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
 	}
 
-	void WindowsWindow::OnUpdate()
+	void Window::OnUpdate()
 	{
 		glfwPollEvents();
 		m_Context->SwapBuffers();
-	
+
 	}
 
-	void WindowsWindow::SetVSync(bool cond)
+	void Window::SetVSync(bool cond)
 	{
 		if (cond)
 			glfwSwapInterval(1);
@@ -173,9 +170,9 @@ namespace Revoke
 		m_Data.VSync = cond;
 	}
 
-	bool WindowsWindow::IsVSync() const
+	bool Window::IsVSync() const
 	{
 		return m_Data.VSync;
-	} 
+	}
 
 }

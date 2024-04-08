@@ -45,15 +45,15 @@ namespace Revoke
 	struct SpriteRendererComponent
 	{
 		glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };
-		Shared<Texture2D> Texture;
+		Shared<Texture> Texture2D;
 
 		SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const glm::vec4& color )
 			:Color(color) {}
 
-		SpriteRendererComponent(Shared<Texture2D> texture)
-		: Texture(texture) {}
+		SpriteRendererComponent(Shared<Texture> texture)
+		: Texture2D(texture) {}
 	};
 
 	struct CameraComponent

@@ -24,7 +24,7 @@ namespace Revoke
 		frameBufferStats.Attachments = { FramebufferTextureFormat::RGBA8,FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::DEPTH24STENCIL8 };
 		frameBufferStats.Width = 1280;
 		frameBufferStats.Height = 720;
-		m_FrameBuffer = FrameBuffers::Create(frameBufferStats);
+		m_FrameBuffer = std::make_shared<FrameBuffers>(frameBufferStats);
 		m_Scene = std::make_shared<Scene>("Main scene");
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);

@@ -22,8 +22,8 @@ namespace Revoke
 
 		SceneState m_SceneState = SceneState::Editor;
 
-		Shared<Texture2D> m_PlayIcon;
-		Shared<Texture2D> m_StopIcon;
+		Shared<Texture> m_PlayIcon;
+		Shared<Texture> m_StopIcon;
 
 	};
 }

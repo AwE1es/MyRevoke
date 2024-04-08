@@ -3,27 +3,27 @@
 
 namespace Revoke
 {
-	class Texture
+	class Texture 
 	{
 	public:
-		virtual ~Texture() = default;
+		Texture(const std::string& path);
+		Texture(int width, int height);
+		~Texture();
 
-		virtual uint32_t GetWidth() const = 0;
-		virtual uint32_t GetHeight() const = 0;
-		virtual uint32_t GetID() const = 0;
+		uint32_t GetWidth() const { return m_Width; };
+		uint32_t GetHeight() const { return m_Height; };
+		uint32_t GetID() const { return m_RendererID; }
 
-		virtual void Bind(uint32_t slot) const  = 0;
-		virtual void UnBind() const = 0;
 
-		virtual void SetData(void* data, uint32_t size) = 0;
+		void Bind(uint32_t slot) const;
+		void UnBind() const;
 
+		void SetData(void* data, uint32_t size);
+
+	private:
+		uint32_t m_Width, m_Height;
+		uint32_t m_RendererID;
 	};
 
-	class Texture2D : public Texture
-	{
-	public:
-		static Shared<Texture2D> Create(const std::string& path);
-		static Shared<Texture2D> Create(int width, int height);
 
-	};
 }

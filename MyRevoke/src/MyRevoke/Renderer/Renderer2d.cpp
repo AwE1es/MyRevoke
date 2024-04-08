@@ -29,18 +29,16 @@ namespace Revoke
 		Shared <VertexArray> QuadVA;
 		Shared <VertexBuffer> QuadVB;
 
-		Shared <VertexArray> TriangleVA;
-		Shared <VertexBuffer> TriangleVB;
 
 		Shared <Shader> Shader;
-		Shared <Texture2D> WhiteTexture;
+		Shared <Texture> WhiteTexture;
 
 		uint32_t QuadIndexCount = 0;
 
 		QuadVertex* QuadVertexBufferBase = nullptr;
 		QuadVertex* QuadVertexBufferPointer = nullptr;
 
-		std::array<Shared <Texture2D>, MaxTextures> Textures;
+		std::array<Shared <Texture>, MaxTextures> Textures;
 		uint32_t TextureIndex = 1;
 
 		glm::vec4 QuadVertexPositions[4];
@@ -57,9 +55,8 @@ namespace Revoke
 		s_Data = new Data2D();
 
 		QuadInit();
-		//TriangleInit();
 
-		s_Data->WhiteTexture = Texture2D::Create(1, 1);
+		s_Data->WhiteTexture = std::make_shared<Texture>(1, 1);
 		uint32_t whiteTextureData = 0xffffffff;
 		s_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 
@@ -69,7 +66,7 @@ namespace Revoke
 			samplers[i] = i;
 		}
 
-		s_Data->Shader = Shader::Create("assets/Shaders/Main.shader");
+		s_Data->Shader = std::make_shared<Shader>("assets/Shaders/Main.shader");
 		s_Data->Shader->Bind();
 		s_Data->Shader->SetUniformIntArr("u_Textures", samplers, s_Data->MaxTextures);
 
@@ -139,37 +136,6 @@ namespace Revoke
 		if (s_Data->QuadIndexCount >= Data2D::MaxIndices)
 			NewBatch();
 
-/*
-#ifdef RV_DEBUG
-		s_Data->QuadVertexBufferPointer->Position = position;
-		s_Data->QuadVertexBufferPointer->Color = color;
-		s_Data->QuadVertexBufferPointer->TexCoord = { 0.0f, 0.0f };
-		s_Data->QuadVertexBufferPointer->TexIndex = 0.0f;
-		s_Data->QuadVertexBufferPointer++;
-
-		s_Data->QuadVertexBufferPointer->Position = { position.x + size.x, position.y, 0.0f };
-		s_Data->QuadVertexBufferPointer->Color = color;
-		s_Data->QuadVertexBufferPointer->TexCoord = { 1.0f, 0.0f };
-		s_Data->QuadVertexBufferPointer->TexIndex = 0.0f;
-		s_Data->QuadVertexBufferPointer++;
-
-		s_Data->QuadVertexBufferPointer->Position = { position.x + size.x, position.y + size.y, 0.0f };
-		s_Data->QuadVertexBufferPointer->Color = color;
-		s_Data->QuadVertexBufferPointer->TexCoord = { 1.0f, 1.0f };
-		s_Data->QuadVertexBufferPointer->TexIndex = 0.0f;
-		s_Data->QuadVertexBufferPointer++;
-
-		s_Data->QuadVertexBufferPointer->Position = { position.x , position.y + size.y, 0.0f };
-		s_Data->QuadVertexBufferPointer->Color = color;
-		s_Data->QuadVertexBufferPointer->TexCoord = { 0.0f, 1.0f };
-		s_Data->QuadVertexBufferPointer->TexIndex = 0.0f;
-		s_Data->QuadVertexBufferPointer++;
-
-		s_Data->QuadIndexCount += 6;
-
-		s_Data->Statistic.QuadCount++;
-#endif 
-*/
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const glm::vec4& color, int entityID)
@@ -178,7 +144,7 @@ namespace Revoke
 	}
 
 	//Texture Draw
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2 size, const Shared<Texture2D>& texture, int entityID)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2 size, const Shared<Texture>& texture, int entityID)
 	{
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
@@ -188,7 +154,7 @@ namespace Revoke
 
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const Shared<Texture2D>& texture, int entityID)
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2 size, const Shared<Texture>& texture, int entityID)
 	{
 		DrawQuad({ position.x, position.y, 0.0f }, size, texture, entityID);
 	}
@@ -218,7 +184,7 @@ namespace Revoke
 		s_Data->Statistic.QuadCount++;
 	}
 
-	void Renderer2D::DrawQuad(const glm::mat4& transform, const Shared<Texture2D>& texture, int entityID)
+	void Renderer2D::DrawQuad(const glm::mat4& transform, const Shared<Texture>& texture, int entityID)
 	{
 		constexpr size_t quadVertexCount = 4;
 		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
@@ -261,52 +227,12 @@ namespace Revoke
 		s_Data->Statistic.QuadCount++;
 	}
 
-	void Renderer2D::DrawTriangle(const glm::vec3& position, const glm::vec2 size, const glm::vec4& color)
-	{
-
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-
-		s_Data->Shader->SetUniformMat4("u_TransformMatrix", transform);
-		s_Data->Shader->SetUniformVec4("u_Color", color);
-		s_Data->Shader->SetUniformFloat("u_TextureScale", { 1.0f });
-
-		s_Data->WhiteTexture->Bind(0);
-		s_Data->TriangleVA->Bind();
-		RenderCommand::DrawElements(s_Data->TriangleVA);
-	}
-
-	void Renderer2D::DrawTriangle(const glm::vec2& position, const glm::vec2 size, const glm::vec4& color)
-	{
-		DrawTriangle({ position.x, position.y, 0.0f }, size, color);
-	}
-
-
-	void Renderer2D::DrawTriangle(const glm::vec3& position, const glm::vec2 size, const Shared<Texture2D>& texture)
-	{
-		
-		s_Data->QuadIndexCount += 6;
-
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-
-		s_Data->Shader->SetUniformMat4("u_TransformMatrix", transform);
-		s_Data->Shader->SetUniformFloat("u_TextureScale", { 1.0f });
-		s_Data->Shader->SetUniformVec4("u_Color", { 1.0f, 1.0f, 1.0f, 1.0f });
-
-		texture->Bind(0);
-		s_Data->TriangleVA->Bind();
-		RenderCommand::DrawElements(s_Data->TriangleVA);
-	}
-
-	void Renderer2D::DrawTriangle(const glm::vec2& position, const glm::vec2 size, const Shared<Texture2D>& texture)
-	{
-		DrawTriangle({ position.x, position.y, 0.0f }, size, texture);
-	}
 
 	void Renderer2D::DrawSprite(const glm::mat4& transform, SpriteRendererComponent& sprite, int entityID)
 	{
-		if (sprite.Texture)
+		if (sprite.Texture2D)
 		{
-			DrawQuad(transform, sprite.Texture, entityID);
+			DrawQuad(transform, sprite.Texture2D, entityID);
 		}
 		else
 		{
@@ -316,9 +242,9 @@ namespace Revoke
 
 	void Renderer2D::QuadInit()
 	{
-		s_Data->QuadVA = VertexArray::Create();
+		s_Data->QuadVA = std::make_shared<VertexArray>();
 
-		s_Data->QuadVB = VertexBuffer::Create(s_Data->MaxVertices * sizeof(QuadVertex));
+		s_Data->QuadVB = std::make_shared<VertexBuffer>(s_Data->MaxVertices * sizeof(QuadVertex));
 
 		BufferLayout quadLayout = {
 			{ShaderDataTypes::Float3, "a_Position", false},
@@ -339,50 +265,26 @@ namespace Revoke
 		uint32_t offset = 0;
 		for (uint32_t i = 0; i < s_Data->MaxIndices; i += 6)
 		{
-			quadIndices[i + 0] = offset + 0;
+			quadIndices[i] = offset ;
 			quadIndices[i + 1] = offset + 1;
 			quadIndices[i + 2] = offset + 2;
 
 			quadIndices[i + 3] = offset + 2;
 			quadIndices[i + 4] = offset + 3;
-			quadIndices[i + 5] = offset + 0;
+			quadIndices[i + 5] = offset;
 
 			offset += 4;
 		}
 
 		Shared<IndexBuffer> QuadIndexBuffer;
-		QuadIndexBuffer = IndexBuffer::Create(quadIndices, s_Data->MaxIndices);
+		QuadIndexBuffer = std::make_shared< IndexBuffer>(quadIndices, s_Data->MaxIndices);
+
 		s_Data->QuadVA->SetIndexBuffer(QuadIndexBuffer);
+
 		delete[] quadIndices;
 	}
 
-	void Renderer2D::TriangleInit()
-	{
-		s_Data->TriangleVA = VertexArray::Create();
-
-		float Vertices[3 * 3 * 2] = {
-			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-			 0.0f,  0.5f, 0.0f, 0.5f, 1.0f
-		};
-		// Vertex Buffer
-
-		s_Data->TriangleVB = VertexBuffer::Create(Vertices, sizeof(Vertices));
-
-		BufferLayout gridLayout = {
-			{ShaderDataTypes::Float3, "a_Position", false},
-			{ShaderDataTypes::Float2, "a_TexCoord", false}
-		};
-		s_Data->TriangleVB->SetLayout(gridLayout);
-
-		s_Data->TriangleVA->AddVertexBuffer(s_Data->TriangleVB);
-
-		uint32_t indices[3 * 2] = { 0, 1, 2 };
-		Shared<IndexBuffer> IndexBuffer;
-		IndexBuffer = IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
-		s_Data->TriangleVA->SetIndexBuffer(IndexBuffer);
-	}
-
+	
 	void Renderer2D::NewBatch()
 	{
 		End();

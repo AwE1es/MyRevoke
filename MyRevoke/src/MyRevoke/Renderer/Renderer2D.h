@@ -29,21 +29,15 @@ namespace Revoke
 
 		static void DrawQuad(const glm::vec3& position, const glm::vec2 size, const glm::vec4& color, int entityID);
 		static void DrawQuad(const glm::vec2& position, const glm::vec2 size, const glm::vec4& color, int entityID);
-		static void DrawQuad(const glm::vec3& position, const glm::vec2 size, const Shared<Texture2D>& texture, int entityID);
-		static void DrawQuad(const glm::vec2& position, const glm::vec2 size, const Shared<Texture2D>& texture, int entityID);
+		static void DrawQuad(const glm::vec3& position, const glm::vec2 size, const Shared<Texture>& texture, int entityID);
+		static void DrawQuad(const glm::vec2& position, const glm::vec2 size, const Shared<Texture>& texture, int entityID);
 
 		static void DrawQuad(const glm::mat4& transform, const glm::vec4& color, int entityID);
-		static void DrawQuad(const glm::mat4& transform, const Shared<Texture2D>& texture, int entityID);
-
-		static void DrawTriangle(const glm::vec3& position, const glm::vec2 size, const glm::vec4& color);			  //TODO
-		static void DrawTriangle(const glm::vec2& position, const glm::vec2 size, const glm::vec4& color);			  //TODO
-		static void DrawTriangle(const glm::vec3& position, const glm::vec2 size, const Shared<Texture2D>& texture);  //TODO
-		static void DrawTriangle(const glm::vec2& position, const glm::vec2 size, const Shared<Texture2D>& texture);  //TODO
+		static void DrawQuad(const glm::mat4& transform, const Shared<Texture>& texture, int entityID);
 
 		static void DrawSprite(const glm::mat4& transform, SpriteRendererComponent& sprite, int entityID);
 
 		static void QuadInit();
-		static void TriangleInit();// TODO
 	private:
 		static void NewBatch();
 	public:

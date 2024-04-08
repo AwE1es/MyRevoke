@@ -114,19 +114,7 @@
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.h">
       <Filter>src\MyRevoke\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLBuffer.h">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLContex.h">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLFrameBuffers.h">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLTexture2D.h">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGlShader.h">
       <Filter>src\MyRevoke\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Platform\Windows\FileExplorer.h">
@@ -1468,19 +1456,7 @@
     <ClCompile Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.cpp">
       <Filter>src\MyRevoke\Platform\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLBuffer.cpp">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLContex.cpp">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLFrameBuffers.cpp">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLTexture2D.cpp">
-      <Filter>src\MyRevoke\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGlShader.cpp">
       <Filter>src\MyRevoke\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Platform\Windows\FileExplorer.cpp">

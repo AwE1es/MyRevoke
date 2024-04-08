@@ -14,8 +14,8 @@ namespace Revoke
 
 	private:
 		std::filesystem::path m_CurrendDir;
-		Shared<Texture2D> m_FolderIcon;
-		Shared<Texture2D> m_FileIcon;
+		Shared<Texture> m_FolderIcon;
+		Shared<Texture> m_FileIcon;
 	};
 
 }

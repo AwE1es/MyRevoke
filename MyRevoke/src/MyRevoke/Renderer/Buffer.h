@@ -106,47 +106,58 @@ namespace Revoke
 	class VertexBuffer
 	{
 	public:
-		virtual  ~VertexBuffer() {}
+		VertexBuffer(float* vertices, uint32_t size);
+		VertexBuffer(uint32_t size);
+		~VertexBuffer();
 
-		virtual void Bind() const = 0;
-		virtual void UnBind() const = 0;
+		void Bind() const;
+		void UnBind() const ;
 
-		virtual void SetLayout(const BufferLayout& layout) = 0;
-		virtual void InitData(const void* data, uint32_t size) = 0;
+		void SetLayout(const BufferLayout& layout) ;
+		void InitData(const void* data, uint32_t size) ;
 
-		virtual const BufferLayout& GetLayout() const = 0;
+		const BufferLayout& GetLayout() const  { return m_Layout; }
 
-		static Shared <VertexBuffer> Create(float* vertices, uint32_t count);
-		static Shared <VertexBuffer> Create(uint32_t size);
+	private:
+		uint32_t m_RendererID;
+		BufferLayout m_Layout;
 	};
 
-	class IndexBuffer
+	class IndexBuffer 
 	{
 	public:
-		virtual  ~IndexBuffer() {}
+		IndexBuffer(uint32_t* indices, uint32_t count);
+		~IndexBuffer();
 
-		virtual void Bind() const = 0;
-		virtual void UnBind() const = 0;
+		void Bind() const;
+		void UnBind() const;
 
-		virtual uint32_t GetCount() const = 0;
+		uint32_t GetCount() const  { return m_Count; }
 
-		static Shared <IndexBuffer> Create(uint32_t* indices, uint32_t count);
+
+	private:
+		uint32_t m_RendererID, m_Count;
 	};
 
-	class VertexArray
+	class VertexArray 
 	{
 	public:
-		virtual  ~VertexArray() {}
+		VertexArray();
+		~VertexArray();
 
-		virtual void Bind() const = 0;
-		virtual void UnBind() const = 0;
+		void Bind() const;
+		void UnBind() const;
 
-		virtual void AddVertexBuffer(const Shared<VertexBuffer>& vertexBuff)  = 0;
-		virtual void SetIndexBuffer(const Shared<IndexBuffer>& indexBuff)  = 0;
+		void AddVertexBuffer(const Shared<VertexBuffer>& vertexBuff);
+		void SetIndexBuffer(const Shared<IndexBuffer>& indexBuff);
 
-		virtual const std::vector<Shared<VertexBuffer>>& GetVertexBuffer() const = 0;
-		virtual const Shared<IndexBuffer>& GetIndexBuffer() const = 0;
-
-		static Shared <VertexArray> Create();
+		const std::vector<Shared<VertexBuffer>>& GetVertexBuffer() const { return m_VertexBuff; }
+		const Shared <IndexBuffer>& GetIndexBuffer() const { return m_IndexBuff; }
+	private:
+		std::vector <Shared<VertexBuffer>> m_VertexBuff;
+		uint32_t m_VertexBufferIndexOffset = 0;
+		Shared <IndexBuffer> m_IndexBuff;
+		uint32_t m_RendererID;
 	};
+
 }

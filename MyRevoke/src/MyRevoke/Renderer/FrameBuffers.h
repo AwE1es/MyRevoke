@@ -38,20 +38,36 @@ namespace Revoke
 		uint32_t Samples = 1;
 	};
 
-	class FrameBuffers
+	class FrameBuffers 
 	{
 	public:
-		virtual void Bind() = 0;
-		virtual void UnBind() = 0;
+		FrameBuffers(const FrameBufferStats& stats);
+		~FrameBuffers();
 
-		virtual uint32_t GetColorAttachmentRendererID(uint32_t index = 0) const = 0;
+		void Bind();
+		void UnBind();
 
-		virtual const FrameBufferStats& GetSpecification() const = 0;
-		virtual void Resize(uint32_t width, uint32_t height) = 0;
-		virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) = 0;
+		void Create();
 
-		virtual void ClearColorTextureAttachment(uint32_t attachmentIndex, int value) = 0;
+		uint32_t GetColorAttachmentRendererID(uint32_t index = 0) const;
 
-		static Shared<FrameBuffers> Create(const FrameBufferStats& stats);
+		const FrameBufferStats& GetSpecification() const;
+		int ReadPixel(uint32_t attachmentIndex, int x, int y);
+
+		void Resize(uint32_t width, uint32_t height);
+
+		void ClearColorTextureAttachment(uint32_t attachmentIndex, int value);
+
+	private:
+		FrameBufferStats m_Stats;
+		uint32_t m_RendererID = 0;
+
+		uint32_t m_DepthAttachment = 0;
+		std::vector<FrameBufferTextureSpec> m_ColorAttachmentSpecs;
+		FrameBufferTextureSpec m_DepthAttachmentSpec = FramebufferTextureFormat::None;
+
+		std::vector<uint32_t> m_RendererIDs;
 	};
+
+
 }

@@ -12,8 +12,8 @@ namespace Revoke
 		:m_CurrendDir(g_AssetsDirectory)
 	{
 
-		m_FolderIcon = Texture2D::Create("resourses/icons/ContentBrowser/Folder_Icon.png");
-		m_FileIcon = Texture2D::Create("resourses/icons/ContentBrowser/File_Icon.png");
+		m_FolderIcon = std::make_shared<Texture>("resourses/icons/ContentBrowser/Folder_Icon.png");
+		m_FileIcon = std::make_shared<Texture>("resourses/icons/ContentBrowser/File_Icon.png");
 	}
 
 	void ContentBrowser::OnImGuiRender()
@@ -49,7 +49,7 @@ namespace Revoke
 			auto relativePath = std::filesystem::relative(entryPath.path(), g_AssetsDirectory);
 			std::string fileNameString = relativePath.filename().string();
 
-			Shared<Texture2D> icon = entryPath.is_directory() ? m_FolderIcon : m_FileIcon;
+			Shared<Texture> icon = entryPath.is_directory() ? m_FolderIcon : m_FileIcon;
 
 			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1.0f, 1.0f, 1.0f, 0.05f));
 			ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 15.0f);

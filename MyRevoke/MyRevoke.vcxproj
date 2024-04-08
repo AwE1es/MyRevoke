@@ -118,11 +118,7 @@
     <ClInclude Include="src\MyRevoke\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\MyRevoke\Math\Math.h" />
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.h" />
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLContex.h" />
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLFrameBuffers.h" />
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGLTexture2D.h" />
-    <ClInclude Include="src\MyRevoke\Platform\OpenGL\OpenGlShader.h" />
     <ClInclude Include="src\MyRevoke\Platform\Windows\FileExplorer.h" />
     <ClInclude Include="src\MyRevoke\Platform\Windows\WIndowsInput.h" />
     <ClInclude Include="src\MyRevoke\Platform\Windows\WindowsWindow.h" />
@@ -572,11 +568,7 @@
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\MyRevoke\Math\Math.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\OpenGL\GLRendererAPI.cpp" />
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLContex.cpp" />
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLFrameBuffers.cpp" />
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGLTexture2D.cpp" />
-    <ClCompile Include="src\MyRevoke\Platform\OpenGL\OpenGlShader.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\Windows\FileExplorer.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\Windows\WIndowsInput.cpp" />
     <ClCompile Include="src\MyRevoke\Platform\Windows\WindowsWindow.cpp" />

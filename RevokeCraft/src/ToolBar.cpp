@@ -7,8 +7,8 @@ namespace Revoke
 {
 	ToolBar::ToolBar()
 	{
-		m_PlayIcon = Texture2D::Create("resourses/icons/Toolbar/Play_Icon.png");
-		m_StopIcon = Texture2D::Create("resourses/icons/Toolbar/Stop_Icon.png");
+		m_PlayIcon = std::make_shared<Texture>("resourses/icons/Toolbar/Play_Icon.png");
+		m_StopIcon = std::make_shared<Texture>("resourses/icons/Toolbar/Stop_Icon.png");
 	}
 	void ToolBar::OnImGuiRender()
 	{
@@ -21,7 +21,7 @@ namespace Revoke
 
 		float size = ImGui::GetWindowHeight() - 6.0f;
 		ImGui::SameLine((ImGui::GetWindowContentRegionMax().x * 0.05f) - (size * 0.5f));
-		Shared<Texture2D> icon = m_SceneState == SceneState::Editor ? m_PlayIcon : m_StopIcon;
+		Shared<Texture> icon = m_SceneState == SceneState::Editor ? m_PlayIcon : m_StopIcon;
 		if (ImGui::ImageButton((ImTextureID)icon->GetID(), ImVec2(size,size), ImVec2(0, 0), ImVec2(1,1), 0))
 		{
 			if (m_SceneState == SceneState::Editor)

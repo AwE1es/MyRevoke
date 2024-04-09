@@ -75,7 +75,7 @@
     <ClInclude Include="src\MyRevoke\Core\Input.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Core\KeyCodes.h">
+    <ClInclude Include="src\MyRevoke\Utility\KeyCodes.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Layer.h">
@@ -87,7 +87,7 @@
     <ClInclude Include="src\MyRevoke\Core\Log.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Core\MouseBtnCodes.h">
+    <ClInclude Include="src\MyRevoke\Utility\MouseBtnCodes.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Time.h">

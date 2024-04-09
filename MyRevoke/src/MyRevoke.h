@@ -21,7 +21,7 @@
 #include "MyRevoke/Scene/Components.h"
 #include "MyRevoke/Scene/ScriptEntity.h"
 
-#include "MyRevoke/Core/MouseBtnCodes.h"
-#include "MyRevoke/Core/KeyCodes.h"
+#include "MyRevoke/Utility/MouseBtnCodes.h"
+#include "MyRevoke/Utility/KeyCodes.h"
 
 #include "rvpch.h"

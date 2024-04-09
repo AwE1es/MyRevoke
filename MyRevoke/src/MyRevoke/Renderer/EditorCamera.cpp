@@ -2,8 +2,8 @@
 #include "EditorCamera.h"
 
 #include "MyRevoke/Core/Input.h"
-#include "MyRevoke/Core/KeyCodes.h"
-#include "MyRevoke/Core/MouseBtnCodes.h"
+#include "MyRevoke/Utility/KeyCodes.h"
+#include "MyRevoke/Utility/MouseBtnCodes.h"
 
 #include <glfw/glfw3.h>
 

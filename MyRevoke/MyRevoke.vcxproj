@@ -104,11 +104,11 @@
     <ClInclude Include="src\MyRevoke\Core\Core.h" />
     <ClInclude Include="src\MyRevoke\Core\EntryPoint.h" />
     <ClInclude Include="src\MyRevoke\Core\Input.h" />
-    <ClInclude Include="src\MyRevoke\Core\KeyCodes.h" />
+    <ClInclude Include="src\MyRevoke\Utility\KeyCodes.h" />
     <ClInclude Include="src\MyRevoke\Core\Layer.h" />
     <ClInclude Include="src\MyRevoke\Core\LayerStack.h" />
     <ClInclude Include="src\MyRevoke\Core\Log.h" />
-    <ClInclude Include="src\MyRevoke\Core\MouseBtnCodes.h" />
+    <ClInclude Include="src\MyRevoke\Utility\MouseBtnCodes.h" />
     <ClInclude Include="src\MyRevoke\Core\Time.h" />
     <ClInclude Include="src\MyRevoke\Core\Window.h" />
     <ClInclude Include="src\MyRevoke\EventSystem\AppEvent.h" />

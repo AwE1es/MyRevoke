@@ -8,29 +8,29 @@
 namespace Revoke
 {
 
-	bool Input::IsKeyPressed(int keycode)
+	bool Input::IsKeyPressed(int key)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetCoreWindow());
 
-		auto state = glfwGetKey(window, keycode);
-		return state == GLFW_PRESS || state == GLFW_REPEAT;
+		auto stateOfKey = glfwGetKey(window, key);
+		return stateOfKey == GLFW_PRESS || stateOfKey == GLFW_REPEAT;
 	}
 
 	bool Input::IsMousePressed(int mouseButton)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetCoreWindow());
 
-		auto state = glfwGetMouseButton(window, mouseButton);
-		return state == GLFW_PRESS;
+		auto stateOfMouse = glfwGetMouseButton(window, mouseButton);
+		return stateOfMouse == GLFW_PRESS;
 	}
 
 	float Input::GetMouseX()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetCoreWindow());
 
-		double xPos, yPos;
-		glfwGetCursorPos(window, &xPos, &yPos);
-		return (float)xPos;
+		double xPosition, yPosition;
+		glfwGetCursorPos(window, &xPosition, &yPosition);
+		return (float)xPosition;
 	}
 
 	float Input::GetMouseY()
@@ -40,5 +40,15 @@ namespace Revoke
 		double xPos, yPos;
 		glfwGetCursorPos(window, &xPos, &yPos);
 		return (float)yPos;
+	}
+
+	std::pair<float, float> Input::GetMousePosition()
+	{
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetCoreWindow());
+
+		double xPosition, yPosition;
+		glfwGetCursorPos(window, &xPosition, &yPosition);
+
+		return std::make_pair((float)xPosition, (float)yPosition);
 	}
 }

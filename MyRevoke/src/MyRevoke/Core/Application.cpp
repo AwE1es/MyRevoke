@@ -65,7 +65,7 @@ namespace Revoke
 		
 		EventDispatcher eDispatcher(e);
 		
-		eDispatcher.Dispatch<WindowsCloseEvent>(RV_BIND_EVENT_FUNK(Application::OnWindowsClose));
+		eDispatcher.Dispatch<WindowsCloseEvent>(RV_BIND_EVENT_FUNK(Application::OnWindowClose));
 		eDispatcher.Dispatch<WindowResizeEvent>(RV_BIND_EVENT_FUNK(Application::OnWindowResize));
 
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend();++it)
@@ -86,7 +86,7 @@ namespace Revoke
 		m_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
 	}
-	bool Application::OnWindowsClose(WindowsCloseEvent e)
+	bool Application::OnWindowClose(WindowsCloseEvent e)
 	{
 		m_Run = false;
 		return true;

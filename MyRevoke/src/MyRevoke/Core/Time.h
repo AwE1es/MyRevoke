@@ -6,16 +6,14 @@ namespace Revoke
 	{
 	public:
 		Timestep(float time = 0.0f)
-			: m_Time(time)
-		{
+			: m_Time(time) {}
 
-		}
-
-		inline float GetSeconds() const { return m_Time; }
-		inline float GetMiliSeconds() const { return m_Time / 10000.0f; }
+		float GetSeconds() const { return m_Time; }
 		
+		operator double() const { return (double)m_Time; }
+
 		operator float() const { return m_Time; }
 	private:
-		float m_Time;
+		float m_Time = 0.0f;
 	};
 }

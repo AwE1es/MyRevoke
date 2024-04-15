@@ -36,11 +36,11 @@ namespace Revoke
 
 		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 
-		inline static Application& Get() { return *s_Instance; }
-		inline Window& GetWindow() { return *m_Window; }
+		static Application& Get() { return *s_Instance; }
+		Window& GetWindow() { return *m_Window; }
 
 	private:
-		bool OnWindowsClose(WindowsCloseEvent e);
+		bool OnWindowClose(WindowsCloseEvent e);
 		bool OnWindowResize(WindowResizeEvent e);
 	private:
 		Shared<Window> m_Window;
@@ -48,7 +48,7 @@ namespace Revoke
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_ImGuiLayer;
 
-		float m_LastFrame;
+		float m_LastFrame = 0;
 
 		bool m_Run = true;
 
@@ -56,6 +56,6 @@ namespace Revoke
 		static Application* s_Instance;
 	};
 
-	//This function will be defined by a client
+
 	Application* CreateApplication();
 }

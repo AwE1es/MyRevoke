@@ -13,24 +13,24 @@ namespace Revoke{
 
 		static void Init();
 
-		inline static std::shared_ptr<spdlog::logger> GetCoreLogger() { return s_CoreLogger; }
-		inline static std::shared_ptr<spdlog::logger> GetClientLogger() { return s_ClientLogger; }
+		static Shared<spdlog::logger> GetCoreLogger() { return s_EngineLogger; }
+		static Shared<spdlog::logger> GetClientLogger() { return s_EditortLogger; }
 
 	private:
-		static std::shared_ptr<spdlog::logger> s_CoreLogger;
-		static std::shared_ptr<spdlog::logger> s_ClientLogger;
+		static Shared<spdlog::logger> s_EngineLogger;
+		static Shared<spdlog::logger> s_EditortLogger;
 	};
 }
 
-// Define macros for logging
-#define RV_CORE_ERROR(...)	::Revoke::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define RV_CORE_WARN(...)	::Revoke::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define RV_CORE_INFO(...)	::Revoke::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define RV_CORE_TRACE(...)	::Revoke::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define RV_CORE_FATAL(...)	::Revoke::Log::GetCoreLogger()->critical(__VA_ARGS__)
+// macros:
+#define RV_ENGINE_ERROR(...)	::Revoke::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define RV_ENGINE_WARN(...)		::Revoke::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define RV_ENGINE_INFO(...)		::Revoke::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define RV_ENGINE_TRACE(...)	::Revoke::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define RV_ENGINE_FATAL(...)	::Revoke::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
-#define RV_ERROR(...)		::Revoke::Log::GetClientLogger()->error(__VA_ARGS__)
-#define RV_WARN(...)		::Revoke::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define RV_INFO(...)		::Revoke::Log::GetClientLogger()->info(__VA_ARGS__)
-#define RV_TRACE(...)		::Revoke::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define RV_FATAL(...)		::Revoke::Log::GetClientLogger()->critical(__VA_ARGS__)
+#define RV_EDITOR_ERROR(...)		::Revoke::Log::GetClientLogger()->error(__VA_ARGS__)
+#define RV_EDITOR_WARN(...)			::Revoke::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define RV_EDITOR_INFO(...)			::Revoke::Log::GetClientLogger()->info(__VA_ARGS__)
+#define RV_EDITOR_TRACE(...)		::Revoke::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define RV_EDITOR_FATAL(...)		::Revoke::Log::GetClientLogger()->critical(__VA_ARGS__)

@@ -29,9 +29,6 @@ namespace Revoke
 		bool OnMouseBtnPressed(MouseButtonPressedEvent& e);
 		bool OnKeyPressed(KeyPressedEvent& e);
 
-		void OnScenePlay();
-		void OnSceneStop();
-
 		void NewScene();
 		void OpenScene();
 		void OpenScene(const std::filesystem::path& path);

@@ -18,7 +18,7 @@ namespace Revoke
 	{
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		RV_CORE_ASSERT(status, "Failed to initialize GLAD");
+		RV_CORE_ASSERT(status, "Failed GLAD");
 	}
 
 	void Revoke::RenderContex::SwapBuffers()

@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Log.h"
 #include "Input.h"
+#include "Core.h"
 
 #include "MyRevoke/Renderer/Renderer2D.h"
 

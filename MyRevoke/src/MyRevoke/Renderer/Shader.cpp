@@ -137,7 +137,7 @@ namespace Revoke {
 
 				glDeleteShader(shader);
 
-				RV_CORE_ERROR("{0}", infoLog.data());
+				RV_ENGINE_ERROR("{0}", infoLog.data());
 				RV_CORE_ASSERT(false, "Shader compilation failure!");
 				break;
 			}
@@ -169,7 +169,7 @@ namespace Revoke {
 			for (auto id : glShaderIDs)
 				glDeleteShader(id);
 
-			RV_CORE_ERROR("{0}", infoLog.data());
+			RV_ENGINE_ERROR("{0}", infoLog.data());
 			RV_CORE_ASSERT(false, "Shader link failure!");
 			return;
 		}
@@ -217,7 +217,7 @@ namespace Revoke {
 		}
 		else
 		{
-			RV_CORE_ERROR("Could not open file '{0}'", filepath);
+			RV_ENGINE_ERROR("Could not open file '{0}'", filepath);
 		}
 
 		return result;
@@ -229,7 +229,7 @@ namespace Revoke {
 		if (type == "fragment")
 			return GL_FRAGMENT_SHADER;
 
-		RV_CORE_ERROR("{0} type of shaders is not supported", type);
+		RV_ENGINE_ERROR("{0} type of shaders is not supported", type);
 		return 0;
 	}
 

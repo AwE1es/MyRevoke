@@ -18,7 +18,7 @@ namespace Revoke
 	static void GLFWErrorCallBack(int error, const char* description)
 	{
 
-		RV_CORE_ERROR("GLFW Error ({0}: {1}", error, description);
+		RV_ENGINE_ERROR("GLFW Error ({0}: {1}", error, description);
 	}
 
 
@@ -41,7 +41,7 @@ namespace Revoke
 		m_Data.Height = settings.Height;
 
 
-		RV_CORE_INFO("Window is initialized {0} ({1}, {2})", settings.Title, settings.Width, settings.Height);
+		RV_ENGINE_INFO("Window is initialized {0} ({1}, {2})", settings.Title, settings.Width, settings.Height);
 
 		if (!s_GLFWInitialization)
 		{

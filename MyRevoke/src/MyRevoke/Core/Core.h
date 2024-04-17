@@ -6,8 +6,8 @@
 #endif //RV_PLATFORM_WINDOWS
 
 #ifdef RV_ASSERTS_ENABLE
-	#define RV_CORE_ASSERT(x, ...) {if(!(x)) {RV_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}
-	#define RV_ASSERT(x, ...) {if(!(x)) {RV_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}
+	#define RV_CORE_ASSERT(x, ...) {if(!(x)) {RV_ENGINE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}
+	#define RV_ASSERT(x, ...) {if(!(x)) {RV_EDITOR_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}
 #else
 	#define RV_CORE_ASSERT(x, ...)
 	#define RV_ASSERT(x, ...)

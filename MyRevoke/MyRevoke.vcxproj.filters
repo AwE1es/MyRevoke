@@ -114,7 +114,7 @@
     <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h">
       <Filter>src\MyRevoke\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Renderer\Buffer.h">
+    <ClInclude Include="src\MyRevoke\Renderer\BuffersAPI.h">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Renderer\Cmaera.h">
@@ -1436,7 +1436,7 @@
     <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp">
       <Filter>src\MyRevoke\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Renderer\Buffer.cpp">
+    <ClCompile Include="src\MyRevoke\Renderer\BuffersAPI.cpp">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Renderer\FrameBuffers.cpp">

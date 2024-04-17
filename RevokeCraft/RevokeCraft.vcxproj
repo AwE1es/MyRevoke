@@ -95,14 +95,14 @@
   <ItemGroup>
     <ClInclude Include="src\ContentBrowser.h" />
     <ClInclude Include="src\CraftLayer.h" />
-    <ClInclude Include="src\SceneUi.h" />
+    <ClInclude Include="src\ObjectsPannel.h" />
     <ClInclude Include="src\ToolBar.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ContentBrowser.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\CraftLayer.cpp" />
-    <ClCompile Include="src\SceneUi.cpp" />
+    <ClCompile Include="src\ObjectsPannel.cpp" />
     <ClCompile Include="src\ToolBar.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
 
 #include <filesystem>
 
-#include "SceneUi.h"
+#include "ObjectsPannel.h"
 #include "ContentBrowser.h"
 #include "ToolBar.h"
 
@@ -58,8 +58,6 @@ namespace Revoke
 		bool m_ViewportHovered = false;
 
 		glm::vec2 m_ViewportBounds[2];
-
-		float m_Framerate = 0.0f;
 
 		int m_GizmoType = -1;
 

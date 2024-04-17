@@ -118,7 +118,7 @@
     <ClInclude Include="src\MyRevoke\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\MyRevoke\Math\Math.h" />
     <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h" />
-    <ClInclude Include="src\MyRevoke\Renderer\Buffer.h" />
+    <ClInclude Include="src\MyRevoke\Renderer\BuffersAPI.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Cmaera.h" />
     <ClInclude Include="src\MyRevoke\Renderer\EditorCamera.h" />
     <ClInclude Include="src\MyRevoke\Renderer\FrameBuffers.h" />
@@ -564,7 +564,7 @@
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\MyRevoke\Math\Math.cpp" />
     <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp" />
-    <ClCompile Include="src\MyRevoke\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\BuffersAPI.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\EditorCamera.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\FrameBuffers.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\GraphicContex.cpp" />

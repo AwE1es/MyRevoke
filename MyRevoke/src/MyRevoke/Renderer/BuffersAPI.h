@@ -13,17 +13,17 @@ namespace Revoke
 	{
 		switch (type)
 		{	
-		case Revoke::ShaderDataTypes::Float:		return 4;
-		case Revoke::ShaderDataTypes::Float2:		return 4 * 2;
-		case Revoke::ShaderDataTypes::Float3:		return 4 * 3;
-		case Revoke::ShaderDataTypes::Float4:		return 4 * 4;
-		case Revoke::ShaderDataTypes::Mat3:			return 4 * 3 * 3;
-		case Revoke::ShaderDataTypes::Mat4:			return 4 * 4 * 4;
-		case Revoke::ShaderDataTypes::Int:			return 4;
-		case Revoke::ShaderDataTypes::Int2:			return 4 * 2;
-		case Revoke::ShaderDataTypes::Int3:			return 4 * 3;
-		case Revoke::ShaderDataTypes::Int4:			return 4 * 4;
-		case Revoke::ShaderDataTypes::Bool:			return 1;
+			case Revoke::ShaderDataTypes::Float:		return 4;
+			case Revoke::ShaderDataTypes::Float2:		return 8;
+			case Revoke::ShaderDataTypes::Float3:		return 12;
+			case Revoke::ShaderDataTypes::Float4:		return 16;
+			case Revoke::ShaderDataTypes::Mat3:			return 36;
+			case Revoke::ShaderDataTypes::Mat4:			return 64;
+			case Revoke::ShaderDataTypes::Int:			return 4;
+			case Revoke::ShaderDataTypes::Int2:			return 8;
+			case Revoke::ShaderDataTypes::Int3:			return 12;
+			case Revoke::ShaderDataTypes::Int4:			return 16;
+			case Revoke::ShaderDataTypes::Bool:			return 1;
 		default:
 			RV_CORE_ASSERT(false, "Unknown Shader Data Type");
 			return 0;
@@ -46,8 +46,8 @@ namespace Revoke
 			case Revoke::ShaderDataTypes::Float2:	return 2;			
 			case Revoke::ShaderDataTypes::Float3:	return 3;				
 			case Revoke::ShaderDataTypes::Float4:	return 4;					
-			case Revoke::ShaderDataTypes::Mat3:		return 3 * 3;				
-			case Revoke::ShaderDataTypes::Mat4:		return 4 * 4;	
+			case Revoke::ShaderDataTypes::Mat3:		return 9;				
+			case Revoke::ShaderDataTypes::Mat4:		return 16;	
 			case Revoke::ShaderDataTypes::Int:		return 1;	
 			case Revoke::ShaderDataTypes::Int2:		return 2;		
 			case Revoke::ShaderDataTypes::Int3:		return 3;			

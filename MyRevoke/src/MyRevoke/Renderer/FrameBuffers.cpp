@@ -212,7 +212,7 @@ namespace Revoke
     {
         if (width == 0 || height == 0 || width > s_MaxFramebufferSize || height > s_MaxFramebufferSize)
         {
-            RV_CORE_WARN("Attempted to rezize framebuffer to {0}, {1}", width, height);
+            RV_ENGINE_WARN("Attempted to rezize framebuffer to {0}, {1}", width, height);
             return;
         }
         m_Stats.Width = width;

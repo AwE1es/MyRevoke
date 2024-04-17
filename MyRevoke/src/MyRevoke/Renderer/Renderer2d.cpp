@@ -230,9 +230,11 @@ namespace Revoke
 
 	void Renderer2D::DrawSprite(const glm::mat4& transform, SpriteRendererComponent& sprite, int entityID)
 	{
-		if (sprite.Texture2D)
+		if (!sprite.Texture2D.empty())
 		{
-			DrawQuad(transform, sprite.Texture2D, entityID);
+			Shared<Texture> texture;
+			texture = std::make_shared<Texture>(sprite.Texture2D);
+			DrawQuad(transform, texture, entityID);
 		}
 		else
 		{

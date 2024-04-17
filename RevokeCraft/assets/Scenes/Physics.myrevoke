@@ -9,6 +9,7 @@ Entities:
       Scale: [19.6652164, 0.213340834, 1]
     SpriteRendererComponent:
       Color: [0.76758939, 1, 0.745097995, 1]
+      Texture2D: ""
     RigidBodyComponent:
       BodyType: 0
       IsRotating: true
@@ -29,6 +30,7 @@ Entities:
       Scale: [1.00000012, 1.00000012, 1]
     SpriteRendererComponent:
       Color: [0.650519013, 0.230392143, 0.691176474, 1]
+      Texture2D: "" 
     RigidBodyComponent:
       BodyType: 2
       IsRotating: false

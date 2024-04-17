@@ -162,6 +162,7 @@ namespace Revoke
 		
 			auto& spriteRendererComponent = entity.GetComponent<SpriteRendererComponent>();
 			out << YAML::Key << "Color" << YAML::Value << spriteRendererComponent.Color;
+			out << YAML::Key << "Texture2D" << YAML::Value << spriteRendererComponent.Texture2D;
 		
 			out << YAML::EndMap; 
 		}
@@ -288,6 +289,7 @@ namespace Revoke
 				{
 					auto& src = deserializedEntity.AddComponent<SpriteRendererComponent>();
 					src.Color = spriteRendererComponent["Color"].as<glm::vec4>();
+					src.Texture2D = spriteRendererComponent["Texture2D"].as<std::string>();
 				}
 
 				auto rigitbodyComponent = entity["RigidBodyComponent"];

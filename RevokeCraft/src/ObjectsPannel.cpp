@@ -119,7 +119,7 @@ namespace Revoke
 							const wchar_t* path = (const wchar_t*)payload->Data;
 							std::filesystem::path texturePath = std::filesystem::path(g_AssetsDirectory) / path;
 
-							spriteComponent.Texture2D = std::make_shared<Texture>(texturePath.string());
+							spriteComponent.Texture2D = texturePath.string();
 						}
 
 						ImGui::EndDragDropTarget();

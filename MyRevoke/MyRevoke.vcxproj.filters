@@ -16,20 +16,17 @@
     <Filter Include="src\MyRevoke\ImGui">
       <UniqueIdentifier>{18A528FC-0489-E951-6DE9-E3A459ECD3D3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\MyRevoke\Platform">
-      <UniqueIdentifier>{828D162B-EEF9-D125-B7ED-69832319F48D}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\MyRevoke\Platform\OpenGL">
-      <UniqueIdentifier>{76B06034-626B-50E0-0B23-C92AF7BC9A70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\MyRevoke\Platform\Windows">
-      <UniqueIdentifier>{BC999218-28B2-7942-F15E-09DC5D360EDC}</UniqueIdentifier>
+    <Filter Include="src\MyRevoke\Math">
+      <UniqueIdentifier>{074F4174-7365-3F0A-BCDC-CA2B28321092}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\MyRevoke\Renderer">
       <UniqueIdentifier>{D494F305-4001-AF00-09F5-465E7520D168}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\MyRevoke\Scene">
       <UniqueIdentifier>{0B9DD8FC-F780-9952-60E1-93A54CE483D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MyRevoke\Utility">
+      <UniqueIdentifier>{B1A15757-9D30-E120-464F-F51B32BDF1C6}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
@@ -75,9 +72,6 @@
     <ClInclude Include="src\MyRevoke\Core\Input.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Utility\KeyCodes.h">
-      <Filter>src\MyRevoke\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Layer.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
@@ -85,9 +79,6 @@
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Log.h">
-      <Filter>src\MyRevoke\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MyRevoke\Utility\MouseBtnCodes.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Time.h">
@@ -111,8 +102,8 @@
     <ClInclude Include="src\MyRevoke\ImGui\ImGuiLayer.h">
       <Filter>src\MyRevoke\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h">
-      <Filter>src\MyRevoke\Platform\Windows</Filter>
+    <ClInclude Include="src\MyRevoke\Math\Math.h">
+      <Filter>src\MyRevoke\Math</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Renderer\BuffersAPI.h">
       <Filter>src\MyRevoke\Renderer</Filter>
@@ -120,7 +111,13 @@
     <ClInclude Include="src\MyRevoke\Renderer\Cmaera.h">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\Renderer\EditorCamera.h">
+      <Filter>src\MyRevoke\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\MyRevoke\Renderer\FrameBuffers.h">
+      <Filter>src\MyRevoke\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Renderer\GraphicContex.h">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Renderer\Renderer2D.h">
@@ -152,6 +149,15 @@
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Scene\Serealizer.h">
       <Filter>src\MyRevoke\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h">
+      <Filter>src\MyRevoke\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Utility\KeyCodes.h">
+      <Filter>src\MyRevoke\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Utility\MouseBtnCodes.h">
+      <Filter>src\MyRevoke\Utility</Filter>
     </ClInclude>
     <ClInclude Include="src\rvpch.h">
       <Filter>src</Filter>
@@ -1410,12 +1416,12 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Math\Math.h" />
-    <ClInclude Include="src\MyRevoke\Renderer\EditorCamera.h" />
-    <ClInclude Include="src\MyRevoke\Renderer\GraphicContex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\Core\Application.cpp">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Core\Input.cpp">
       <Filter>src\MyRevoke\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Core\Layer.cpp">
@@ -1427,22 +1433,31 @@
     <ClCompile Include="src\MyRevoke\Core\Log.cpp">
       <Filter>src\MyRevoke\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\MyRevoke\Core\Window.cpp">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiBuild.cpp">
       <Filter>src\MyRevoke\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiLayer.cpp">
       <Filter>src\MyRevoke\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp">
-      <Filter>src\MyRevoke\Platform\Windows</Filter>
+    <ClCompile Include="src\MyRevoke\Math\Math.cpp">
+      <Filter>src\MyRevoke\Math</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Renderer\BuffersAPI.cpp">
+      <Filter>src\MyRevoke\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Renderer\EditorCamera.cpp">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Renderer\FrameBuffers.cpp">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Renderer\Renderer2D.cpp">
+    <ClCompile Include="src\MyRevoke\Renderer\GraphicContex.cpp">
+      <Filter>src\MyRevoke\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Renderer\Renderer2d.cpp">
       <Filter>src\MyRevoke\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Renderer\RendererAPI.cpp">
@@ -1466,6 +1481,9 @@
     <ClCompile Include="src\MyRevoke\Scene\Serealizer.cpp">
       <Filter>src\MyRevoke\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp">
+      <Filter>src\MyRevoke\Utility</Filter>
+    </ClCompile>
     <ClCompile Include="src\rvpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -1475,10 +1493,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Math\Math.cpp" />
-    <ClCompile Include="src\MyRevoke\Renderer\EditorCamera.cpp" />
-    <ClCompile Include="src\MyRevoke\Renderer\GraphicContex.cpp" />
-    <ClCompile Include="src\MyRevoke\Core\Window.cpp" />
-    <ClCompile Include="src\MyRevoke\Core\Input.cpp" />
   </ItemGroup>
 </Project>

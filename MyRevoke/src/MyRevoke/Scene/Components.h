@@ -10,8 +10,11 @@
 
 #include "MyRevoke/Renderer/Texture.h"
 
+class b2Body;
+
 namespace Revoke
 {
+
 	struct NameComponent
 	{
 		std::string Name;
@@ -71,6 +74,41 @@ namespace Revoke
 		}
 	
 		
+	};
+
+	struct BoxColisionComponent
+	{
+		BoxColisionComponent() = default;
+		BoxColisionComponent(const BoxColisionComponent&) = default;
+
+		glm::vec2 Size = { 0.5f, 0.5f };
+		glm::vec2 Offset = { 0.0f, 0.0f };
+
+		float Density = 1.0f;
+		float Friction = 0.5f;
+		float Restriction = 0.0f;
+		float ResitutionTreshhold = 0.5f;
+		bool isSensor = false;
+
+		//void* Fixture = nullptr;
+	};
+
+	struct RigidBodyComponent
+	{
+		enum class BodyType
+		{
+			StaticBody = 0,
+			KinematicBody,
+			DynamicBody
+		};
+
+		RigidBodyComponent() = default;
+		RigidBodyComponent(const RigidBodyComponent&) = default;
+		
+		BodyType Type = BodyType::StaticBody;
+		bool IsRotating = true;
+
+		b2Body *Body = nullptr;
 	};
 
 	struct NativeScriptComponent //TODO: Move out with entt include

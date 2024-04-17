@@ -19,3 +19,6 @@
 [submodule "MyRevoke/vendor/ImGuizmo"]
 	path = MyRevoke/vendor/ImGuizmo
 	url = https://github.com/Revokeeee/ImGuizmo
+[submodule "MyRevoke/vendor/Box2D"]
+	path = MyRevoke/vendor/Box2D
+	url = https://github.com/Revokeeee/box2d

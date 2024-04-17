@@ -58,7 +58,7 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;_CRT_SECURE_NO_WARNINGS;YAML_CPP_STATIC_DEFINE;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -79,7 +79,7 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;_CRT_SECURE_NO_WARNINGS;YAML_CPP_STATIC_DEFINE;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -104,11 +104,9 @@
     <ClInclude Include="src\MyRevoke\Core\Core.h" />
     <ClInclude Include="src\MyRevoke\Core\EntryPoint.h" />
     <ClInclude Include="src\MyRevoke\Core\Input.h" />
-    <ClInclude Include="src\MyRevoke\Utility\KeyCodes.h" />
     <ClInclude Include="src\MyRevoke\Core\Layer.h" />
     <ClInclude Include="src\MyRevoke\Core\LayerStack.h" />
     <ClInclude Include="src\MyRevoke\Core\Log.h" />
-    <ClInclude Include="src\MyRevoke\Utility\MouseBtnCodes.h" />
     <ClInclude Include="src\MyRevoke\Core\Time.h" />
     <ClInclude Include="src\MyRevoke\Core\Window.h" />
     <ClInclude Include="src\MyRevoke\EventSystem\AppEvent.h" />
@@ -117,7 +115,6 @@
     <ClInclude Include="src\MyRevoke\EventSystem\MouseEvent.h" />
     <ClInclude Include="src\MyRevoke\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\MyRevoke\Math\Math.h" />
-    <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h" />
     <ClInclude Include="src\MyRevoke\Renderer\BuffersAPI.h" />
     <ClInclude Include="src\MyRevoke\Renderer\Cmaera.h" />
     <ClInclude Include="src\MyRevoke\Renderer\EditorCamera.h" />
@@ -133,6 +130,9 @@
     <ClInclude Include="src\MyRevoke\Scene\SceneCamera.h" />
     <ClInclude Include="src\MyRevoke\Scene\ScriptEntity.h" />
     <ClInclude Include="src\MyRevoke\Scene\Serealizer.h" />
+    <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h" />
+    <ClInclude Include="src\MyRevoke\Utility\KeyCodes.h" />
+    <ClInclude Include="src\MyRevoke\Utility\MouseBtnCodes.h" />
     <ClInclude Include="src\rvpch.h" />
     <ClInclude Include="vendor\ImGuizmo\ImGuizmo.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -563,12 +563,11 @@
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\MyRevoke\Math\Math.cpp" />
-    <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\BuffersAPI.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\EditorCamera.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\FrameBuffers.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\GraphicContex.cpp" />
-    <ClCompile Include="src\MyRevoke\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="src\MyRevoke\Renderer\Renderer2d.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Shader.cpp" />
     <ClCompile Include="src\MyRevoke\Renderer\Texture.cpp" />
@@ -576,6 +575,7 @@
     <ClCompile Include="src\MyRevoke\Scene\Scene.cpp" />
     <ClCompile Include="src\MyRevoke\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\MyRevoke\Scene\Serealizer.cpp" />
+    <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp" />
     <ClCompile Include="src\rvpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -594,6 +594,9 @@
     </ProjectReference>
     <ProjectReference Include="vendor\yaml-cpp\yaml-cpp.vcxproj">
       <Project>{88F1A057-74BE-FB62-9DD7-E90A890331F1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\Box2D\Box2D.vcxproj">
+      <Project>{A434E80C-1049-10BE-D9CA-B31D459E0CEF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

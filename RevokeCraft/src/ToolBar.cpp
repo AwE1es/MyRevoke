@@ -25,14 +25,28 @@ namespace Revoke
 		if (ImGui::ImageButton((ImTextureID)icon->GetID(), ImVec2(size,size), ImVec2(0, 0), ImVec2(1,1), 0))
 		{
 			if (m_SceneState == SceneState::Editor)
-				m_SceneState = SceneState::Runtime;
+				OnScenePlay();
 			else
-				m_SceneState = SceneState::Editor;
+				OnSceneStop();
 		}
 
 		ImGui::PopStyleVar(2);
 		ImGui::PopStyleColor(3);
 		ImGui::End();
 
+	}
+	void ToolBar::OnScenePlay()
+	{	
+		m_CurrentScene->OnRuntimeStart();
+		m_SceneState = SceneState::Runtime;
+	}
+	void ToolBar::OnSceneStop()
+	{
+		m_CurrentScene->OnRuntimeStop();
+		m_SceneState = SceneState::Editor;
+	}
+	void ToolBar::SetScene(Shared<Scene> currentScene)
+	{
+		m_CurrentScene = currentScene;
 	}
 }

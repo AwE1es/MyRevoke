@@ -6,6 +6,28 @@
 namespace YAML {
 
 	template<>
+	struct convert<glm::vec2>
+	{
+		static Node encode(const glm::vec2& rhs)
+		{
+			Node node;
+			node.push_back(rhs.x);
+			node.push_back(rhs.y);
+			return node;
+		}
+
+		static bool decode(const Node& node, glm::vec2& rhs)
+		{
+			if (!node.IsSequence() || node.size() != 2)
+				return false;
+
+			rhs.x = node[0].as<float>();
+			rhs.y = node[1].as<float>();
+			return true;
+		}
+	};
+
+	template<>
 	struct convert<glm::vec3>
 	{
 		static Node encode(const glm::vec3& rhs)
@@ -58,6 +80,12 @@ namespace YAML {
 }
 namespace Revoke
 {
+	YAML::Emitter& operator<<(YAML::Emitter& out, const glm::vec2& v)
+	{
+		out << YAML::Flow;
+		out << YAML::BeginSeq << v.x << v.y << YAML::EndSeq;
+		return out;
+	}
 
 	YAML::Emitter& operator<<(YAML::Emitter& out, const glm::vec3& v)
 	{
@@ -130,13 +158,45 @@ namespace Revoke
 		if (entity.HasComponent<SpriteRendererComponent>())
 		{
 			out << YAML::Key << "SpriteRendererComponent";
-			out << YAML::BeginMap; // SpriteRendererComponent
+			out << YAML::BeginMap; 
 		
 			auto& spriteRendererComponent = entity.GetComponent<SpriteRendererComponent>();
 			out << YAML::Key << "Color" << YAML::Value << spriteRendererComponent.Color;
 		
-			out << YAML::EndMap; // SpriteRendererComponent
+			out << YAML::EndMap; 
 		}
+
+
+		if (entity.HasComponent<RigidBodyComponent>())
+		{
+			out << YAML::Key << "RigidBodyComponent";
+			out << YAML::BeginMap; 
+
+			auto& rbComponent = entity.GetComponent<RigidBodyComponent>();
+			out << YAML::Key << "BodyType" << YAML::Value << (int)rbComponent.Type;
+			out << YAML::Key << "IsRotating" << YAML::Value << rbComponent.IsRotating;
+
+			out << YAML::EndMap;
+		}
+
+		if (entity.HasComponent<BoxColisionComponent>())
+		{
+			out << YAML::Key << "BoxColisionComponent";
+			out << YAML::BeginMap; 
+
+			auto& boxColisionComponent = entity.GetComponent<BoxColisionComponent>();
+			out << YAML::Key << "Offset" << YAML::Value << boxColisionComponent.Offset;
+			out << YAML::Key << "Size" << YAML::Value << boxColisionComponent.Size;
+
+			out << YAML::Key << "Density" << YAML::Value << boxColisionComponent.Density;
+			out << YAML::Key << "Friction" << YAML::Value << boxColisionComponent.Friction;
+			out << YAML::Key << "Restriction" << YAML::Value << boxColisionComponent.Restriction;
+			out << YAML::Key << "ResitutionTreshhold" << YAML::Value << boxColisionComponent.ResitutionTreshhold;
+			out << YAML::Key << "isSensor" << YAML::Value << boxColisionComponent.isSensor;
+
+			out << YAML::EndMap; 
+		}
+
 
 		out << YAML::EndMap; // Entity
 	}
@@ -228,6 +288,28 @@ namespace Revoke
 				{
 					auto& src = deserializedEntity.AddComponent<SpriteRendererComponent>();
 					src.Color = spriteRendererComponent["Color"].as<glm::vec4>();
+				}
+
+				auto rigitbodyComponent = entity["RigidBodyComponent"];
+				if (rigitbodyComponent)
+				{
+					auto& src = deserializedEntity.AddComponent<RigidBodyComponent>();
+					src.Type = (RigidBodyComponent::BodyType)rigitbodyComponent["BodyType"].as<int>();
+					src.IsRotating = rigitbodyComponent["IsRotating"].as<bool>();
+				}
+
+				auto boxColisionComponent = entity["BoxColisionComponent"];
+				if (boxColisionComponent)
+				{
+					auto& src = deserializedEntity.AddComponent<BoxColisionComponent>();
+					src.Size = boxColisionComponent["Size"].as<glm::vec2>();
+					src.Offset = boxColisionComponent["Offset"].as<glm::vec2>();
+
+					src.Density = boxColisionComponent["Density"].as<float>();
+					src.Friction = boxColisionComponent["Friction"].as<float>();
+					src.Restriction = boxColisionComponent["Restriction"].as<float>();
+					src.ResitutionTreshhold = boxColisionComponent["ResitutionTreshhold"].as<float>();
+					src.isSensor = boxColisionComponent["isSensor"].as<bool>();
 				}
 			}
 		}

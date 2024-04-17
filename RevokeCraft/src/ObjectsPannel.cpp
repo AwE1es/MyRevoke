@@ -128,6 +128,59 @@ namespace Revoke
 					ImGui::TreePop();
 				}
 			}
+			if (m_SelectedEntity.HasComponent<RigidBodyComponent>())
+			{
+				if (ImGui::TreeNodeEx((void*)typeid(RigidBodyComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Rigid Body"))
+				{
+					auto& bodyComponent = m_SelectedEntity.GetComponent<RigidBodyComponent>();
+
+					const char* bodyType[] = { "StaticBody",  "KinematicBody", "DynamicBody" };
+					const char* currentBodyType = bodyType[(int)bodyComponent.Type];
+
+					if (ImGui::BeginCombo("Body Type", currentBodyType))
+					{
+						for (int i = 0; i < 3; i++)
+						{
+							bool isSelected = currentBodyType == bodyType[i];
+							if (ImGui::Selectable(bodyType[i], isSelected))
+							{
+								currentBodyType = bodyType[i];
+								bodyComponent.Type = (RigidBodyComponent::BodyType)i;
+							}
+							if (isSelected)
+								ImGui::SetItemDefaultFocus();
+						}
+
+						ImGui::EndCombo();
+					}
+					ImGui::Checkbox("Fixed Rotation", &bodyComponent.IsRotating);
+
+					ImGui::TreePop();
+				}
+			}
+
+			if (m_SelectedEntity.HasComponent<BoxColisionComponent>())
+			{
+				if (ImGui::TreeNodeEx((void*)typeid(BoxColisionComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Colisions"))
+				{
+					auto& boxCollisionComponent = m_SelectedEntity.GetComponent<BoxColisionComponent>();
+					
+					ImGui::DragFloat2("Size", glm::value_ptr(boxCollisionComponent.Size), 0.1f);
+					ImGui::DragFloat2("Offset", glm::value_ptr(boxCollisionComponent.Offset), 0.1f);
+
+					ImGui::DragFloat("Density", &boxCollisionComponent.Density, 0.01f, 0.0f, 1.0f);
+					ImGui::DragFloat("Friction", &boxCollisionComponent.Friction, 0.01f, 0.0f, 1.0f);
+					ImGui::DragFloat("Restriction", & boxCollisionComponent.Restriction, 0.01f, 0.0f, 1.0f);
+					ImGui::DragFloat("Resitution Treshhold", &boxCollisionComponent.ResitutionTreshhold, 0.01f, 0.0f);
+
+					ImGui::Checkbox("Sensor", &boxCollisionComponent.isSensor);
+
+					ImGui::TreePop();
+				}
+			}
+
+			
+			
 			if (m_SelectedEntity.HasComponent<CameraComponent>())
 			{
 				if (ImGui::TreeNodeEx((void*)typeid(CameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Camera"))
@@ -200,6 +253,16 @@ namespace Revoke
 				if (ImGui::MenuItem("Sprite Renderer"))
 				{
 					m_SelectedEntity.AddComponent<SpriteRendererComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+				if (ImGui::MenuItem("Rigid Body"))
+				{
+					m_SelectedEntity.AddComponent<RigidBodyComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+				if (ImGui::MenuItem("Box Colidor"))
+				{
+					m_SelectedEntity.AddComponent<BoxColisionComponent>();
 					ImGui::CloseCurrentPopup();
 				}
 			

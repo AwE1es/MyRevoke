@@ -35,6 +35,8 @@ namespace Revoke
 		void SaveAs();
 		void Save();
 
+		Shared<Scene> GetCurrentScene() const { return m_Scene; }
+
 	private:
 
 		Shared<FrameBuffers> m_FrameBuffer;
@@ -66,5 +68,6 @@ namespace Revoke
 			const char* Name;
 			float Time;
 		};
+
 	};
 }

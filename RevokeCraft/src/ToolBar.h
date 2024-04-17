@@ -2,6 +2,7 @@
 
 #include "MyRevoke/Renderer/Texture.h"
 #include "MyRevoke/Core/Core.h"
+#include "MyRevoke/Scene/Scene.h"
 
 namespace Revoke
 {
@@ -16,14 +17,21 @@ namespace Revoke
 	public:
 		ToolBar();
 		void OnImGuiRender();
+
+		void OnScenePlay();
+		void OnSceneStop();
+
+		void SetScene(Shared<Scene> currentScene);
+
 		SceneState GetSceneState() const { return m_SceneState; }
 	private:
 	
-
 		SceneState m_SceneState = SceneState::Editor;
 
 		Shared<Texture> m_PlayIcon;
 		Shared<Texture> m_StopIcon;
+
+		Shared<Scene> m_CurrentScene;
 
 	};
 }

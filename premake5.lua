@@ -15,6 +15,7 @@ workspace "MyRevoke"
     IncludeDir ["ENTT"] = "MyRevoke/vendor/entt"
     IncludeDir ["yaml_cpp"] = "MyRevoke/vendor/yaml-cpp/include"
     IncludeDir ["ImGuizmo"] = "MyRevoke/vendor/ImGuizmo"
+    IncludeDir ["Box2D"] = "MyRevoke/vendor/Box2D/include"
 
 
     group "Dependencies"
@@ -22,6 +23,7 @@ workspace "MyRevoke"
         include "MyRevoke/vendor/GLAD"
         include "MyRevoke/vendor/imgui"
         include "MyRevoke/vendor/yaml-cpp"
+        include "MyRevoke/vendor/Box2D"
         
     group ""
 
@@ -66,6 +68,7 @@ workspace "MyRevoke"
             "%{IncludeDir.ENTT}",
             "%{IncludeDir.yaml_cpp}",
             "%{IncludeDir.ImGuizmo}",
+            "%{IncludeDir.Box2D}",
         }
 
         links
@@ -75,6 +78,7 @@ workspace "MyRevoke"
             "ImGui",
             "yaml-cpp",
             "opengl32.lib",
+            "Box2D",
         }
         filter "files:vendor/ImGuizmo/**.cpp"
             flags {"NoPCH"}

@@ -1,0 +1,60 @@
+Scene: Untitled
+Entities:
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: Floor
+    TransformComponent:
+      Position: [-2.98023224e-08, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [19.6652164, 0.213340834, 1]
+    SpriteRendererComponent:
+      Color: [0.76758939, 1, 0.745097995, 1]
+    RigidBodyComponent:
+      BodyType: 0
+      IsRotating: true
+    BoxColisionComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restriction: 0.689999998
+      ResitutionTreshhold: 0.5
+      isSensor: false
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: Object
+    TransformComponent:
+      Position: [-0.285803914, 4.44553852, 0]
+      Rotation: [0, 0, 0.3466869]
+      Scale: [1.00000012, 1.00000012, 1]
+    SpriteRendererComponent:
+      Color: [0.650519013, 0.230392143, 0.691176474, 1]
+    RigidBodyComponent:
+      BodyType: 2
+      IsRotating: false
+    BoxColisionComponent:
+      Offset: [0, 0]
+      Size: [0.5, 0.5]
+      Density: 1
+      Friction: 0.5
+      Restriction: 0
+      ResitutionTreshhold: 0.5
+      isSensor: false
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: Camera
+    TransformComponent:
+      Position: [0.018136315, 2.4861207, 14.9471769]
+      Rotation: [-5.84590737e-07, 0.0017939806, 1.18017181e-06]
+      Scale: [1.00000119, 1, 1.00000119]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false

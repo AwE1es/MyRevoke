@@ -30,6 +30,7 @@ namespace Revoke
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
 		m_ObjPannel.SetScene(m_Scene);
+		m_ToolBar.SetScene(m_Scene);
 
 		
 	}
@@ -319,6 +320,7 @@ namespace Revoke
 		m_Scene = std::make_shared<Scene>("New scene");
 		m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_ObjPannel.SetScene(m_Scene);
+		m_ToolBar.SetScene(m_Scene);
 	}
 
 	void CraftLayer::OpenScene()
@@ -336,6 +338,7 @@ namespace Revoke
 		m_Scene = std::make_shared<Scene>();
 		m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_ObjPannel.SetScene(m_Scene);
+		m_ToolBar.SetScene(m_Scene);
 
 		Serealizer sceneSerealizer(m_Scene);
 		sceneSerealizer.DeSerealize(path.string());

@@ -82,7 +82,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -99,8 +99,8 @@
     <ClInclude Include="src\ToolBar.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ContentBrowser.cpp" />
     <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\ContentBrowser.cpp" />
     <ClCompile Include="src\CraftLayer.cpp" />
     <ClCompile Include="src\ObjectsPannel.cpp" />
     <ClCompile Include="src\ToolBar.cpp" />

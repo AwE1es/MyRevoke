@@ -10,6 +10,10 @@
 #include <yaml-cpp/yaml.h>
 #include <glm/glm.hpp>
 
+#include <box2d/b2_world.h>
+#include <box2d/b2_polygon_shape.h>
+#include <box2d/b2_fixture.h>
+
 namespace Revoke
 {
 
@@ -38,24 +42,91 @@ namespace Revoke
         return entity;
     }
 
+    void Scene::OnRuntimeStart()
+    {
+        b2Vec2 gravity = { 0.0f, -9.8f };
+        m_B2World = new b2World(gravity);
+        auto view = m_Registry.view<RigidBodyComponent>();
+        for (auto ent : view)
+        {
+            Entity entity = { ent ,this };
+
+            auto& rigitBody = entity.GetComponent<RigidBodyComponent>();
+            auto& transforms = entity.GetComponent<TransformComponent>();
+
+            b2BodyDef bodyDefenition;
+            bodyDefenition.type = (b2BodyType)rigitBody.Type;
+            bodyDefenition.position.Set(transforms.Position.x, transforms.Position.y);
+            bodyDefenition.angle = transforms.Rotation.z;
+
+            b2Body* body = m_B2World->CreateBody(&bodyDefenition);
+            //TODO: add more options
+            body->SetFixedRotation(rigitBody.IsRotating);
+
+            rigitBody.Body = body;
+
+            if (entity.HasComponent<BoxColisionComponent>())
+            {
+                auto& boxColidor = entity.GetComponent<BoxColisionComponent>();
+
+                b2PolygonShape shape;
+                shape.SetAsBox(transforms.Scale.x * boxColidor.Size.x, transforms.Scale.y * boxColidor.Size.y);
+
+                b2FixtureDef fixture;
+                fixture.shape = &shape;
+                fixture.density = boxColidor.Density;
+                fixture.friction = boxColidor.Friction;
+                fixture.restitution = boxColidor.Restriction;
+                fixture.restitutionThreshold = boxColidor.ResitutionTreshhold;
+                fixture.isSensor = boxColidor.isSensor;
+
+                //TODO: Save fixture?
+                body->CreateFixture(&fixture);
+            }
+
+        }
+
+    }
+
     void Scene::OnRuntimeUpdate(Timestep ts)
     {
 
-        {
-            m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+        m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+            {
+                if (!nsc.Instance)
                 {
-                    if (!nsc.Instance)
-                    {
-                        nsc.Instance = nsc.InstantiateScript();
-                        nsc.Instance->m_Entity = Entity{ entity, this };
+                    nsc.Instance = nsc.InstantiateScript();
+                    nsc.Instance->m_Entity = Entity{ entity, this };
 
-                        nsc.Instance->OnCreate();
-                    }
+                    nsc.Instance->OnCreate();
+                }
 
-                    nsc.Instance->OnUpdate(ts);
-                });
-        }
+                nsc.Instance->OnUpdate(ts);
+            });
+        {
+        //TODO: Expose to the editor (impacts the performance)
+            const int positionIteration = 2;
+            const int velocityIteration = 4;
 
+            m_B2World->Step(ts, velocityIteration, positionIteration);
+
+            auto view = m_Registry.view<RigidBodyComponent>();
+            for (auto ent : view)
+            {
+                Entity entity = { ent, this };
+
+                auto& rigitBody = entity.GetComponent<RigidBodyComponent>();
+                auto& transforms = entity.GetComponent<TransformComponent>();
+
+                b2Body* body = rigitBody.Body;
+                const auto& pos = body->GetPosition();
+
+                transforms.Position.x = pos.x;
+                transforms.Position.y = pos.y;
+                transforms.Rotation.z = body->GetAngle();
+        };
+
+    }
 
         Camera* mainCamera = nullptr;
         glm::mat4 cameraTransform;
@@ -73,6 +144,7 @@ namespace Revoke
                 break;
             }
         }
+
 
         if (mainCamera)
         {
@@ -104,6 +176,11 @@ namespace Revoke
       
         }
         Renderer2D::End();
+    }
+    void Scene::OnRuntimeStop()
+    {
+        delete m_B2World;
+        m_B2World = nullptr;
     }
     void Scene::OnViewportResize(uint32_t width, uint32_t height)
     {
@@ -167,6 +244,16 @@ namespace Revoke
     }
     template<>
     void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
+    {
+
+    }
+    template<>
+    void Scene::OnComponentAdded<RigidBodyComponent>(Entity entity, RigidBodyComponent& component)
+    {
+
+    }
+    template<>
+    void Scene::OnComponentAdded<BoxColisionComponent>(Entity entity, BoxColisionComponent& component)
     {
 
     }

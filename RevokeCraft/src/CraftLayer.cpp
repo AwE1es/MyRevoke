@@ -32,11 +32,16 @@ namespace Revoke
 		m_ObjPannel.SetScene(m_Scene);
 		m_ToolBar.SetScene(m_Scene);
 
-		
+		m_GizmoType = new int(-1);
+
+		m_ToolBar.SetGuizmo(m_GizmoType);
+
+		RendererAPI::SetClearColor({ 0.2f, 0.2f, 0.2f, 1.0f });
+		RendererAPI::EnableBlending();
 	}
 	void CraftLayer::OnDetach()
 	{
-
+		delete m_GizmoType;
 	}
 	void CraftLayer::OnUpdate(Timestep deltaTime)
 	{
@@ -51,13 +56,10 @@ namespace Revoke
 			m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		}
 
-	
-		Renderer2D::ResetStatistics();
 
 		m_FrameBuffer->Bind();
-		RendererAPI::SetClearColor({ 0.2f, 0.2f, 0.2f, 1.0f });
+		
 		RendererAPI::Clear();
-		RendererAPI::EnableBlending();
 
 		m_FrameBuffer->ClearColorTextureAttachment(1, -1);
 
@@ -157,6 +159,7 @@ namespace Revoke
 		//--------------------------------------------------------------------
 		m_ObjPannel.OnImGuiRender();
 		m_ContentBrowserPanel.OnImGuiRender();
+		m_ProjectSettingsPanel.OnImGuiRender();
 		//-----------ViewPort-------------------------------------------------
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");
@@ -192,7 +195,7 @@ namespace Revoke
 		
 
 		//-----------Guizmo---------------------------------------------------
-		if (selectedEntity && m_GizmoType != -1)
+		if (selectedEntity && *m_GizmoType != -1)
 		{
 			ImGuizmo::SetOrthographic(false);
 			ImGuizmo::SetDrawlist();
@@ -209,13 +212,13 @@ namespace Revoke
 			
 			bool snap = Input::IsKeyPressed(RV_KEY_LEFT_CONTROL);
 			float snapValue = 0.5f;
-			if (m_GizmoType == ImGuizmo::OPERATION::ROTATE)
+			if (*m_GizmoType == ImGuizmo::OPERATION::ROTATE)
 				snapValue = 45.0f;
 
 			float snapValues[3] = { snapValue, snapValue, snapValue };
 
 		
-			ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection), (ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(tranforms), nullptr, snap ? snapValues : nullptr);
+			ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection), (ImGuizmo::OPERATION)*m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(tranforms), nullptr, snap ? snapValues : nullptr);
 
 			if (ImGuizmo::IsUsing() && !Input::IsKeyPressed(RV_KEY_LEFT_ALT))
 			{
@@ -292,22 +295,22 @@ namespace Revoke
 		}
 		case RV_KEY_Q:
 		{
-			m_GizmoType = -1;
+			*m_GizmoType = -1;
 			break;
 		}
 		case RV_KEY_W:
 		{
-			m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+			*m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
 			break;
 		}
 		case RV_KEY_E:
 		{
-			m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+			*m_GizmoType = ImGuizmo::OPERATION::ROTATE;
 			break;
 		}
 		case RV_KEY_R:
 		{
-			m_GizmoType = ImGuizmo::OPERATION::SCALE;
+			*m_GizmoType = ImGuizmo::OPERATION::SCALE;
 			break;
 		}
 		}

@@ -15,6 +15,9 @@ namespace Revoke
 		void SetScene(Shared<Scene> currentScene);
 		void OnImGuiRender();
 
+		void SceneHierarchyWindow();
+		void PropertiesWindow();
+
 		void SetSelectedEntity(Entity entity);
 		Entity GetSelectedEntity() const { return m_SelectedEntity; }
 	private:

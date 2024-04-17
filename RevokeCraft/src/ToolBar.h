@@ -22,6 +22,7 @@ namespace Revoke
 		void OnSceneStop();
 
 		void SetScene(Shared<Scene> currentScene);
+		void SetGuizmo(int* guizmo);
 
 		SceneState GetSceneState() const { return m_SceneState; }
 	private:
@@ -32,6 +33,8 @@ namespace Revoke
 		Shared<Texture> m_StopIcon;
 
 		Shared<Scene> m_CurrentScene;
+
+		int* m_Guizmo;
 
 	};
 }

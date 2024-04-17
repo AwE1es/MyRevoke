@@ -3,6 +3,8 @@
 #include "ToolBar.h"
 #include <imgui.h>
 
+#include <ImGuizmo.h>
+
 namespace Revoke
 {
 	ToolBar::ToolBar()
@@ -20,7 +22,7 @@ namespace Revoke
 		ImGui::Begin("##toolbar",nullptr, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
 		float size = ImGui::GetWindowHeight() - 6.0f;
-		ImGui::SameLine((ImGui::GetWindowContentRegionMax().x * 0.05f) - (size * 0.5f));
+		ImGui::SameLine((ImGui::GetWindowContentRegionMax().x * 0.03f) - (size * 0.5f));
 		Shared<Texture> icon = m_SceneState == SceneState::Editor ? m_PlayIcon : m_StopIcon;
 		if (ImGui::ImageButton((ImTextureID)icon->GetID(), ImVec2(size,size), ImVec2(0, 0), ImVec2(1,1), 0))
 		{
@@ -28,6 +30,26 @@ namespace Revoke
 				OnScenePlay();
 			else
 				OnSceneStop();
+		}
+		ImGui::SameLine((ImGui::GetWindowContentRegionMax().x * 0.86f) - (size * 0.5f));
+		if (ImGui::Button("Q", ImVec2(size, size)))
+		{
+			*m_Guizmo = -1;
+		}
+		ImGui::SameLine((ImGui::GetWindowContentRegionMax().x * 0.895f) - (size * 0.5f));
+		if (ImGui::Button("W", ImVec2(size, size)))
+		{
+			*m_Guizmo = ImGuizmo::OPERATION::TRANSLATE;
+		}
+		ImGui::SameLine((ImGui::GetWindowContentRegionMax().x * 0.925f) - (size * 0.5f));
+		if (ImGui::Button("E", ImVec2(size, size)))
+		{
+			*m_Guizmo = ImGuizmo::OPERATION::ROTATE;
+		}
+		ImGui::SameLine((ImGui::GetWindowContentRegionMax().x * 0.955f) - (size * 0.5f));
+		if (ImGui::Button("R", ImVec2(size, size)))
+		{
+			*m_Guizmo = ImGuizmo::OPERATION::SCALE;
 		}
 
 		ImGui::PopStyleVar(2);
@@ -48,5 +70,9 @@ namespace Revoke
 	void ToolBar::SetScene(Shared<Scene> currentScene)
 	{
 		m_CurrentScene = currentScene;
+	}
+	void ToolBar::SetGuizmo(int* guizmo)
+	{
+		m_Guizmo = guizmo;
 	}
 }

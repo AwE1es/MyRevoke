@@ -10,6 +10,7 @@
 #include "ObjectsPannel.h"
 #include "ContentBrowser.h"
 #include "ToolBar.h"
+#include "SceneSettingsPannel.h"
 
 namespace Revoke
 {
@@ -53,6 +54,7 @@ namespace Revoke
 		ObjectsPannel m_ObjPannel;
 		ContentBrowser m_ContentBrowserPanel;
 		ToolBar m_ToolBar;
+		SceneSettingsPannel m_ProjectSettingsPanel;
 
 		bool m_PrimaryCamera = true;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
@@ -61,7 +63,7 @@ namespace Revoke
 
 		glm::vec2 m_ViewportBounds[2];
 
-		int m_GizmoType = -1;
+		int* m_GizmoType;
 
 		struct ProfileResult
 		{

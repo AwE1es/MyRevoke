@@ -16,6 +16,8 @@ workspace "MyRevoke"
     IncludeDir ["yaml_cpp"] = "MyRevoke/vendor/yaml-cpp/include"
     IncludeDir ["ImGuizmo"] = "MyRevoke/vendor/ImGuizmo"
     IncludeDir ["Box2D"] = "MyRevoke/vendor/Box2D/include"
+    IncludeDir ["OpenAL"] = "MyRevoke/vendor/OpenALBuild/include"
+    IncludeDir ["sndfile"] = "MyRevoke/vendor/libsndfile/include"
 
 
     group "Dependencies"
@@ -24,7 +26,6 @@ workspace "MyRevoke"
         include "MyRevoke/vendor/imgui"
         include "MyRevoke/vendor/yaml-cpp"
         include "MyRevoke/vendor/Box2D"
-        
     group ""
 
     project "MyRevoke"
@@ -50,6 +51,7 @@ workspace "MyRevoke"
             "%{prj.name}/vendor/stb_image/stb_image.cpp",
             "%{prj.name}/vendor/ImGuizmo/ImGuizmo.cpp",
             "%{prj.name}/vendor/ImGuizmo/ImGuizmo.h",
+
         }
         defines
         {
@@ -69,6 +71,8 @@ workspace "MyRevoke"
             "%{IncludeDir.yaml_cpp}",
             "%{IncludeDir.ImGuizmo}",
             "%{IncludeDir.Box2D}",
+            "%{IncludeDir.OpenAL}",
+            "%{IncludeDir.sndfile}",
         }
 
         links
@@ -79,6 +83,14 @@ workspace "MyRevoke"
             "yaml-cpp",
             "opengl32.lib",
             "Box2D",
+            "OpenAL32.lib",
+            "sndfile.lib",
+
+        }
+        libdirs 
+        {
+            "%{prj.name}/vendor/OpenALBuild/lib",
+            "%{prj.name}/vendor/libsndfile/lib",
         }
         filter "files:vendor/ImGuizmo/**.cpp"
             flags {"NoPCH"}
@@ -132,6 +144,8 @@ workspace "MyRevoke"
             "%{IncludeDir.ImGui}",
             "%{IncludeDir.ENTT}",
             "%{IncludeDir.ImGuizmo}",
+            "%{IncludeDir.OpenAL}",
+            "%{IncludeDir.sndfile}",
         }
     
         links

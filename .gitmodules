@@ -10,9 +10,6 @@
 [submodule "MyRevoke/vendor/GLFW"]
 	path = MyRevoke/vendor/GLFW
 	url = git@github.com:Revokeeee/glfw.git
-[submodule "MyRevoke/vendor/yaml"]
-	path = MyRevoke/vendor/yaml
-	url = https://github.com/Revokeeee/yami
 [submodule "MyRevoke/vendor/yaml-cpp"]
 	path = MyRevoke/vendor/yaml-cpp
 	url = https://github.com/Revokeeee/yaml-cpp
@@ -22,3 +19,4 @@
 [submodule "MyRevoke/vendor/Box2D"]
 	path = MyRevoke/vendor/Box2D
 	url = https://github.com/Revokeeee/box2d
+

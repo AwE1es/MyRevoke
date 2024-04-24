@@ -1,6 +1,7 @@
 #include "rvpch.h"
 
 #include "MyRevoke/Renderer/Renderer2D.h"
+#include "MyRevoke/AudioManager/AudioRenderer.h"
 #include "Scene.h"
 #include "Components.h"
 #include "Entity.h"
@@ -14,22 +15,28 @@
 #include <box2d/b2_polygon_shape.h>
 #include <box2d/b2_fixture.h>
 
+#include <sndfile.h>
+
+#include <AL/al.h>
+
+
+
 namespace Revoke
 {
 
     Scene::Scene()
     {
-
+      
     }
 
-    Scene::Scene(std::string name)
+    Scene::Scene(std::string name )
         :m_Name(name)
-    {
-
+    {   
     }
 
     Scene::~Scene()
     {
+       
     }
 
     Entity Scene::CreateEntity(const std::string name)
@@ -83,83 +90,119 @@ namespace Revoke
                 //TODO: Save fixture?
                 body->CreateFixture(&fixture);
             }
-
         }
 
+        { // Sounds
+
+            auto view = m_Registry.view<SoundComponent>();
+            for (auto ent : view)
+            {
+                Entity entity = { ent, this };
+                auto& soundComponent = entity.GetComponent<SoundComponent>();
+                soundComponent.HasPlayed = false;
+
+            };
+
+        }
+        
+     
     }
 
     void Scene::OnRuntimeUpdate(Timestep ts)
     {
 
-        m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
-            {
-                if (!nsc.Instance)
+        { // Scripts
+            m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
                 {
-                    nsc.Instance = nsc.InstantiateScript();
-                    nsc.Instance->m_Entity = Entity{ entity, this };
+                    if (!nsc.Instance)
+                    {
+                        nsc.Instance = nsc.InstantiateScript();
+                        nsc.Instance->m_Entity = Entity{ entity, this };
 
-                    nsc.Instance->OnCreate();
-                }
+                        nsc.Instance->OnCreate();
+                    }
 
-                nsc.Instance->OnUpdate(ts);
-            });
+                    nsc.Instance->OnUpdate(ts);
+                });
+        }
+
+        // Physics
+        m_B2World->Step(ts, m_VelocityIteration, m_PositionIteration);
+
+        auto view = m_Registry.view<RigidBodyComponent>();
+        for (auto ent : view)
         {
-        //TODO: Expose to the editor (impacts the performance)
-            const int positionIteration = 2;
-            const int velocityIteration = 4;
+            Entity entity = { ent, this };
 
-            m_B2World->Step(ts, velocityIteration, positionIteration);
+            auto& rigitBody = entity.GetComponent<RigidBodyComponent>();
+            auto& transforms = entity.GetComponent<TransformComponent>();
 
-            auto view = m_Registry.view<RigidBodyComponent>();
+            b2Body* body = rigitBody.Body;
+            const auto& pos = body->GetPosition();
+
+            transforms.Position.x = pos.x;
+            transforms.Position.y = pos.y;
+            transforms.Rotation.z = body->GetAngle();
+        };
+        
+
+        { // Sounds
+
+            auto view = m_Registry.view<SoundComponent>();
             for (auto ent : view)
             {
                 Entity entity = { ent, this };
+                auto& soundComponent = entity.GetComponent<SoundComponent>();
 
-                auto& rigitBody = entity.GetComponent<RigidBodyComponent>();
-                auto& transforms = entity.GetComponent<TransformComponent>();
+                if (!AudioRenderer::IsAudioActive(soundComponent))
+                {
+                    
+                    if (!soundComponent.LoopSound && soundComponent.HasPlayed)
+                        break;
+              
+                    AudioRenderer::RenderAudio(soundComponent);
+                }
 
-                b2Body* body = rigitBody.Body;
-                const auto& pos = body->GetPosition();
+            };
 
-                transforms.Position.x = pos.x;
-                transforms.Position.y = pos.y;
-                transforms.Rotation.z = body->GetAngle();
-        };
-
-    }
-
-        Camera* mainCamera = nullptr;
-        glm::mat4 cameraTransform;
-
-        auto view = m_Registry.view<TransformComponent, CameraComponent>();
-
-        for (auto entity : view)
-        {
-            auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
-
-            if (camera.isMain)
-            {
-                mainCamera = &camera.Camera;
-                cameraTransform = transform.GetTransform();
-                break;
-            }
         }
+            
 
+        { // Rendering
 
-        if (mainCamera)
-        {
-            Renderer2D::Begin(*mainCamera, cameraTransform);
+            Camera* mainCamera = nullptr;
+            glm::mat4 cameraTransform;
 
-            auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-            for (auto entity : group)
+            auto view = m_Registry.view<TransformComponent, CameraComponent>();
+
+            for (auto entity : view)
             {
-                auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-                Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
-           
-            }
-            Renderer2D::End();
-        }
+                auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 
+                if (camera.isMain)
+                {
+                    mainCamera = &camera.Camera;
+                    cameraTransform = transform.GetTransform();
+                    break;
+                }
+            }
+
+
+            if (mainCamera)
+            {
+                Renderer2D::Begin(*mainCamera, cameraTransform);
+
+                auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+                for (auto entity : group)
+                {
+                    auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+                    Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+
+                }
+                Renderer2D::End();
+            }
+
+        }
       
     }
     void Scene::OnEditorUpdate(Timestep ts, EditorCamera& camera)
@@ -201,7 +244,22 @@ namespace Revoke
        m_Registry.destroy(ent);
     }
 
-    Entity Scene::GetMainCamera() 
+    void Scene::OnSceneClose()
+    {
+        { // Sounds
+
+            auto view = m_Registry.view<SoundComponent>();
+            for (auto ent : view)
+            {
+                Entity entity = { ent, this };
+                auto& soundComponent = entity.GetComponent<SoundComponent>();
+                soundComponent.ShutDown();
+            };
+
+        }
+    }
+
+    Entity Scene::GetMainCamera()
     {
         auto view = m_Registry.view<CameraComponent>();
         for (auto ent : view)
@@ -254,6 +312,11 @@ namespace Revoke
     }
     template<>
     void Scene::OnComponentAdded<BoxColisionComponent>(Entity entity, BoxColisionComponent& component)
+    {
+
+    }
+    template<>
+    void Scene::OnComponentAdded<SoundComponent>(Entity entity, SoundComponent& component)
     {
 
     }

@@ -10,6 +10,10 @@
 
 #include "MyRevoke/Renderer/Texture.h"
 
+#include "MyRevoke/AudioManager/AudioSource.h"
+#include "MyRevoke/AudioManager/AudioBuffer.h"
+#include "MyRevoke/AudioManager/MusicBuffer.h"
+
 class b2Body;
 
 namespace Revoke
@@ -125,4 +129,84 @@ namespace Revoke
 			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
 		}
 	};
+
+	struct SoundComponent
+	{
+		std::string AudioPath;
+
+		uint32_t SoundID;
+		uint32_t SourceID;
+
+
+		float  Pitch = 1.0f;
+		float  Gain = 1.0f;
+		glm::vec3 Position = { 0.0f, 0.0f, 0.0f };
+		glm::vec3 Velocity = { 0.0f, 0.0f, 0.0f };
+		bool  LoopSound = false;
+		
+		bool HasPlayed = false;
+	
+		SoundComponent() = default;
+		SoundComponent(const SoundComponent&) = default;
+
+		SoundComponent(std::string audioPath)
+		{
+			SetPath(audioPath);
+		}
+		~SoundComponent()
+		{
+			ShutDown();
+		}
+
+		void SetPath(std::string audioPath)
+		{
+			AudioPath = audioPath;
+			if (!AudioPath.empty())
+			{
+				SoundID = AudioBuffer::AddSound(AudioPath.c_str());
+				SourceID = AudioSource::AddSound(Pitch, Gain, Position, Velocity, LoopSound, SoundID);
+			}
+		}
+		void ShutDown()
+		{
+			AudioSource::ShutDown(SoundID);
+			AudioBuffer::ShutDown();
+		}
+		//TODO: give control of destroing to the classes
+	
+	};
+	struct SongComponent
+	{
+		std::string AudioPath;
+
+		uint32_t SoundID;
+		uint32_t SourceID;
+
+		SongComponent() = default;
+		SongComponent(const SongComponent&) = default;
+
+		SongComponent(std::string audioPath)
+		{
+			SetPath(audioPath);
+		}
+		~SongComponent()
+		{
+			ShutDown();
+		}
+
+		void SetPath(std::string audioPath)
+		{
+			AudioPath = audioPath;
+			if (!AudioPath.empty())
+			{
+				
+			}
+		}
+		void ShutDown()
+		{
+			AudioSource::ShutDown(SoundID);
+			AudioBuffer::ShutDown();
+		}
+	};
+
 }

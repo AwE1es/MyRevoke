@@ -1,5 +1,12 @@
-Scene: Untitled
+Scene: Physics
 Entities:
+  - Entity: 12837192831273
+    TagComponent:
+      Tag: Sound
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
   - Entity: 12837192831273
     TagComponent:
       Tag: Floor
@@ -9,7 +16,7 @@ Entities:
       Scale: [19.6652164, 0.213340834, 1]
     SpriteRendererComponent:
       Color: [0.76758939, 1, 0.745097995, 1]
-      Texture2D: ""
+      Texture2D: assets\Textures\Square_Texture.png
     RigidBodyComponent:
       BodyType: 0
       IsRotating: true
@@ -30,7 +37,7 @@ Entities:
       Scale: [1.00000012, 1.00000012, 1]
     SpriteRendererComponent:
       Color: [0.650519013, 0.230392143, 0.691176474, 1]
-      Texture2D: "" 
+      Texture2D: assets\Textures\Square1_Texture.png
     RigidBodyComponent:
       BodyType: 2
       IsRotating: false

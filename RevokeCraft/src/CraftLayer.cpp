@@ -5,6 +5,7 @@
 
 #include "MyRevoke/Utility/FileExplorer.h"
 #include "MyRevoke/Math/Math.h"
+#include "MyRevoke/AudioManager/AudioRenderer.h"
 
 #include <ImGuizmo.h>
 
@@ -16,6 +17,10 @@ namespace Revoke
 		:Layer("CraftLayer")
 	{
 
+	}
+	CraftLayer::~CraftLayer()
+	{
+		m_Scene->OnSceneClose();
 	}
 	void CraftLayer::OnAttach()
 	{
@@ -31,6 +36,7 @@ namespace Revoke
 
 		m_ObjPannel.SetScene(m_Scene);
 		m_ToolBar.SetScene(m_Scene);
+		m_ProjectSettingsPanel.SetScene(m_Scene);
 
 		m_GizmoType = new int(-1);
 
@@ -321,9 +327,11 @@ namespace Revoke
 	void CraftLayer::NewScene()
 	{
 		m_Scene = std::make_shared<Scene>("New scene");
+		m_Scene->OnSceneClose();
 		m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_ObjPannel.SetScene(m_Scene);
 		m_ToolBar.SetScene(m_Scene);
+		m_ProjectSettingsPanel.SetScene(m_Scene);
 	}
 
 	void CraftLayer::OpenScene()
@@ -337,14 +345,16 @@ namespace Revoke
 	}
 	void CraftLayer::OpenScene(const std::filesystem::path& path)
 	{
-
 		m_Scene = std::make_shared<Scene>();
+		m_Scene->OnSceneClose();
 		m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-		m_ObjPannel.SetScene(m_Scene);
-		m_ToolBar.SetScene(m_Scene);
-
+		
 		Serealizer sceneSerealizer(m_Scene);
 		sceneSerealizer.DeSerealize(path.string());
+
+		m_ObjPannel.SetScene(m_Scene);
+		m_ToolBar.SetScene(m_Scene);
+		m_ProjectSettingsPanel.SetScene(m_Scene);
 		
 	}
 
@@ -362,7 +372,7 @@ namespace Revoke
 	void CraftLayer::Save()
 	{
 		Serealizer sceneSerealizer(m_Scene);
-		sceneSerealizer.Serealize("Scenes/" + m_Scene->GetName() + ".myrevoke");
+		sceneSerealizer.Serealize("assets/Scenes/" + m_Scene->GetName() + ".myrevoke");
 	}
 
 }

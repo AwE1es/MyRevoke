@@ -135,6 +135,37 @@ namespace Revoke
 					ImGui::TreePop();
 				}
 			}
+			if (m_SelectedEntity.HasComponent<SoundComponent>())
+			{
+				if (ImGui::TreeNodeEx((void*)typeid(SoundComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sound Settings"))
+				{
+					auto& soundComponent = m_SelectedEntity.GetComponent<SoundComponent>();
+
+					ImGui::Button("File (.wov)");
+
+					if (ImGui::BeginDragDropTarget())
+					{
+						if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_PAYLOAD"))
+						{
+							const wchar_t* path = (const wchar_t*)payload->Data;
+							std::filesystem::path soundPath = std::filesystem::path(g_AssetsDirectory) / path;
+
+							soundComponent.SetPath(soundPath.string());
+
+						}
+						ImGui::EndDragDropTarget();
+					}
+					ImGui::DragFloat("Pitch", &soundComponent.Pitch, 0.1f);
+					ImGui::DragFloat("Gain", &soundComponent.Gain, 0.1f);
+					ImGui::DragFloat3("Position", glm::value_ptr(soundComponent.Position), 0.1f);
+					ImGui::DragFloat3("Velocity", glm::value_ptr(soundComponent.Velocity), 0.1f);
+
+					ImGui::Checkbox("Loop Audio", &soundComponent.LoopSound);
+
+
+					ImGui::TreePop();
+				}
+			}
 			if (m_SelectedEntity.HasComponent<RigidBodyComponent>())
 			{
 				if (ImGui::TreeNodeEx((void*)typeid(RigidBodyComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Rigid Body"))
@@ -270,6 +301,11 @@ namespace Revoke
 				if (ImGui::MenuItem("Box Colidor"))
 				{
 					m_SelectedEntity.AddComponent<BoxColisionComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+				if (ImGui::MenuItem("Sound Component"))
+				{
+					m_SelectedEntity.AddComponent<SoundComponent>();
 					ImGui::CloseCurrentPopup();
 				}
 

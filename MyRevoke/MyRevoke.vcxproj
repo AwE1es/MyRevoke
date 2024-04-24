@@ -58,7 +58,7 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;_CRT_SECURE_NO_WARNINGS;YAML_CPP_STATIC_DEFINE;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;vendor\OpenALBuild\include;vendor\libsndfile\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -70,7 +70,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;OpenAL32.lib;sndfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\OpenALBuild\lib;vendor\libsndfile\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -79,7 +80,7 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;_CRT_SECURE_NO_WARNINGS;YAML_CPP_STATIC_DEFINE;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;vendor\OpenALBuild\include;vendor\libsndfile\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -95,11 +96,16 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;OpenAL32.lib;sndfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\OpenALBuild\lib;vendor\libsndfile\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\MyRevoke\AudioManager\MusicBuffer.h" />
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h" />
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioSource.h" />
     <ClInclude Include="src\MyRevoke.h" />
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioBuffer.h" />
     <ClInclude Include="src\MyRevoke\Core\Application.h" />
     <ClInclude Include="src\MyRevoke\Core\Core.h" />
     <ClInclude Include="src\MyRevoke\Core\EntryPoint.h" />
@@ -554,6 +560,10 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\MyRevoke\AudioManager\MusicBuffer.cpp" />
+    <ClCompile Include="src\MyRevoke\AudioManager\AudioRenderer.cpp" />
+    <ClCompile Include="src\MyRevoke\AudioManager\AudioSource.cpp" />
+    <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Application.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Input.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Layer.cpp" />

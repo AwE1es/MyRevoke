@@ -77,9 +77,6 @@ namespace Revoke
 			ImGui::NextColumn();
 			ImGui::PopID();
 		}
-			ImGui::Columns(1);
-			ImGui::SliderFloat("ThumbnailSize ", &thumbnailSize, 16, 512);
-			ImGui::SliderFloat("Padding ", &thumbnailSize, 0, 32);
 		ImGui::End();
 	}
 }

@@ -5,6 +5,7 @@
 #include "Core.h"
 
 #include "MyRevoke/Renderer/Renderer2D.h"
+#include "MyRevoke/AudioManager/AudioRenderer.h"
 
 #include "GLFW/glfw3.h"
 
@@ -17,6 +18,7 @@ namespace Revoke
 	Application::Application()
 	
 	{
+		ALuint test = 2;
 		RV_CORE_ASSERT(!s_Instance, "Applicatio already exist");
 		s_Instance = this;
 
@@ -26,6 +28,7 @@ namespace Revoke
 
 		RendererAPI::Init();
 		Renderer2D::Init();
+		AudioRenderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -35,6 +38,7 @@ namespace Revoke
 	Application::~Application()
 	{
 		Renderer2D::Shutdown();
+		AudioRenderer::Shutdown();
 	}
 	void Application::Run()
 	{

@@ -7,6 +7,9 @@
     <Filter Include="src\MyRevoke">
       <UniqueIdentifier>{6E55EEE4-5AB8-7D89-033E-B63FEF7F490C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\MyRevoke\AudioManager">
+      <UniqueIdentifier>{EA014291-56C4-751B-9F74-04A80B764EF9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\MyRevoke\Core">
       <UniqueIdentifier>{860E3C74-F224-3A0A-3B9C-C52BA7F10A92}</UniqueIdentifier>
     </Filter>
@@ -59,6 +62,9 @@
   <ItemGroup>
     <ClInclude Include="src\MyRevoke.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioBuffer.h">
+      <Filter>src\MyRevoke\AudioManager</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Application.h">
       <Filter>src\MyRevoke\Core</Filter>
@@ -1416,8 +1422,14 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioSource.h" />
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h" />
+    <ClInclude Include="src\MyRevoke\AudioManager\MusicBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp">
+      <Filter>src\MyRevoke\AudioManager</Filter>
+    </ClCompile>
     <ClCompile Include="src\MyRevoke\Core\Application.cpp">
       <Filter>src\MyRevoke\Core</Filter>
     </ClCompile>
@@ -1493,5 +1505,8 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\MyRevoke\AudioManager\AudioSource.cpp" />
+    <ClCompile Include="src\MyRevoke\AudioManager\AudioRenderer.cpp" />
+    <ClCompile Include="src\MyRevoke\AudioManager\MusicBuffer.cpp" />
   </ItemGroup>
 </Project>

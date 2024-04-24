@@ -19,6 +19,7 @@ namespace Revoke
 	{
 	public:
 		CraftLayer();
+		~CraftLayer();
 
 		void OnAttach() override;
 		void OnDetach() override;

@@ -197,6 +197,22 @@ namespace Revoke
 
 			out << YAML::EndMap; 
 		}
+		if (entity.HasComponent<SoundComponent>())
+		{
+			out << YAML::Key << "SoundComponent";
+			out << YAML::BeginMap;
+
+			auto& soundComponent = entity.GetComponent<SoundComponent>();
+			out << YAML::Key << "AudioPath" << YAML::Value << soundComponent.AudioPath;
+
+			out << YAML::Key << "Pitch" << YAML::Value << soundComponent.Pitch;
+			out << YAML::Key << "Gain" << YAML::Value << soundComponent.Gain;
+			out << YAML::Key << "Position" << YAML::Value << soundComponent.Position;
+			out << YAML::Key << "Velocity" << YAML::Value << soundComponent.Velocity;
+			out << YAML::Key << "LoopSound" << YAML::Value << soundComponent.LoopSound;
+		
+			out << YAML::EndMap;
+		}
 
 
 		out << YAML::EndMap; // Entity
@@ -210,7 +226,7 @@ namespace Revoke
     {
         YAML::Emitter out;
         out << YAML::BeginMap;
-        out << YAML::Key << "Scene" << YAML::Value << "Untitled";
+        out << YAML::Key << "Scene" << YAML::Value << m_Scene->GetName();
         out << YAML::Key << "Entities" << YAML::Value << YAML::BeginSeq;
         m_Scene->m_Registry.each([&](auto entityID)
             {
@@ -239,6 +255,7 @@ namespace Revoke
 			return false;
 
 		std::string sceneName = data["Scene"].as<std::string>();
+		m_Scene->SetName(sceneName);
 
 		auto entities = data["Entities"];
 		if (entities)
@@ -312,6 +329,22 @@ namespace Revoke
 					src.Restriction = boxColisionComponent["Restriction"].as<float>();
 					src.ResitutionTreshhold = boxColisionComponent["ResitutionTreshhold"].as<float>();
 					src.isSensor = boxColisionComponent["isSensor"].as<bool>();
+				}
+
+				auto soundComponent = entity["SoundComponent"];
+				if (soundComponent)
+				{
+					auto& src = deserializedEntity.AddComponent<SoundComponent>();
+					src.SetPath(soundComponent["AudioPath"].as<std::string>());
+
+					src.Pitch = soundComponent["Pitch"].as<float>();
+					src.Gain = soundComponent["Gain"].as<float>();
+
+					src.Position = soundComponent["Position"].as<glm::vec3>();
+					src.Velocity = soundComponent["Velocity"].as<glm::vec3>();
+
+					src.LoopSound = soundComponent["LoopSound"].as<bool>();
+					
 				}
 			}
 		}

@@ -1,6 +1,12 @@
 #pragma once
 #include "SceneCamera.h"
 #include "ScriptEntity.h"
+#include "MyRevoke/Renderer/Texture.h"
+
+#include "MyRevoke/AudioManager/AudioSource.h"
+#include "MyRevoke/AudioManager/AudioBuffer.h"
+#include "MyRevoke/AudioManager/MusicBuffer.h"
+#include "MyRevoke/Core/UniversallyUniqueIdentifiers.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
@@ -8,11 +14,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "MyRevoke/Renderer/Texture.h"
-
-#include "MyRevoke/AudioManager/AudioSource.h"
-#include "MyRevoke/AudioManager/AudioBuffer.h"
-#include "MyRevoke/AudioManager/MusicBuffer.h"
 
 class b2Body;
 
@@ -27,6 +28,21 @@ namespace Revoke
 		NameComponent(const NameComponent&) = default;
 		NameComponent(const std::string& name)
 			:Name(name) {}
+	};
+
+	struct IdComponent
+	{
+		UUID ID;
+
+		IdComponent() = default;
+		IdComponent(const IdComponent&) = default;
+		IdComponent(const uint64_t id)
+			:ID(id) {}
+
+		void SetId(UUID id)
+		{
+			ID = id;
+		}
 	};
 
 	struct TransformComponent
@@ -208,5 +224,6 @@ namespace Revoke
 			AudioBuffer::ShutDown();
 		}
 	};
+	
 
 }

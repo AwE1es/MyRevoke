@@ -6,7 +6,6 @@
 #include "entt.hpp"
 
 
-
 namespace Revoke
 {
 	class Entity

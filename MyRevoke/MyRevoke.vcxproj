@@ -114,6 +114,7 @@
     <ClInclude Include="src\MyRevoke\Core\LayerStack.h" />
     <ClInclude Include="src\MyRevoke\Core\Log.h" />
     <ClInclude Include="src\MyRevoke\Core\Time.h" />
+    <ClInclude Include="src\MyRevoke\Core\UniversallyUniqueIdentifiers.h" />
     <ClInclude Include="src\MyRevoke\Core\Window.h" />
     <ClInclude Include="src\MyRevoke\EventSystem\AppEvent.h" />
     <ClInclude Include="src\MyRevoke\EventSystem\Event.h" />
@@ -569,6 +570,7 @@
     <ClCompile Include="src\MyRevoke\Core\Layer.cpp" />
     <ClCompile Include="src\MyRevoke\Core\LayerStack.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Log.cpp" />
+    <ClCompile Include="src\MyRevoke\Core\UniversallyUniqueIdentifiers.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Window.cpp" />
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\MyRevoke\ImGui\ImGuiLayer.cpp" />

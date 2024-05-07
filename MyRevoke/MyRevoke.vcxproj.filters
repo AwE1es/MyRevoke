@@ -1425,6 +1425,7 @@
     <ClInclude Include="src\MyRevoke\AudioManager\AudioSource.h" />
     <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h" />
     <ClInclude Include="src\MyRevoke\AudioManager\MusicBuffer.h" />
+    <ClInclude Include="src\MyRevoke\Core\UniversallyUniqueIdentifiers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp">
@@ -1508,5 +1509,6 @@
     <ClCompile Include="src\MyRevoke\AudioManager\AudioSource.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioRenderer.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\MusicBuffer.cpp" />
+    <ClCompile Include="src\MyRevoke\Core\UniversallyUniqueIdentifiers.cpp" />
   </ItemGroup>
 </Project>

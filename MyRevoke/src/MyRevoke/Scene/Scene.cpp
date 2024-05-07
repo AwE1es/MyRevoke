@@ -2,6 +2,7 @@
 
 #include "MyRevoke/Renderer/Renderer2D.h"
 #include "MyRevoke/AudioManager/AudioRenderer.h"
+
 #include "Scene.h"
 #include "Components.h"
 #include "Entity.h"
@@ -42,9 +43,21 @@ namespace Revoke
     Entity Scene::CreateEntity(const std::string name)
     {
         Entity entity = { m_Registry.create(), this };
+        entity.AddComponent<IdComponent>();
         entity.AddComponent<TransformComponent>();
         auto& entName = entity.AddComponent<NameComponent>();
         
+        entName.Name = name.empty() ? "UnNamed Entity" : name;
+        return entity;
+    }
+
+    Entity Scene::CreateEntity(UUID id, const std::string name)
+    {
+        Entity entity = { m_Registry.create(), this };
+        entity.AddComponent<IdComponent>(id);
+        entity.AddComponent<TransformComponent>();
+        auto& entName = entity.AddComponent<NameComponent>();
+
         entName.Name = name.empty() ? "UnNamed Entity" : name;
         return entity;
     }
@@ -121,29 +134,30 @@ namespace Revoke
 
                         nsc.Instance->OnCreate();
                     }
-
+                     
                     nsc.Instance->OnUpdate(ts);
                 });
         }
 
-        // Physics
-        m_B2World->Step(ts, m_VelocityIteration, m_PositionIteration);
+        {// Physics
+            m_B2World->Step(ts, m_VelocityIteration, m_PositionIteration);
 
-        auto view = m_Registry.view<RigidBodyComponent>();
-        for (auto ent : view)
-        {
-            Entity entity = { ent, this };
+            auto view = m_Registry.view<RigidBodyComponent>();
+            for (auto ent : view)
+            {
+                Entity entity = { ent, this };
 
-            auto& rigitBody = entity.GetComponent<RigidBodyComponent>();
-            auto& transforms = entity.GetComponent<TransformComponent>();
+                auto& rigitBody = entity.GetComponent<RigidBodyComponent>();
+                auto& transforms = entity.GetComponent<TransformComponent>();
 
-            b2Body* body = rigitBody.Body;
-            const auto& pos = body->GetPosition();
+                b2Body* body = rigitBody.Body;
+                const auto& pos = body->GetPosition();
 
-            transforms.Position.x = pos.x;
-            transforms.Position.y = pos.y;
-            transforms.Rotation.z = body->GetAngle();
-        };
+                transforms.Position.x = pos.x;
+                transforms.Position.y = pos.y;
+                transforms.Rotation.z = body->GetAngle();
+            };
+        }
         
 
         { // Sounds
@@ -279,7 +293,11 @@ namespace Revoke
     {
        
     }
+    template<>
+    void Scene::OnComponentAdded<IdComponent>(Entity entity, IdComponent& component)
+    {
 
+    }
     template<>
     void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent& component)
     {
@@ -320,7 +338,8 @@ namespace Revoke
     {
 
     }
-    
+
+    template void Scene::OnComponentAdded(Entity, IdComponent&);
     template void Scene::OnComponentAdded(Entity, TransformComponent&);
     template void Scene::OnComponentAdded(Entity, CameraComponent&);
     template void Scene::OnComponentAdded(Entity, SpriteRendererComponent&);

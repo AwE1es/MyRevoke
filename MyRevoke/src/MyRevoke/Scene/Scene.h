@@ -4,9 +4,11 @@
 
 #include "MyRevoke/Core/Time.h"
 #include "MyRevoke/Renderer/EditorCamera.h"
+#include "MyRevoke/Core/UniversallyUniqueIdentifiers.h"
 
 #include "MyRevoke/AudioManager/AudioSource.h"
 #include "MyRevoke/AudioManager/AudioBuffer.h"
+
 
 class b2World;
 
@@ -23,6 +25,7 @@ namespace Revoke
 			~Scene();
 			
 			Entity CreateEntity(const std::string name = std::string());
+			Entity CreateEntity(UUID id, const std::string name = std::string());
 
 			void OnRuntimeStart();
 

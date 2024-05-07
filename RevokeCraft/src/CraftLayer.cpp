@@ -345,12 +345,16 @@ namespace Revoke
 	}
 	void CraftLayer::OpenScene(const std::filesystem::path& path)
 	{
+		if (m_ToolBar.GetSceneState() == SceneState::Runtime)
+		{
+			m_ToolBar.OnSceneStop();
+		}
 		m_Scene = std::make_shared<Scene>();
 		m_Scene->OnSceneClose();
 		m_Scene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		
 		Serealizer sceneSerealizer(m_Scene);
-		sceneSerealizer.DeSerealize(path.string());
+ 		sceneSerealizer.DeSerealize(path.string());
 
 		m_ObjPannel.SetScene(m_Scene);
 		m_ToolBar.SetScene(m_Scene);

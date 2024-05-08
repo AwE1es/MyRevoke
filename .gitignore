@@ -342,6 +342,7 @@ OpenCover/
 
 /bin-int/
 /obj/
+intermediates/
 
 # Azure Stream Analytics local run output
 ASALocalRun/

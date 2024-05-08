@@ -5,6 +5,8 @@
 #include <mono/metadata/assembly.h>
 #include <mono/metadata/object.h>
 
+#include "ScriptConnector.h"
+
 namespace Revoke
 {
 	namespace ScriptCore
@@ -16,11 +18,14 @@ namespace Revoke
 			MonoDomain* AppDomain = nullptr;
 
 			MonoAssembly* CoreAssembly = nullptr;
+			MonoImage* CoreAssemblyImage = nullptr;
+
+			MonoClass* EntityMonoClass = nullptr;
 		};
 
 		static ScriptCoreData s_Data;
 
-		char* ReadBytes(const std::string& filepath, uint32_t* outSize)
+		static char* ReadBytes(const std::string& filepath, uint32_t* outSize)
 		{
 			std::ifstream stream(filepath, std::ios::binary | std::ios::ate);
 
@@ -48,7 +53,7 @@ namespace Revoke
 			return buffer;
 		}
 
-		MonoAssembly* LoadCSharpAssembly(const std::string& assemblyPath)
+		static MonoAssembly* LoadCSharpAssembly(const std::string& assemblyPath)
 		{
 			uint32_t fileSize = 0;
 			char* fileData = ReadBytes(assemblyPath, &fileSize);
@@ -73,7 +78,7 @@ namespace Revoke
 			return assembly;
 		}
 
-		void PrintAssemblyTypes(MonoAssembly* assembly)
+		static void PrintAssemblyTypes(MonoAssembly* assembly)
 		{
 			MonoImage* image = mono_assembly_get_image(assembly);
 			const MonoTableInfo* typeDefinitionsTable = mono_image_get_table_info(image, MONO_TABLE_TYPEDEF);
@@ -90,6 +95,15 @@ namespace Revoke
 				printf("%s.%s\n", nameSpace, name);
 			}
 		}
+		
+		static MonoObject* InstantiateClass(MonoClass* monoClass) //TODO: maybe needed to be used globaly so move to .h file
+		{
+
+			MonoObject* monoObject = mono_object_new(s_Data.AppDomain, monoClass);
+			mono_runtime_object_init(monoObject);
+			return monoObject;
+
+		}
 
 		void Init()
 		{
@@ -102,42 +116,48 @@ namespace Revoke
 				return;
 			}
 
-
 			// Store the root domain pointer
 			s_Data.RootDomain = rootDomain;
 
-			// Create an App Domain
-			char myAppDomain[] = "RevokeScriptRuntime";
-			s_Data.AppDomain = mono_domain_create_appdomain(myAppDomain, nullptr);
-			mono_domain_set(s_Data.AppDomain, true);
+			LoadAssembly("resourses/scripts/MyRevoke-ScriptCore.dll");
 
-			s_Data.CoreAssembly = LoadCSharpAssembly("resourses/scripts/MyRevoke-ScriptCore.dll");
-			PrintAssemblyTypes(s_Data.CoreAssembly);
 
-			MonoImage* image = mono_assembly_get_image(s_Data.CoreAssembly);
-			MonoClass* monoClass = mono_class_from_name(image, "Revoke", "Main");
-			MonoObject* monoObject = mono_object_new(s_Data.AppDomain, monoClass);
-			mono_runtime_object_init(monoObject);
+			//Example
+			ScriptConnector::ConnectFunctions(); // Connects cpp function defined in script connector to c# functions
 
-			MonoMethod* PrintMessegeFunc = mono_class_get_method_from_name(monoClass, "PrintMessege", 0);
-			mono_runtime_invoke(PrintMessegeFunc, monoObject, nullptr, nullptr);
+			s_Data.EntityMonoClass = mono_class_from_name(s_Data.CoreAssemblyImage, "Revoke", "Entity"); // Gets class
 
-			MonoMethod* PrintCustomMessegeFunc = mono_class_get_method_from_name(monoClass, "PrintCustomMessege", 1);
+			MonoObject* monoObject = InstantiateClass(s_Data.EntityMonoClass); // Calls constructor
+
+			MonoMethod* PrintMessegeFunc = mono_class_get_method_from_name(s_Data.EntityMonoClass, "PrintMessege", 0); // Gets function
+			mono_runtime_invoke(PrintMessegeFunc, monoObject, nullptr, nullptr); // Calls function
+
+			MonoMethod* PrintCustomMessegeFunc = mono_class_get_method_from_name(s_Data.EntityMonoClass, "PrintCustomMessege", 1); // Gets function
 			int value = 5;
 			void* params[1]
 			{
 				&value
 			};
-			mono_runtime_invoke(PrintCustomMessegeFunc, monoObject, params, nullptr);
+			mono_runtime_invoke(PrintCustomMessegeFunc, monoObject, params, nullptr); // Calls function
 
 		}
 
+		void LoadAssembly(const std::string& path)
+		{
+			char myAppDomain[] = "RevokeScriptRuntime";
+			s_Data.AppDomain = mono_domain_create_appdomain(myAppDomain, nullptr);
+			mono_domain_set(s_Data.AppDomain, true);
+
+			s_Data.CoreAssembly = LoadCSharpAssembly(path);
+			//PrintAssemblyTypes(s_Data.CoreAssembly);
+
+			s_Data.CoreAssemblyImage = mono_assembly_get_image(s_Data.CoreAssembly); 
+		}
 
 		void Shutdown()
 		{
 		
 		}
-
 
 	};
 }

@@ -101,6 +101,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\MyRevoke\Scripting\ScriptConnector.h" />
     <ClInclude Include="src\MyRevoke.h" />
     <ClInclude Include="src\MyRevoke\AudioManager\AudioBuffer.h" />
     <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h" />
@@ -562,6 +563,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\MyRevoke\Scripting\ScriptConnector.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioRenderer.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioSource.cpp" />

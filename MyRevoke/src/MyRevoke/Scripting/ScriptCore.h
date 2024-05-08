@@ -9,6 +9,8 @@ namespace Revoke
 		void Init();
 		void Shutdown();
 
+		void LoadAssembly(const std::string& path);
+
 	};
 }
 

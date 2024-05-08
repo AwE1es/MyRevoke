@@ -58,10 +58,10 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;_CRT_SECURE_NO_WARNINGS;YAML_CPP_STATIC_DEFINE;RV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;vendor\OpenALBuild\include;vendor\libsndfile\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;vendor\OpenALBuild\include;vendor\libsndfile\include;vendor\mono\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -70,8 +70,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;OpenAL32.lib;sndfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\OpenALBuild\lib;vendor\libsndfile\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;OpenAL32.lib;sndfile.lib;libmono-static-sgen.lib;Ws2_32.lib;Winmm.lib;Version.lib;Bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\OpenALBuild\lib\Debug;vendor\libsndfile\lib\Debug;vendor\mono\Lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -80,13 +80,13 @@
       <PrecompiledHeaderFile>rvpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RV_PLATFORM_WINDOWS;RV_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_DEFINE_MATH_OPERATORS;RV_ASSERTS_ENABLE;_CRT_SECURE_NO_WARNINGS;YAML_CPP_STATIC_DEFINE;RV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;vendor\OpenALBuild\include;vendor\libsndfile\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt;vendor\yaml-cpp\include;vendor\ImGuizmo;vendor\Box2D\include;vendor\OpenALBuild\include;vendor\libsndfile\include;vendor\mono\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -96,16 +96,16 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;OpenAL32.lib;sndfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\OpenALBuild\lib;vendor\libsndfile\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;OpenAL32.lib;sndfile.lib;libmono-static-sgen.lib;Ws2_32.lib;Winmm.lib;Version.lib;Bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\OpenALBuild\lib\Release;vendor\libsndfile\lib\Release;vendor\mono\Lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\MyRevoke\AudioManager\MusicBuffer.h" />
-    <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h" />
-    <ClInclude Include="src\MyRevoke\AudioManager\AudioSource.h" />
     <ClInclude Include="src\MyRevoke.h" />
     <ClInclude Include="src\MyRevoke\AudioManager\AudioBuffer.h" />
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h" />
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioSource.h" />
+    <ClInclude Include="src\MyRevoke\AudioManager\MusicBuffer.h" />
     <ClInclude Include="src\MyRevoke\Core\Application.h" />
     <ClInclude Include="src\MyRevoke\Core\Core.h" />
     <ClInclude Include="src\MyRevoke\Core\EntryPoint.h" />
@@ -137,6 +137,7 @@
     <ClInclude Include="src\MyRevoke\Scene\SceneCamera.h" />
     <ClInclude Include="src\MyRevoke\Scene\ScriptEntity.h" />
     <ClInclude Include="src\MyRevoke\Scene\Serealizer.h" />
+    <ClInclude Include="src\MyRevoke\Scripting\ScriptCore.h" />
     <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h" />
     <ClInclude Include="src\MyRevoke\Utility\KeyCodes.h" />
     <ClInclude Include="src\MyRevoke\Utility\MouseBtnCodes.h" />
@@ -561,10 +562,10 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MyRevoke\AudioManager\MusicBuffer.cpp" />
+    <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioRenderer.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioSource.cpp" />
-    <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp" />
+    <ClCompile Include="src\MyRevoke\AudioManager\MusicBuffer.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Application.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Input.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Layer.cpp" />
@@ -587,6 +588,7 @@
     <ClCompile Include="src\MyRevoke\Scene\Scene.cpp" />
     <ClCompile Include="src\MyRevoke\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\MyRevoke\Scene\Serealizer.cpp" />
+    <ClCompile Include="src\MyRevoke\Scripting\ScriptCore.cpp" />
     <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp" />
     <ClCompile Include="src\rvpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

@@ -28,6 +28,9 @@
     <Filter Include="src\MyRevoke\Scene">
       <UniqueIdentifier>{0B9DD8FC-F780-9952-60E1-93A54CE483D4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\MyRevoke\Scripting">
+      <UniqueIdentifier>{F0EBB9A0-DCE5-E2F2-C552-7903B1EB485F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\MyRevoke\Utility">
       <UniqueIdentifier>{B1A15757-9D30-E120-464F-F51B32BDF1C6}</UniqueIdentifier>
     </Filter>
@@ -66,6 +69,15 @@
     <ClInclude Include="src\MyRevoke\AudioManager\AudioBuffer.h">
       <Filter>src\MyRevoke\AudioManager</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h">
+      <Filter>src\MyRevoke\AudioManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\AudioManager\AudioSource.h">
+      <Filter>src\MyRevoke\AudioManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\AudioManager\MusicBuffer.h">
+      <Filter>src\MyRevoke\AudioManager</Filter>
+    </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Application.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
@@ -88,6 +100,9 @@
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Time.h">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Core\UniversallyUniqueIdentifiers.h">
       <Filter>src\MyRevoke\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Core\Window.h">
@@ -155,6 +170,9 @@
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Scene\Serealizer.h">
       <Filter>src\MyRevoke\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Scripting\ScriptCore.h">
+      <Filter>src\MyRevoke\Scripting</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h">
       <Filter>src\MyRevoke\Utility</Filter>
@@ -1422,13 +1440,18 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\AudioManager\AudioSource.h" />
-    <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h" />
-    <ClInclude Include="src\MyRevoke\AudioManager\MusicBuffer.h" />
-    <ClInclude Include="src\MyRevoke\Core\UniversallyUniqueIdentifiers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp">
+      <Filter>src\MyRevoke\AudioManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\AudioManager\AudioRenderer.cpp">
+      <Filter>src\MyRevoke\AudioManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\AudioManager\AudioSource.cpp">
+      <Filter>src\MyRevoke\AudioManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\AudioManager\MusicBuffer.cpp">
       <Filter>src\MyRevoke\AudioManager</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Core\Application.cpp">
@@ -1444,6 +1467,9 @@
       <Filter>src\MyRevoke\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Core\Log.cpp">
+      <Filter>src\MyRevoke\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Core\UniversallyUniqueIdentifiers.cpp">
       <Filter>src\MyRevoke\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MyRevoke\Core\Window.cpp">
@@ -1494,6 +1520,9 @@
     <ClCompile Include="src\MyRevoke\Scene\Serealizer.cpp">
       <Filter>src\MyRevoke\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\MyRevoke\Scripting\ScriptCore.cpp">
+      <Filter>src\MyRevoke\Scripting</Filter>
+    </ClCompile>
     <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp">
       <Filter>src\MyRevoke\Utility</Filter>
     </ClCompile>
@@ -1506,9 +1535,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\AudioManager\AudioSource.cpp" />
-    <ClCompile Include="src\MyRevoke\AudioManager\AudioRenderer.cpp" />
-    <ClCompile Include="src\MyRevoke\AudioManager\MusicBuffer.cpp" />
-    <ClCompile Include="src\MyRevoke\Core\UniversallyUniqueIdentifiers.cpp" />
   </ItemGroup>
 </Project>

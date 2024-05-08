@@ -18,7 +18,11 @@ workspace "MyRevoke"
     IncludeDir ["Box2D"] = "MyRevoke/vendor/Box2D/include"
     IncludeDir ["OpenAL"] = "MyRevoke/vendor/OpenALBuild/include"
     IncludeDir ["sndfile"] = "MyRevoke/vendor/libsndfile/include"
+    IncludeDir ["mono"] = "MyRevoke/vendor/mono/include"
 
+    LibraryDir = {};
+
+    LibraryDir ["mono"] = "%{prj.name}/vendor/mono/Lib/%{cfg.buildcfg}"
 
     group "Dependencies"
         include "MyRevoke/vendor/GLFW"
@@ -33,7 +37,7 @@ workspace "MyRevoke"
         kind "StaticLib"
         language "C++"
         cppdialect "C++20"
-        staticruntime "on"
+        staticruntime "off"
 
         targetdir ("bin/" .. outputdir .. "/%{prj.name}")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -73,6 +77,7 @@ workspace "MyRevoke"
             "%{IncludeDir.Box2D}",
             "%{IncludeDir.OpenAL}",
             "%{IncludeDir.sndfile}",
+            "%{IncludeDir.mono}",
         }
 
         links
@@ -85,12 +90,16 @@ workspace "MyRevoke"
             "Box2D",
             "OpenAL32.lib",
             "sndfile.lib",
+            "libmono-static-sgen.lib",
+            "Ws2_32.lib",
+            "Winmm.lib",
+            "Version.lib",
+            "Bcrypt.lib",
 
         }
         libdirs 
         {
-            "%{prj.name}/vendor/OpenALBuild/lib",
-            "%{prj.name}/vendor/libsndfile/lib",
+            
         }
         filter "files:vendor/ImGuizmo/**.cpp"
             flags {"NoPCH"}
@@ -113,10 +122,26 @@ workspace "MyRevoke"
             runtime "Debug"
             symbols "On"
 
+            libdirs 
+            {
+                "%{prj.name}/vendor/OpenALBuild/lib/Debug",
+                "%{prj.name}/vendor/libsndfile/lib/Debug",
+                "%{prj.name}/vendor/mono/Lib/Debug",
+            }
+            
+
         filter "configurations:Release"
+            
             defines "RV_RELEASE"
             runtime "Release"
             optimize "On"
+
+            libdirs 
+            {
+                "%{prj.name}/vendor/OpenALBuild/lib/Release",
+                "%{prj.name}/vendor/libsndfile/lib/Release",
+                "%{prj.name}/vendor/mono/Lib/Release",
+            }
 
 
     project "RevokeCraft"
@@ -124,7 +149,7 @@ workspace "MyRevoke"
         kind "ConsoleApp"
         cppdialect "C++20"
         language "C++"
-        staticruntime "on"
+        staticruntime "off"
     
         targetdir ("bin/" .. outputdir .. "/%{prj.name}")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -174,12 +199,12 @@ workspace "MyRevoke"
             optimize "On"
 
 
-        project "SandBox"
+    project "SandBox"
         location "SandBox"
         kind "ConsoleApp"
         cppdialect "C++20"
         language "C++"
-        staticruntime "on"
+        staticruntime "off"
     
         targetdir ("bin/" .. outputdir .. "/%{prj.name}")
         objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -224,3 +249,31 @@ workspace "MyRevoke"
             defines "RV_RELEASE"
             runtime "Release"
             optimize "On"
+
+    
+     project "MyRevoke-ScriptCore"
+        location "MyRevoke-ScriptCore"
+        kind "SharedLib"
+        language "C#"
+        dotnetframework "4.7.2"
+
+        targetdir ("RevokeCraft/resourses/scripts")
+        objdir ("RevokeCraft/resourses/scripts/intermediates")
+
+
+        files
+        {
+            "%{prj.name}/Source/**.cs",
+            "%{prj.name}/Properties/**.cs",
+        }
+           
+
+        filter "configurations:Debug"
+            optimize "Off"
+            symbols "Default"
+            
+
+        filter "configurations:Release"
+            optimize "Full"
+            symbols "Off"
+            

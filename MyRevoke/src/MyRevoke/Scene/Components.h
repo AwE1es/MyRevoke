@@ -217,12 +217,14 @@ namespace Revoke
 		ScriptEntity* Instance = nullptr;
 
 		ScriptEntity* (*InstantiateScript)();
-		void (*DestroyScript)(NativeScriptComponent*);
+		void DestroyScript()
+		{
+
+		}
 
 		template<typename T>
 		void Bind()
 		{
-			InstantiateScript = []() { return static_cast<ScriptEntity*>(new T()); };
 			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
 		}
 	};

@@ -195,7 +195,7 @@ namespace Revoke
 
 		// create new DLL file Path
 		strcpy(patchedDllPath, dllPath);
-		if (!patchFileName(patchedDllPath))
+ 		if (!patchFileName(patchedDllPath))
 		{
 			RV_CORE_ASSERT(false, "Failed to create new DLL file Path.");
 			return false;
@@ -297,7 +297,7 @@ namespace Revoke
 	}
 
 
-	using fn_t = ScriptEntity * (*)();
+
 
 	DLLdata loadDLL(const char* dllPath)
 	{
@@ -305,39 +305,10 @@ namespace Revoke
 
 		// load the DLL
 		data.dllHandle = LoadLibraryA(dllPath);
+
 		if (dllPath == nullptr)
 			return data;
 		
-		data.playerScript = (playerScript)GetProcAddress(data.dllHandle, "GetPlayerScript");
-		//data.playerScript = (ScriptEntity*)(GetProcAddress(data.dllHandle, "PlayerScript"));
-
-		
-
-		if (data.playerScript == nullptr)
-		{
-			RV_ENGINE_ERROR("Failed to read calss");
-		}
-
-
-		// get DLL function pointer
-		data.tick = (dll_tick)GetProcAddress(data.dllHandle, "tick");
-		data.player = (dll_player)GetProcAddress(data.dllHandle, "Player");
-	
-		if (data.tick == nullptr)
-		{
-			CloseHandle(data.dllHandle);
-			data = { nullptr };
-			RV_ENGINE_ERROR("Failed to read calss");
-			return data;
-		}
-		if (data.player == nullptr)
-		{
-			CloseHandle(data.dllHandle);
-			data = { nullptr };
-			RV_ENGINE_ERROR("Failed to read calss");
-			return data;
-		}
-
 		return data;
 	}
 
@@ -379,14 +350,11 @@ namespace Revoke
 	void ScriptEngine::OnUpdate()
 	{
 		//this needs to be called from inheritet script entity itself
-		m_IsTick = m_Dll.tick();
+		//m_IsTick = m_Dll.tick();
 		//m_Dll.player();
-		fn_t new_obj_fn = (fn_t)m_Dll.playerScript;
-
-		auto script_obj = new_obj_fn();
+	
 
 		//script_obj->OnCreate();
-
 
 		// check is DLL updated
 		m_DllTimeNew = FileIOgetLastWriteTime(m_DllPath);
@@ -417,9 +385,22 @@ namespace Revoke
 		CoUninitialize();
 	}
 
-	ScriptEntity* ScriptEngine::GetScritpByName()
+	using fn_t = ScriptEntity * (*)();
+
+	ScriptEntity* ScriptEngine::GetScritpByName(std::string scriptName)
 	{
-		return nullptr;
+		
+		m_Dll.playerScript = (scripVoidPtr)GetProcAddress(m_Dll.dllHandle, scriptName.c_str());
+	
+		if (m_Dll.playerScript == nullptr)
+		{
+			RV_ENGINE_ERROR("Failed to read calss");
+		}
+
+		//
+		fn_t new_obj_fn = (fn_t)m_Dll.playerScript;
+		auto script_obj = new_obj_fn();
+		return script_obj;
 	}
 
 	void ScriptEngine::InitDll()

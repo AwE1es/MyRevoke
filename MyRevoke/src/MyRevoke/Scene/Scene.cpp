@@ -31,12 +31,11 @@ namespace Revoke
 
     Scene::Scene()
     {
-      
     }
 
     Scene::Scene(std::string name )
         :m_Name(name)
-    {   
+    {     
     }
 
     Scene::~Scene()
@@ -68,7 +67,6 @@ namespace Revoke
 
     void Scene::OnRuntimeStart()
     {
-
         m_ScriptEngine = std::make_shared<ScriptEngine>();
 
 
@@ -138,13 +136,15 @@ namespace Revoke
                 {
                     if (!nsc.Instance)
                     {
-                        nsc.Instance = nsc.InstantiateScript();
+                        nsc.Instance = m_ScriptEngine->GetScritpByName("Player");
                         nsc.Instance->m_Entity = Entity{ entity, this };
 
                         nsc.Instance->OnCreate();
                     }
-                     
+                   
+                   
                     nsc.Instance->OnUpdate(ts);
+                    uint32_t t = (uint32_t)nsc.Instance->m_Entity.GetEnttId();
                 });
         }
 
@@ -333,7 +333,7 @@ namespace Revoke
     template<>
     void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
     {
- 
+        
     }
     template<>
     void Scene::OnComponentAdded<RigidBodyComponent>(Entity entity, RigidBodyComponent& component)

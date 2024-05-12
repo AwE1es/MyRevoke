@@ -308,12 +308,11 @@ workspace "MyRevoke"
             "%{IncludeDir.sndfile}",
         }
       
-    
            
 
         filter "configurations:Debug"
             optimize "Off"
-            symbols "Default"
+            symbols "On"
             
 
         filter "configurations:Release"

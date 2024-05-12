@@ -4,19 +4,21 @@
 
 #include <iostream>
 
-void Player()
-{
-	printf("player is \n");
-
-}
-
-ScriptEntity* GetPlayerScript()
+ScriptEntity* Player()
 {
 	return new PlayerScript;
 }
 
+
 void PlayerScript::OnCreate()
 {
-	std::cout << " lolo\n";
+	std::cout << " sdas\n";
 }
 
+void PlayerScript::OnUpdate(Timestep ts)
+{
+
+	//auto& comp = GetComponent<TransformComponent>();
+	//comp.Position.x = comp.Position.x + 0.01f * ts;
+
+}

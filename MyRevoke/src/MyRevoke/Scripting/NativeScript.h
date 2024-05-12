@@ -13,21 +13,19 @@
 #pragma warning( default : 4278 )
 
 
-typedef bool (*dll_tick)();
-typedef void (*dll_player)();
-typedef void* (*playerScript)();
+typedef void* (*scripVoidPtr)();
 
-class ScriptEntity;
+
 
 namespace Revoke
 {
 	struct DLLdata
 	{
 		HMODULE		dllHandle;
-		dll_tick	tick;
-		dll_player  player;
-		playerScript playerScript;
+		scripVoidPtr playerScript;
 	};
+
+	class ScriptEntity;
 
 	class ScriptEngine
 	{
@@ -37,7 +35,7 @@ namespace Revoke
 		void OnUpdate();
 		void ShutDown();
 
-		ScriptEntity* GetScritpByName();
+		ScriptEntity* GetScritpByName(std::string scriptName);
 	private:
 		void InitDll();
 		void OnDllUpdate();

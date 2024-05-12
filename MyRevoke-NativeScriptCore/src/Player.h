@@ -12,25 +12,22 @@
 
 using namespace Revoke;
 
-extern "C" __declspec(dllexport) void Player();
-
-
-class __declspec(dllexport) PlayerScript : public ScriptEntity
+class PlayerScript : public ScriptEntity
 {
 public:
+	PlayerScript() = default;
+
 	void OnCreate();
 	
 	void OnDestroy()
 	{
 	}
 
-	void OnUpdate()
-	{
+	void OnUpdate(Timestep ts);
+
+private:
+	int m_Count = 1;
 	
-		
-	}
-}; // TODO: in the object pannel you need to bind this script to the native script component, you need to somehow retrive this class to your main program from dll and bind PlayerScript to the chosen Entit
+}; 
 
-extern "C" __declspec(dllexport) ScriptEntity* GetPlayerScript();
-
- 
+extern "C" __declspec(dllexport) ScriptEntity * Player();

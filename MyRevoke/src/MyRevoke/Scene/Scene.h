@@ -10,6 +10,8 @@
 #include "MyRevoke/AudioManager/AudioBuffer.h"
 
 
+#include "MyRevoke/Scripting/NativeScript.h"
+
 class b2World;
 
 namespace Revoke
@@ -58,6 +60,8 @@ namespace Revoke
 		std::string m_Name = "Unnamed";
 
 		b2World* m_B2World = nullptr;
+
+		Shared<ScriptEngine> m_ScriptEngine;
 
 
 		int m_PositionIteration = 4;

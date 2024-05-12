@@ -13,8 +13,8 @@ namespace Revoke
 		{
 			return m_Entity.GetComponent<T>();
 		}
-	protected:
 		virtual void OnCreate() {}
+	protected:
 		virtual void OnDestroy() {}
 		virtual void OnUpdate(Timestep ts) {}
 	private:

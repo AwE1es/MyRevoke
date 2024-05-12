@@ -18,8 +18,8 @@
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
-    <OutputPath>..\RevokeCraft\resourses\scripts\</OutputPath>
-    <BaseIntermediateOutputPath>..\RevokeCraft\resourses\scripts\intermediates\Debug\</BaseIntermediateOutputPath>
+    <OutputPath>..\RevokeCraft\resourses\scripts\C#\</OutputPath>
+    <BaseIntermediateOutputPath>..\RevokeCraft\resourses\scripts\C#\intermediates\Debug\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
     <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -30,8 +30,8 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
     <Optimize>true</Optimize>
-    <OutputPath>..\RevokeCraft\resourses\scripts\</OutputPath>
-    <BaseIntermediateOutputPath>..\RevokeCraft\resourses\scripts\intermediates\Release\</BaseIntermediateOutputPath>
+    <OutputPath>..\RevokeCraft\resourses\scripts\C#\</OutputPath>
+    <BaseIntermediateOutputPath>..\RevokeCraft\resourses\scripts\C#\intermediates\Release\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
     <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>

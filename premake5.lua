@@ -257,15 +257,58 @@ workspace "MyRevoke"
         language "C#"
         dotnetframework "4.7.2"
 
-        targetdir ("RevokeCraft/resourses/scripts")
-        objdir ("RevokeCraft/resourses/scripts/intermediates")
+        targetdir ("RevokeCraft/resourses/scripts/C#")
+        objdir ("RevokeCraft/resourses/scripts/C#/intermediates")
 
 
         files
         {
+            
             "%{prj.name}/Source/**.cs",
             "%{prj.name}/Properties/**.cs",
         }
+           
+
+        filter "configurations:Debug"
+            optimize "Off"
+            symbols "Default"
+            
+
+        filter "configurations:Release"
+            optimize "Full"
+            symbols "Off"
+            
+
+     project "MyRevoke-NativeScriptCore"
+        location "MyRevoke-NativeScriptCore"
+        kind "SharedLib"
+        language "C++"
+        cppdialect "C++20"
+        staticruntime "off"
+
+        targetdir ("RevokeCraft/resourses/scripts/Native")
+        objdir ("RevokeCraft/resourses/scripts/Native/intermediates")
+
+
+        files
+        {
+            
+            "%{prj.name}/src/**.h",
+            "%{prj.name}/src/**.cpp",
+        }
+        includedirs
+        {
+            "MyRevoke/vendor/spdlog/include",
+            "MyRevoke/src",
+            "%{IncludeDir.GLM}",
+            "%{IncludeDir.ImGui}",
+            "%{IncludeDir.ENTT}",
+            "%{IncludeDir.ImGuizmo}",
+            "%{IncludeDir.OpenAL}",
+            "%{IncludeDir.sndfile}",
+        }
+      
+    
            
 
         filter "configurations:Debug"

@@ -20,6 +20,10 @@
 
 #include <AL/al.h>
 
+//DELETE
+#include "MyRevoke/Utility/KeyCodes.h"
+#include "MyRevoke/Core/Input.h"
+
 
 
 namespace Revoke
@@ -64,6 +68,10 @@ namespace Revoke
 
     void Scene::OnRuntimeStart()
     {
+
+        m_ScriptEngine = std::make_shared<ScriptEngine>();
+
+
         b2Vec2 gravity = { 0.0f, -9.8f };
         m_B2World = new b2World(gravity);
         auto view = m_Registry.view<RigidBodyComponent>();
@@ -123,6 +131,7 @@ namespace Revoke
 
     void Scene::OnRuntimeUpdate(Timestep ts)
     {
+        m_ScriptEngine->OnUpdate();
 
         { // Scripts
             m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
@@ -236,6 +245,7 @@ namespace Revoke
     }
     void Scene::OnRuntimeStop()
     {
+
         delete m_B2World;
         m_B2World = nullptr;
     }
@@ -287,7 +297,9 @@ namespace Revoke
         }
         return {};
     }
-    
+
+
+
     template<typename T>
     void Scene::OnComponentAdded(Entity entity, T& component)
     {
@@ -311,7 +323,7 @@ namespace Revoke
     template<>
     void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component)
     {
-
+        
     }
     template<>
     void Scene::OnComponentAdded<NameComponent>(Entity entity, NameComponent& component)
@@ -321,7 +333,7 @@ namespace Revoke
     template<>
     void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
     {
-
+ 
     }
     template<>
     void Scene::OnComponentAdded<RigidBodyComponent>(Entity entity, RigidBodyComponent& component)

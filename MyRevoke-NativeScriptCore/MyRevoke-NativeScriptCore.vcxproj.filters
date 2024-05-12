@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="MyRevoke">
+      <UniqueIdentifier>{775274B4-631F-CFBF-8C38-BD677864044E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyRevoke\src">
+      <UniqueIdentifier>{0E74D2A2-FAD6-6147-A35C-9AFD8F9E2DCA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyRevoke\src\MyRevoke">
+      <UniqueIdentifier>{6FAB028D-DB17-BE87-A40B-56E51037E0EF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Player.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dll.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dll.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\MyRevoke\src\MyRevoke\Scene">
+      <Filter>MyRevoke\src\MyRevoke</Filter>
+    </None>
+  </ItemGroup>
+</Project>

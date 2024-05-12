@@ -3,6 +3,7 @@
 
 #include "Components.h"
 #include <yaml-cpp/yaml.h>
+#include "Entity.h"
 namespace YAML {
 
 	template<>

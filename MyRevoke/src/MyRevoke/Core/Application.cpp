@@ -30,7 +30,7 @@ namespace Revoke
 		RendererAPI::Init();
 		Renderer2D::Init();
 		AudioRenderer::Init();
-		ScriptCore::Init();
+	
 		
 
 
@@ -41,7 +41,6 @@ namespace Revoke
 	}
 	Application::~Application()
 	{
-		ScriptCore::Shutdown();
 		AudioRenderer::Shutdown();
 		Renderer2D::Shutdown();
 	}

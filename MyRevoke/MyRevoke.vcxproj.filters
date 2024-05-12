@@ -171,6 +171,12 @@
     <ClInclude Include="src\MyRevoke\Scene\Serealizer.h">
       <Filter>src\MyRevoke\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\MyRevoke\Scripting\NativeScript.h">
+      <Filter>src\MyRevoke\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MyRevoke\Scripting\ScriptConnector.h">
+      <Filter>src\MyRevoke\Scripting</Filter>
+    </ClInclude>
     <ClInclude Include="src\MyRevoke\Scripting\ScriptCore.h">
       <Filter>src\MyRevoke\Scripting</Filter>
     </ClInclude>
@@ -1440,7 +1446,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Scripting\ScriptConnector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp">
@@ -1521,6 +1526,12 @@
     <ClCompile Include="src\MyRevoke\Scene\Serealizer.cpp">
       <Filter>src\MyRevoke\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\MyRevoke\Scripting\NativeScript.cpp">
+      <Filter>src\MyRevoke\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MyRevoke\Scripting\ScriptConnector.cpp">
+      <Filter>src\MyRevoke\Scripting</Filter>
+    </ClCompile>
     <ClCompile Include="src\MyRevoke\Scripting\ScriptCore.cpp">
       <Filter>src\MyRevoke\Scripting</Filter>
     </ClCompile>
@@ -1536,6 +1547,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\MyRevoke\Scripting\ScriptConnector.cpp" />
   </ItemGroup>
 </Project>

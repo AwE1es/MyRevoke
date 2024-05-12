@@ -24,6 +24,8 @@ namespace Revoke
 	}
 	void CraftLayer::OnAttach()
 	{
+
+		
 		
 		FrameBufferStats frameBufferStats;
 		frameBufferStats.Attachments = { FramebufferTextureFormat::RGBA8,FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::DEPTH24STENCIL8 };

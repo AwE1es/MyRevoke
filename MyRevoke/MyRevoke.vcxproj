@@ -101,7 +101,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\MyRevoke\Scripting\ScriptConnector.h" />
     <ClInclude Include="src\MyRevoke.h" />
     <ClInclude Include="src\MyRevoke\AudioManager\AudioBuffer.h" />
     <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h" />
@@ -138,6 +137,8 @@
     <ClInclude Include="src\MyRevoke\Scene\SceneCamera.h" />
     <ClInclude Include="src\MyRevoke\Scene\ScriptEntity.h" />
     <ClInclude Include="src\MyRevoke\Scene\Serealizer.h" />
+    <ClInclude Include="src\MyRevoke\Scripting\NativeScript.h" />
+    <ClInclude Include="src\MyRevoke\Scripting\ScriptConnector.h" />
     <ClInclude Include="src\MyRevoke\Scripting\ScriptCore.h" />
     <ClInclude Include="src\MyRevoke\Utility\FileExplorer.h" />
     <ClInclude Include="src\MyRevoke\Utility\KeyCodes.h" />
@@ -563,7 +564,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MyRevoke\Scripting\ScriptConnector.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioRenderer.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioSource.cpp" />
@@ -590,6 +590,8 @@
     <ClCompile Include="src\MyRevoke\Scene\Scene.cpp" />
     <ClCompile Include="src\MyRevoke\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\MyRevoke\Scene\Serealizer.cpp" />
+    <ClCompile Include="src\MyRevoke\Scripting\NativeScript.cpp" />
+    <ClCompile Include="src\MyRevoke\Scripting\ScriptConnector.cpp" />
     <ClCompile Include="src\MyRevoke\Scripting\ScriptCore.cpp" />
     <ClCompile Include="src\MyRevoke\Utility\FileExplorer.cpp" />
     <ClCompile Include="src\rvpch.cpp">

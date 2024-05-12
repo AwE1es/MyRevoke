@@ -6,6 +6,7 @@
 
 namespace Revoke
 {
+
 	extern const std::filesystem::path g_AssetsDirectory;
 
 	ObjectsPannel::ObjectsPannel(Shared<Scene> currentScene)
@@ -96,6 +97,8 @@ namespace Revoke
 					name = std::string(buffer);
 				}
 			}
+
+		
 
 			if (m_SelectedEntity.HasComponent<TransformComponent>())
 			{
@@ -281,6 +284,7 @@ namespace Revoke
 				}
 			}
 
+
 			if (ImGui::Button("Add Component"))
 				ImGui::OpenPopup("Add Component");
 
@@ -312,6 +316,11 @@ namespace Revoke
 				if (ImGui::MenuItem("Camera"))
 				{
 					m_SelectedEntity.AddComponent<CameraComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+				if (ImGui::MenuItem("Native Script Component"))
+				{
+					m_SelectedEntity.AddComponent<NativeScriptComponent>();
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndPopup();

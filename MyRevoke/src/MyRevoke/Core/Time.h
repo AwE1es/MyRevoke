@@ -9,8 +9,7 @@ namespace Revoke
 			: m_Time(time) {}
 
 		float GetSeconds() const { return m_Time; }
-		
-		operator double() const { return (double)m_Time; }
+
 
 		operator float() const { return m_Time; }
 	private:

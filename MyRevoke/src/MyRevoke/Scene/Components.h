@@ -131,20 +131,7 @@ namespace Revoke
 		b2Body *Body = nullptr;
 	};
 
-	struct NativeScriptComponent //TODO: Move out with entt include
-	{
-		ScriptEntity* Instance = nullptr;
-
-		ScriptEntity* (*InstantiateScript)();
-		void (*DestroyScript)(NativeScriptComponent*);
-
-		template<typename T>
-		void Bind()
-		{
-			InstantiateScript = []() { return static_cast<ScriptEntity*>(new T()); };
-			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
-		}
-	};
+	
 
 	struct SoundComponent
 	{
@@ -222,6 +209,21 @@ namespace Revoke
 		{
 			AudioSource::ShutDown(SoundID);
 			AudioBuffer::ShutDown();
+		}
+	};
+
+	struct NativeScriptComponent
+	{
+		ScriptEntity* Instance = nullptr;
+
+		ScriptEntity* (*InstantiateScript)();
+		void (*DestroyScript)(NativeScriptComponent*);
+
+		template<typename T>
+		void Bind()
+		{
+			InstantiateScript = []() { return static_cast<ScriptEntity*>(new T()); };
+			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
 		}
 	};
 	

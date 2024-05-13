@@ -174,6 +174,8 @@ namespace Revoke
 					ImGui::DragFloat3("Position", glm::value_ptr(soundComponent.Position), 0.1f);
 					ImGui::DragFloat3("Velocity", glm::value_ptr(soundComponent.Velocity), 0.1f);
 
+					//TODO: Maybe add on propertiesUpdate
+
 					ImGui::Checkbox("Loop Audio", &soundComponent.LoopSound);
 
 

@@ -102,9 +102,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\MyRevoke.h" />
-    <ClInclude Include="src\MyRevoke\AudioManager\AudioBuffer.h" />
     <ClInclude Include="src\MyRevoke\AudioManager\AudioRenderer.h" />
-    <ClInclude Include="src\MyRevoke\AudioManager\AudioSource.h" />
     <ClInclude Include="src\MyRevoke\AudioManager\MusicBuffer.h" />
     <ClInclude Include="src\MyRevoke\Core\Application.h" />
     <ClInclude Include="src\MyRevoke\Core\Core.h" />
@@ -564,9 +562,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MyRevoke\AudioManager\AudioBuffer.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\AudioRenderer.cpp" />
-    <ClCompile Include="src\MyRevoke\AudioManager\AudioSource.cpp" />
     <ClCompile Include="src\MyRevoke\AudioManager\MusicBuffer.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Application.cpp" />
     <ClCompile Include="src\MyRevoke\Core\Input.cpp" />

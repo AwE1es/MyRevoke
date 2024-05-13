@@ -347,7 +347,6 @@ namespace Revoke
 				if (soundComponent)
 				{
 					auto& src = deserializedEntity.AddComponent<SoundComponent>();
-					src.SetPath(soundComponent["AudioPath"].as<std::string>());
 
 					src.Pitch = soundComponent["Pitch"].as<float>();
 					src.Gain = soundComponent["Gain"].as<float>();
@@ -356,6 +355,9 @@ namespace Revoke
 					src.Velocity = soundComponent["Velocity"].as<glm::vec3>();
 
 					src.LoopSound = soundComponent["LoopSound"].as<bool>();
+
+					src.SetPath(soundComponent["AudioPath"].as<std::string>());
+
 					
 				}
 				auto scriptComponent = entity["NativeScriptComponent"];

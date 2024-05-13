@@ -174,14 +174,7 @@ namespace Revoke
                 Entity entity = { ent, this };
                 auto& soundComponent = entity.GetComponent<SoundComponent>();
 
-                if (!AudioRenderer::IsAudioActive(soundComponent))
-                {
-                    
-                    if (!soundComponent.LoopSound && soundComponent.HasPlayed)
-                        break;
-              
-                    AudioRenderer::RenderAudio(soundComponent);
-                }
+                soundComponent.Play();
 
             };
 

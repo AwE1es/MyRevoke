@@ -4,10 +4,10 @@
 #include "MyRevoke/Scripting/ScriptEntity.h"
 #include "MyRevoke/Renderer/Texture.h"
 
-#include "MyRevoke/AudioManager/AudioSource.h"
-#include "MyRevoke/AudioManager/AudioBuffer.h"
 #include "MyRevoke/AudioManager/MusicBuffer.h"
 #include "MyRevoke/Core/UniversallyUniqueIdentifiers.h"
+
+#include "MyRevoke/AudioManager/AudioRenderer.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
@@ -138,7 +138,7 @@ namespace Revoke
 	{
 		std::string AudioPath;
 
-		uint32_t SoundID;
+		uint32_t BufferID;
 		uint32_t SourceID;
 
 
@@ -147,9 +147,9 @@ namespace Revoke
 		glm::vec3 Position = { 0.0f, 0.0f, 0.0f };
 		glm::vec3 Velocity = { 0.0f, 0.0f, 0.0f };
 		bool  LoopSound = false;
-		
+
 		bool HasPlayed = false;
-	
+
 		SoundComponent() = default;
 		SoundComponent(const SoundComponent&) = default;
 
@@ -157,60 +157,42 @@ namespace Revoke
 		{
 			SetPath(audioPath);
 		}
-		~SoundComponent()
-		{
-			ShutDown();
-		}
 
 		void SetPath(std::string audioPath)
 		{
 			AudioPath = audioPath;
 			if (!AudioPath.empty())
 			{
-				SoundID = AudioBuffer::AddSound(AudioPath.c_str());
-				SourceID = AudioSource::AddSound(Pitch, Gain, Position, Velocity, LoopSound, SoundID);
+				BufferID = AudioRenderer::CreateSoundBuffer(AudioPath.c_str());
+				SourceID = AudioRenderer::CreateSoundSource(Pitch, Gain, Position, Velocity, LoopSound, BufferID);
 			}
 		}
 		void ShutDown()
 		{
-			AudioSource::ShutDown(SoundID);
-			AudioBuffer::ShutDown();
+			AudioRenderer::RemoveSoundSource(SourceID);
+			AudioRenderer::RemoveSoundBuffer(BufferID);
 		}
-		//TODO: give control of destroing to the classes
+		void UpdateSource()
+		{
+			AudioRenderer::UpdateSoundSource(SourceID, Pitch, Gain, Position, Velocity, LoopSound, BufferID);
+		}
+
+		void Play()
+		{
+			if (!AudioRenderer::IsAudioActive(SourceID))
+			{
+				if (!LoopSound && HasPlayed)
+					return;
+
+				AudioRenderer::RenderAudio(SourceID);
+				HasPlayed = true;
+			}
+		}
+		void Stop()
+		{
+			AudioRenderer::StopRenderingAudio(SourceID);
+		}
 	
-	};
-	struct SongComponent
-	{
-		std::string AudioPath;
-
-		uint32_t SoundID;
-		uint32_t SourceID;
-
-		SongComponent() = default;
-		SongComponent(const SongComponent&) = default;
-
-		SongComponent(std::string audioPath)
-		{
-			SetPath(audioPath);
-		}
-		~SongComponent()
-		{
-			ShutDown();
-		}
-
-		void SetPath(std::string audioPath)
-		{
-			AudioPath = audioPath;
-			if (!AudioPath.empty())
-			{
-				
-			}
-		}
-		void ShutDown()
-		{
-			AudioSource::ShutDown(SoundID);
-			AudioBuffer::ShutDown();
-		}
 	};
 
 	struct NativeScriptComponent

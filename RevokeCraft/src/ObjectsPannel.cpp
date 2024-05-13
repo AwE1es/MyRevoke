@@ -246,13 +246,20 @@ namespace Revoke
 							const wchar_t* path = (const wchar_t*)payload->Data;
 							std::filesystem::path scriptName = path;
 							s_TempData.CurrentScriptName = scriptName.stem().string();
-							nativeScriptComponent.scriprClassName = s_TempData.CurrentScriptName;
+							nativeScriptComponent.scriptClassName = s_TempData.CurrentScriptName;
 							nativeScriptComponent.Instance = nullptr;
 						}
 
 						ImGui::EndDragDropTarget();
 					}
-					//TODO: DragDrop
+
+					ImGui::SameLine();
+					if (ImGui::Button("X", ImVec2(20, 20))) {
+						s_TempData.CurrentScriptName = "Script";
+						nativeScriptComponent.scriptClassName.clear();
+						nativeScriptComponent.Instance = nullptr;
+					}
+				
 					ImGui::TreePop();
 				}
 			}

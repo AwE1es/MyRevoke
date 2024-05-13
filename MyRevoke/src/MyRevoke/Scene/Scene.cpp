@@ -130,9 +130,11 @@ namespace Revoke
         { // Scripts
             m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
                 {
+                    if (nsc.scriptClassName.empty())
+                        return;
                     if (!nsc.Instance)
                     {
-                        nsc.Instance = ScriptEngine::GetScritpByName(nsc.scriprClassName);
+                        nsc.Instance = ScriptEngine::GetScritpByName(nsc.scriptClassName);
                         nsc.Instance->m_Entity = Entity{ entity, this };
 
                         nsc.Instance->OnCreate();

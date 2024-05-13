@@ -395,7 +395,8 @@ namespace Revoke
 
 	ScriptEntity* ScriptEngine::GetScritpByName(std::string scriptName)
 	{
-		
+		if (scriptName.empty())
+			return nullptr;
 		s_Data.Dll.playerScript = (scripVoidPtr)GetProcAddress(s_Data.Dll.dllHandle, scriptName.c_str());
 	
 		if (s_Data.Dll.playerScript == nullptr)

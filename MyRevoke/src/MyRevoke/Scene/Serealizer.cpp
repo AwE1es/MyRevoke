@@ -220,7 +220,7 @@ namespace Revoke
 			out << YAML::BeginMap;
 
 			auto& scriptComponent = entity.GetComponent<NativeScriptComponent>();
-			out << YAML::Key << "ScriptClassName" << YAML::Value << scriptComponent.scriprClassName;
+			out << YAML::Key << "ScriptClassName" << YAML::Value << scriptComponent.scriptClassName;
 
 			out << YAML::EndMap;
 		}
@@ -362,7 +362,7 @@ namespace Revoke
 				if (scriptComponent)
 				{
 					auto& src = deserializedEntity.AddComponent<NativeScriptComponent>();
-					src.scriprClassName = scriptComponent["ScriptClassName"].as<std::string>();
+					src.scriptClassName = scriptComponent["ScriptClassName"].as<std::string>();
 
 				}
 			}

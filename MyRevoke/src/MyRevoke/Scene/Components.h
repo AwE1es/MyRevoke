@@ -218,7 +218,7 @@ namespace Revoke
 		NativeScriptComponent() = default;
 		NativeScriptComponent(const NativeScriptComponent&) = default;
 
-		std::string scriprClassName;
+		std::string scriptClassName;
 		ScriptEntity* Instance = nullptr;
 
 	};

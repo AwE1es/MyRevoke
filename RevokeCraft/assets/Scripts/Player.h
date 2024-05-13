@@ -3,7 +3,7 @@
 
 #include "MyRevoke/Scene/Components.h"
 
-#include "MyRevoke/Scene/ScriptEntity.h"
+#include "MyRevoke/Scripting/ScriptEntity.h"
 
 #include "MyRevoke/Core/Input.h"
 #include "MyRevoke/Utility/KeyCodes.h"

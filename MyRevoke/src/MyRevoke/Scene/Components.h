@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneCamera.h"
-#include "ScriptEntity.h"
+
+#include "MyRevoke/Scripting/ScriptEntity.h"
 #include "MyRevoke/Renderer/Texture.h"
 
 #include "MyRevoke/AudioManager/AudioSource.h"

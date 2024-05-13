@@ -18,6 +18,6 @@ void PlayerScript::OnCreate()
 void PlayerScript::OnUpdate(Timestep ts)
 {
 	auto& comp = GetComponent<TransformComponent>();
-	comp.Position.x = comp.Position.x - 1.0f * ts;
+	comp.Position.x = comp.Position.x - 0.2f * ts;
 
 }

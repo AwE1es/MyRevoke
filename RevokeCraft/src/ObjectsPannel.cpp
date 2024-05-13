@@ -9,6 +9,15 @@ namespace Revoke
 
 	extern const std::filesystem::path g_AssetsDirectory;
 
+	struct TempData
+	{
+		std::string CurrentScriptName = "Script";
+		std::string CurrentTextureName = "Texture";
+		std::string CurrentSoundName = "Sound";
+	};
+
+	static TempData s_TempData;
+
 	ObjectsPannel::ObjectsPannel(Shared<Scene> currentScene)
 		:m_CurrentScene(currentScene)
 	{
@@ -120,7 +129,7 @@ namespace Revoke
 					auto& spriteComponent = m_SelectedEntity.GetComponent<SpriteRendererComponent>();
 					ImGui::ColorEdit4("Color", glm::value_ptr(spriteComponent.Color));
 
-					ImGui::Button("Texture");
+					ImGui::Button(s_TempData.CurrentTextureName.c_str());
 
 					if (ImGui::BeginDragDropTarget())
 					{
@@ -129,6 +138,7 @@ namespace Revoke
 							const wchar_t* path = (const wchar_t*)payload->Data;
 							std::filesystem::path texturePath = std::filesystem::path(g_AssetsDirectory) / path;
 
+							s_TempData.CurrentTextureName = texturePath.stem().string();
 							spriteComponent.Texture2D = texturePath.string();
 						}
 
@@ -144,7 +154,7 @@ namespace Revoke
 				{
 					auto& soundComponent = m_SelectedEntity.GetComponent<SoundComponent>();
 
-					ImGui::Button("File (.wov)");
+					ImGui::Button(s_TempData.CurrentSoundName.c_str());
 
 					if (ImGui::BeginDragDropTarget())
 					{
@@ -152,6 +162,7 @@ namespace Revoke
 						{
 							const wchar_t* path = (const wchar_t*)payload->Data;
 							std::filesystem::path soundPath = std::filesystem::path(g_AssetsDirectory) / path;
+							s_TempData.CurrentSoundName = soundPath.stem().string();
 
 							soundComponent.SetPath(soundPath.string());
 
@@ -225,8 +236,8 @@ namespace Revoke
 				if (ImGui::TreeNodeEx((void*)typeid(NativeScriptComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Scripts"))
 				{
 					auto& nativeScriptComponent = m_SelectedEntity.GetComponent<NativeScriptComponent>();
-
-					ImGui::Button("Script");
+					
+					ImGui::Button(s_TempData.CurrentScriptName.c_str());
 
 					if (ImGui::BeginDragDropTarget())
 					{
@@ -234,7 +245,8 @@ namespace Revoke
 						{
 							const wchar_t* path = (const wchar_t*)payload->Data;
 							std::filesystem::path scriptName = path;
-							nativeScriptComponent.scriprClassName = scriptName.stem().string();
+							s_TempData.CurrentScriptName = scriptName.stem().string();
+							nativeScriptComponent.scriprClassName = s_TempData.CurrentScriptName;
 							nativeScriptComponent.Instance = nullptr;
 						}
 

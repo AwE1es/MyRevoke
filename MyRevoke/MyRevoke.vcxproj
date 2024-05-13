@@ -135,7 +135,7 @@
     <ClInclude Include="src\MyRevoke\Scene\Entity.h" />
     <ClInclude Include="src\MyRevoke\Scene\Scene.h" />
     <ClInclude Include="src\MyRevoke\Scene\SceneCamera.h" />
-    <ClInclude Include="src\MyRevoke\Scene\ScriptEntity.h" />
+    <ClInclude Include="src\MyRevoke\Scripting\ScriptEntity.h" />
     <ClInclude Include="src\MyRevoke\Scene\Serealizer.h" />
     <ClInclude Include="src\MyRevoke\Scripting\NativeScript.h" />
     <ClInclude Include="src\MyRevoke\Scripting\ScriptConnector.h" />

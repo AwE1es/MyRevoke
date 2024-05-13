@@ -165,7 +165,7 @@
     <ClInclude Include="src\MyRevoke\Scene\SceneCamera.h">
       <Filter>src\MyRevoke\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\MyRevoke\Scene\ScriptEntity.h">
+    <ClInclude Include="src\MyRevoke\Scripting\ScriptEntity.h">
       <Filter>src\MyRevoke\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\MyRevoke\Scene\Serealizer.h">

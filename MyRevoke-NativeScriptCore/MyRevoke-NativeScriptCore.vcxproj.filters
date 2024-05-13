@@ -1,38 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="MyRevoke">
-      <UniqueIdentifier>{775274B4-631F-CFBF-8C38-BD677864044E}</UniqueIdentifier>
+    <Filter Include="RevokeCraft">
+      <UniqueIdentifier>{21805B7A-8D35-D46F-162A-CE4682DECA73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MyRevoke\src">
-      <UniqueIdentifier>{0E74D2A2-FAD6-6147-A35C-9AFD8F9E2DCA}</UniqueIdentifier>
+    <Filter Include="RevokeCraft\assets">
+      <UniqueIdentifier>{034C7F51-EF2F-40A7-5890-3AFA44932A29}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MyRevoke\src\MyRevoke">
-      <UniqueIdentifier>{6FAB028D-DB17-BE87-A40B-56E51037E0EF}</UniqueIdentifier>
+    <Filter Include="RevokeCraft\assets\Scripts">
+      <UniqueIdentifier>{3A86F1F3-2696-9DC4-8F4F-02E37B7E8C5D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Player.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\RevokeCraft\assets\Scripts\Player.h">
+      <Filter>RevokeCraft\assets\Scripts</Filter>
     </ClInclude>
     <ClInclude Include="src\dll.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Player.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\RevokeCraft\assets\Scripts\Player.cpp">
+      <Filter>RevokeCraft\assets\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="src\dll.cpp">
       <Filter>src</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\MyRevoke\src\MyRevoke\Scene">
-      <Filter>MyRevoke\src\MyRevoke</Filter>
-    </None>
   </ItemGroup>
 </Project>

@@ -1,0 +1,42 @@
+Scene: Main scene
+Entities:
+  - Entity: 12348941312902322887
+    TagComponent:
+      Tag: Flor
+    TransformComponent:
+      Position: [0, -1.04259813, 0]
+      Rotation: [0, 0, 0]
+      Scale: [160.258148, 0.614631534, 1]
+    SpriteRendererComponent:
+      Color: [0.200980365, 0.141868487, 0.141868487, 1]
+      Texture2D: ""
+  - Entity: 15933831184578046345
+    TagComponent:
+      Tag: Player Camera
+    TransformComponent:
+      Position: [0, 0, -10.5002842]
+      Rotation: [-3.14159203, 0.000345230044, 3.14159226]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.00999999978
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
+    NativeScriptComponent:
+      ScriptClassName: Player
+  - Entity: 10107444019990964487
+    TagComponent:
+      Tag: Player
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [0.266652256, 0.361926675, 0.671568632, 1]
+      Texture2D: ""

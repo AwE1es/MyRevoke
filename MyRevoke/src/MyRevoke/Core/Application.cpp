@@ -6,7 +6,7 @@
 
 #include "MyRevoke/Renderer/Renderer2D.h"
 #include "MyRevoke/AudioManager/AudioRenderer.h"
-#include "MyRevoke/Scripting/ScriptCore.h"
+#include "MyRevoke/Scripting/NativeScript.h"
 
 #include "GLFW/glfw3.h"
 
@@ -30,9 +30,8 @@ namespace Revoke
 		RendererAPI::Init();
 		Renderer2D::Init();
 		AudioRenderer::Init();
-	
+		ScriptEngine::InitDll();
 		
-
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);

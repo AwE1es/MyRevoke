@@ -94,11 +94,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="..\RevokeCraft\assets\Scripts\Player.h" />
     <ClInclude Include="src\dll.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="..\RevokeCraft\assets\Scripts\Player.cpp" />
     <ClCompile Include="src\dll.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

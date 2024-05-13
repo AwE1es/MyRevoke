@@ -214,19 +214,12 @@ namespace Revoke
 
 	struct NativeScriptComponent
 	{
+		NativeScriptComponent() = default;
+		NativeScriptComponent(const NativeScriptComponent&) = default;
+
+		std::string scriprClassName;
 		ScriptEntity* Instance = nullptr;
 
-		ScriptEntity* (*InstantiateScript)();
-		void DestroyScript()
-		{
-
-		}
-
-		template<typename T>
-		void Bind()
-		{
-			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
-		}
 	};
 	
 

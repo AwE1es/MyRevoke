@@ -220,7 +220,30 @@ namespace Revoke
 				}
 			}
 
+			if (m_SelectedEntity.HasComponent<NativeScriptComponent>())
+			{
+				if (ImGui::TreeNodeEx((void*)typeid(NativeScriptComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Scripts"))
+				{
+					auto& nativeScriptComponent = m_SelectedEntity.GetComponent<NativeScriptComponent>();
 
+					ImGui::Button("Script");
+
+					if (ImGui::BeginDragDropTarget())
+					{
+						if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_PAYLOAD"))
+						{
+							const wchar_t* path = (const wchar_t*)payload->Data;
+							std::filesystem::path scriptName = path;
+							nativeScriptComponent.scriprClassName = scriptName.stem().string();
+							nativeScriptComponent.Instance = nullptr;
+						}
+
+						ImGui::EndDragDropTarget();
+					}
+					//TODO: DragDrop
+					ImGui::TreePop();
+				}
+			}
 
 			if (m_SelectedEntity.HasComponent<CameraComponent>())
 			{

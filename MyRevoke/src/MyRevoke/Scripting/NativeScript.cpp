@@ -5,7 +5,24 @@
 
 namespace Revoke
 {
+	struct ScriptCoreData
+	{
+		DLLdata	Dll;
 
+		char ExePath[MAX_PATH];
+		char DllPath[MAX_PATH];
+
+		FILETIME DllLastWriteTime;
+		FILETIME DllTimeNew;
+
+		bool IsStartWithDebugger = false;
+
+		char PatchedDllPath[MAX_PATH] = { '\0' };
+		char PatchedPdbPath[MAX_PATH] = { '\0' };
+
+		bool Ok;
+	};
+	static ScriptCoreData s_Data;
 	namespace Utilities
 	{
 		static void unloadDLL(DLLdata dll)
@@ -318,20 +335,20 @@ namespace Revoke
 	void ScriptEngine::OnDllUpdate()
 	{
 		// the DLL may not yet finish compliation and still writing to DLL
-		if (!FileIOisWriting(m_DllPath))
+		if (!FileIOisWriting(s_Data.DllPath))
 		{
 			if (IsDebuggerPresent())
 				DetachVS(true);	// detach to release PDB lock
 
 			// reload DLL
-			Utilities::unloadDLL(m_Dll);
-			m_Ok = patchDLL(m_DllPath, m_PatchedDllPath, m_PatchedPdbPath);
-			if (m_Ok && (m_Dll = loadDLL(m_PatchedDllPath)).dllHandle)
+			Utilities::unloadDLL(s_Data.Dll);
+			s_Data.Ok = patchDLL(s_Data.DllPath, s_Data.PatchedDllPath, s_Data.PatchedPdbPath);
+			if (s_Data.Ok && (s_Data.Dll = loadDLL(s_Data.PatchedDllPath)).dllHandle)
 			{
-				if (m_IsStartWithDebugger)
+				if (s_Data.IsStartWithDebugger)
 					AttachVS();	// re-attach debugger
 
-				m_DllLastWriteTime = m_DllTimeNew;
+				s_Data.DllLastWriteTime = s_Data.DllTimeNew;
 				printf("DLL reloaded.\n");
 			}
 			else
@@ -341,25 +358,14 @@ namespace Revoke
 		}
 	}
 
-	ScriptEngine::ScriptEngine()
-	{
-		InitDll();
-	}
-
 
 	void ScriptEngine::OnUpdate()
 	{
-		//this needs to be called from inheritet script entity itself
-		//m_IsTick = m_Dll.tick();
-		//m_Dll.player();
 	
-
-		//script_obj->OnCreate();
-
 		// check is DLL updated
-		m_DllTimeNew = FileIOgetLastWriteTime(m_DllPath);
-		if (!(m_DllLastWriteTime.dwHighDateTime == m_DllTimeNew.dwHighDateTime &&
-			m_DllLastWriteTime.dwLowDateTime == m_DllTimeNew.dwLowDateTime))
+		s_Data.DllTimeNew = FileIOgetLastWriteTime(s_Data.DllPath);
+		if (!(s_Data.DllLastWriteTime.dwHighDateTime == s_Data.DllTimeNew.dwHighDateTime &&
+			s_Data.DllLastWriteTime.dwLowDateTime == s_Data.DllTimeNew.dwLowDateTime))
 		{
 			OnDllUpdate();
 		}
@@ -370,16 +376,16 @@ namespace Revoke
 	{
 		printf("shut down.\n");
 		getchar();
-		Utilities::unloadDLL(m_Dll);
-		if (m_PatchedDllPath[0] != '\0')
-			DeleteFileA(m_PatchedDllPath);
-		if (m_PatchedDllPath[0] != '\0')
+		Utilities::unloadDLL(s_Data.Dll);
+		if (s_Data.PatchedDllPath[0] != '\0')
+			DeleteFileA(s_Data.PatchedDllPath);
+		if (s_Data.PatchedPdbPath[0] != '\0')
 		{
 			if (IsDebuggerPresent())
 				DetachVS(true);	// may fail to delete the patchedPdbPath if a debugger 
 			// is attached, MSVC locks the PDB file, 
 			// so detach the debugger first.
-			DeleteFileA(m_PatchedDllPath);
+			DeleteFileA(s_Data.PatchedPdbPath);
 		}
 
 		CoUninitialize();
@@ -390,43 +396,43 @@ namespace Revoke
 	ScriptEntity* ScriptEngine::GetScritpByName(std::string scriptName)
 	{
 		
-		m_Dll.playerScript = (scripVoidPtr)GetProcAddress(m_Dll.dllHandle, scriptName.c_str());
+		s_Data.Dll.playerScript = (scripVoidPtr)GetProcAddress(s_Data.Dll.dllHandle, scriptName.c_str());
 	
-		if (m_Dll.playerScript == nullptr)
+		if (s_Data.Dll.playerScript == nullptr)
 		{
 			RV_ENGINE_ERROR("Failed to read calss");
 		}
 
 		//
-		fn_t new_obj_fn = (fn_t)m_Dll.playerScript;
-		auto script_obj = new_obj_fn();
+		fn_t new_obj_fn = (fn_t)s_Data.Dll.playerScript;
+		auto* script_obj = new_obj_fn();
 		return script_obj;
 	}
 
 	void ScriptEngine::InitDll()
 	{
-		m_IsStartWithDebugger = IsDebuggerPresent();
-		RV_ENGINE_INFO("Start with debugger: {}", m_IsStartWithDebugger);
+		s_Data.IsStartWithDebugger = IsDebuggerPresent();
+		RV_ENGINE_INFO("Start with debugger: {}", s_Data.IsStartWithDebugger);
 
 		CoInitialize(0);
-		if (m_IsStartWithDebugger)
+		if (s_Data.IsStartWithDebugger)
 		{
 			// re-attach the debugger to avoid killing the app process when stopping the debugger
 			DetachVS(true);
 			AttachVS();
 		}
 
-		GetModuleFileNameA(NULL, m_ExePath, MAX_PATH);
+		GetModuleFileNameA(NULL, s_Data.ExePath, MAX_PATH);
 		const char* dllPath = "resourses/scripts/Native/MyRevoke-NativeScriptCore.dll";
 		const char* loadDllPath = dllPath;
 
-		strcpy(m_DllPath, dllPath);
+		strcpy(s_Data.DllPath, dllPath);
 		// create a copy of DLL and PDB
 
-		m_Ok = patchDLL(m_DllPath, m_PatchedDllPath, m_PatchedPdbPath);
-		if (m_Ok)
+		s_Data.Ok = patchDLL(s_Data.DllPath, s_Data.PatchedDllPath, s_Data.PatchedPdbPath);
+		if (s_Data.Ok)
 		{
-			loadDllPath = m_PatchedDllPath;
+			loadDllPath = s_Data.PatchedDllPath;
 			RV_ENGINE_INFO("Patch DLL succeeded");
 		}
 		else
@@ -438,9 +444,9 @@ namespace Revoke
 		}
 
 		// load DLL
-		m_DllLastWriteTime = FileIOgetLastWriteTime(m_DllPath);
-		m_Dll = loadDLL(loadDllPath);
-		if (m_Dll.dllHandle == nullptr)
+		s_Data.DllLastWriteTime = FileIOgetLastWriteTime(s_Data.DllPath);
+		s_Data.Dll = loadDLL(loadDllPath);
+		if (s_Data.Dll.dllHandle == nullptr)
 		{
 			RV_CORE_ASSERT(false, "Failed to load DLL.");
 			getchar();

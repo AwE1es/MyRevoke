@@ -50,7 +50,7 @@ namespace Revoke
 			void OnSceneClose();
 
 			Entity GetMainCamera() ;
-			
+
 	private:
 		template<typename T>
 		void OnComponentAdded(Entity entity, T& component);
@@ -60,8 +60,6 @@ namespace Revoke
 		std::string m_Name = "Unnamed";
 
 		b2World* m_B2World = nullptr;
-
-		Shared<ScriptEngine> m_ScriptEngine;
 
 
 		int m_PositionIteration = 4;

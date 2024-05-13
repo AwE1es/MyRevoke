@@ -192,12 +192,15 @@ workspace "MyRevoke"
             defines "RV_DEBUG"
             runtime "Debug"
             symbols "On"
+
     
+
         filter "configurations:Release"
             defines "RV_RELEASE"
             runtime "Release"
             optimize "On"
 
+   
 
     project "SandBox"
         location "SandBox"
@@ -295,6 +298,8 @@ workspace "MyRevoke"
             
             "%{prj.name}/src/**.h",
             "%{prj.name}/src/**.cpp",
+            "RevokeCraft/assets/Scripts/**.h",
+            "RevokeCraft/assets/Scripts/**.cpp",
         }
         includedirs
         {

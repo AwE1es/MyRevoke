@@ -214,6 +214,16 @@ namespace Revoke
 		
 			out << YAML::EndMap;
 		}
+		if (entity.HasComponent<NativeScriptComponent>())
+		{
+			out << YAML::Key << "NativeScriptComponent";
+			out << YAML::BeginMap;
+
+			auto& scriptComponent = entity.GetComponent<NativeScriptComponent>();
+			out << YAML::Key << "ScriptClassName" << YAML::Value << scriptComponent.scriprClassName;
+
+			out << YAML::EndMap;
+		}
 
 
 		out << YAML::EndMap; // Entity
@@ -347,6 +357,13 @@ namespace Revoke
 
 					src.LoopSound = soundComponent["LoopSound"].as<bool>();
 					
+				}
+				auto scriptComponent = entity["NativeScriptComponent"];
+				if (scriptComponent)
+				{
+					auto& src = deserializedEntity.AddComponent<NativeScriptComponent>();
+					src.scriprClassName = scriptComponent["ScriptClassName"].as<std::string>();
+
 				}
 			}
 		}

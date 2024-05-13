@@ -20,9 +20,6 @@
 
 #include <AL/al.h>
 
-//DELETE
-#include "MyRevoke/Utility/KeyCodes.h"
-#include "MyRevoke/Core/Input.h"
 
 
 
@@ -65,10 +62,9 @@ namespace Revoke
         return entity;
     }
 
+
     void Scene::OnRuntimeStart()
     {
-        m_ScriptEngine = std::make_shared<ScriptEngine>();
-
 
         b2Vec2 gravity = { 0.0f, -9.8f };
         m_B2World = new b2World(gravity);
@@ -127,24 +123,23 @@ namespace Revoke
      
     }
 
+
     void Scene::OnRuntimeUpdate(Timestep ts)
     {
-        m_ScriptEngine->OnUpdate();
-
+        
         { // Scripts
             m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
                 {
                     if (!nsc.Instance)
                     {
-                        nsc.Instance = m_ScriptEngine->GetScritpByName("Player");
+                        nsc.Instance = ScriptEngine::GetScritpByName(nsc.scriprClassName);
                         nsc.Instance->m_Entity = Entity{ entity, this };
 
                         nsc.Instance->OnCreate();
                     }
-                   
-                   
+                  
                     nsc.Instance->OnUpdate(ts);
-                    uint32_t t = (uint32_t)nsc.Instance->m_Entity.GetEnttId();
+               
                 });
         }
 

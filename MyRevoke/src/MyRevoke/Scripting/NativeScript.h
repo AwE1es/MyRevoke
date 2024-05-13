@@ -30,15 +30,15 @@ namespace Revoke
 	class ScriptEngine
 	{
 	public:
-		ScriptEngine();
 
-		void OnUpdate();
-		void ShutDown();
+		static void InitDll();
 
-		ScriptEntity* GetScritpByName(std::string scriptName);
+		static void OnUpdate();
+		static void ShutDown();
+
+		static ScriptEntity* GetScritpByName(std::string scriptName);
 	private:
-		void InitDll();
-		void OnDllUpdate();
+		static void OnDllUpdate();
 	private:
 		bool m_IsTick = true;
 		DLLdata		m_Dll;

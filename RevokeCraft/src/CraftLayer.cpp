@@ -6,6 +6,7 @@
 #include "MyRevoke/Utility/FileExplorer.h"
 #include "MyRevoke/Math/Math.h"
 #include "MyRevoke/AudioManager/AudioRenderer.h"
+#include "MyRevoke/Scripting/NativeScript.h"
 
 #include <ImGuizmo.h>
 
@@ -25,8 +26,6 @@ namespace Revoke
 	void CraftLayer::OnAttach()
 	{
 
-		
-		
 		FrameBufferStats frameBufferStats;
 		frameBufferStats.Attachments = { FramebufferTextureFormat::RGBA8,FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::DEPTH24STENCIL8 };
 		frameBufferStats.Width = 1280;
@@ -46,6 +45,8 @@ namespace Revoke
 
 		RendererAPI::SetClearColor({ 0.2f, 0.2f, 0.2f, 1.0f });
 		RendererAPI::EnableBlending();
+
+		
 	}
 	void CraftLayer::OnDetach()
 	{
@@ -70,6 +71,8 @@ namespace Revoke
 		RendererAPI::Clear();
 
 		m_FrameBuffer->ClearColorTextureAttachment(1, -1);
+
+		ScriptEngine::OnUpdate();
 
 		//TODO: Fix the picking in a play mode!!!
 		switch (m_ToolBar.GetSceneState())

@@ -20,5 +20,7 @@ namespace Revoke
 		static float GetMouseY();
 
 		static std::pair<float, float> GetMousePosition();
+
+		static void SetInputWindow();
 	};
 }

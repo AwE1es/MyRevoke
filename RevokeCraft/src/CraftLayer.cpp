@@ -7,7 +7,7 @@
 #include "MyRevoke/Math/Math.h"
 #include "MyRevoke/AudioManager/AudioRenderer.h"
 #include "MyRevoke/Scripting/NativeScript.h"
-
+#include "MyRevoke/Core/Input.h"
 #include <ImGuizmo.h>
 
 namespace Revoke
@@ -46,6 +46,7 @@ namespace Revoke
 		RendererAPI::SetClearColor({ 0.2f, 0.2f, 0.2f, 1.0f });
 		RendererAPI::EnableBlending();
 
+		Input::SetInputWindow();
 		
 	}
 	void CraftLayer::OnDetach()

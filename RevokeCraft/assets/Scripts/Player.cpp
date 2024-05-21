@@ -24,13 +24,13 @@ ScriptEntity* Player()
 void PlayerScript::OnCreate()
 {
 	
-	auto application = Application::Get();
+	
 
 }
 
 void PlayerScript::OnUpdate(Timestep ts)
 {
-
+	std::cout << (uint32_t)m_Entity.GetEnttId() << "\n";
 	//auto& comp = GetComponent<RigidBodyComponent>();
 	//
 	//b2Body* body = comp.Body;

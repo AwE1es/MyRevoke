@@ -20,7 +20,7 @@
 
 #include <AL/al.h>
 
-
+#include "MyRevoke/Core/Application.h"
 
 
 namespace Revoke
@@ -130,8 +130,10 @@ namespace Revoke
         { // Scripts
             m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
                 {
+                        
                     if (nsc.scriptClassName.empty())
                         return;
+
                     if (!nsc.Instance)
                     {
                         nsc.Instance = ScriptEngine::GetScritpByName(nsc.scriptClassName);
@@ -139,9 +141,10 @@ namespace Revoke
 
                         nsc.Instance->OnCreate();
                     }
-                  
+                    auto window = Application::Get();
                     nsc.Instance->OnUpdate(ts);
-               
+                   
+                 
                 });
         }
 
@@ -165,7 +168,7 @@ namespace Revoke
             };
         }
         
-
+        
         { // Sounds
 
             auto view = m_Registry.view<SoundComponent>();
@@ -174,7 +177,7 @@ namespace Revoke
                 Entity entity = { ent, this };
                 auto& soundComponent = entity.GetComponent<SoundComponent>();
 
-                soundComponent.Play();
+                soundComponent.UpdateSource();
 
             };
 
@@ -235,7 +238,6 @@ namespace Revoke
     }
     void Scene::OnRuntimeStop()
     {
-
         delete m_B2World;
         m_B2World = nullptr;
     }

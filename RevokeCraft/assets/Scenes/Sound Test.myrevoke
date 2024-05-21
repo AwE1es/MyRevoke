@@ -36,9 +36,9 @@ Entities:
     TagComponent:
       Tag: Object
     TransformComponent:
-      Position: [-0.545743465, 2.86993814, 0]
-      Rotation: [0, 0, -1.5993855]
-      Scale: [1.00000024, 1.00000024, 1]
+      Position: [0.944309771, 0.595063806, 6.10351562e-05]
+      Rotation: [-3.14159226, 4.26325608e-14, -1.5617255]
+      Scale: [0.912603021, 0.897618294, 0.200000003]
     SpriteRendererComponent:
       Color: [0.650519013, 0.230392143, 0.691176474, 1]
       Texture2D: assets\Textures\Square1_Texture.png
@@ -53,6 +53,15 @@ Entities:
       Restriction: 0
       ResitutionTreshhold: 0.5
       isSensor: false
+    SoundComponent:
+      AudioPath: assets\Audio\magicfail.ogg
+      Pitch: 1
+      Gain: 1
+      Position: [0, 0, 0]
+      Velocity: [0, 0, 0]
+      LoopSound: false
+    NativeScriptComponent:
+      ScriptClassName: Player
   - Entity: 12705655090242639925
     TagComponent:
       Tag: Floor

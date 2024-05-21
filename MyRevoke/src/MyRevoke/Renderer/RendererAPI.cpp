@@ -17,7 +17,7 @@ namespace Revoke
 
 	void RendererAPI::DrawElements(const Shared<VertexArray>& vertrexArray, uint32_t count)
 	{
-		uint32_t _count = count ? vertrexArray->GetIndexBuffer()->GetCount() : count;
+		uint32_t _count = count ? count : vertrexArray->GetIndexBuffer()->GetCount();
 		glDrawElements(GL_TRIANGLES, _count, GL_UNSIGNED_INT, nullptr);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}

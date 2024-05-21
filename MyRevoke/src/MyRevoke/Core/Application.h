@@ -36,15 +36,19 @@ namespace Revoke
 
 		ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 
-		static Application& Get() { return *s_Instance; }
+		static Application& Get() { 
+
+			return *s_Instance;
+		}
 		Window& GetWindow() { return *m_Window; }
 
+		Shared<Window> GetWindowScr() { return m_Window; }
 	private:
 		bool OnWindowClose(WindowsCloseEvent e);
 		bool OnWindowResize(WindowResizeEvent e);
 	private:
-		Shared<Window> m_Window;
 
+		Shared<Window> m_Window;
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_ImGuiLayer;
 

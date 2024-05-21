@@ -2,10 +2,10 @@
 
 extern Revoke::Application* Revoke::CreateApplication();
 
-int main(int argc, char** argv)
+int main()
 {
 	Revoke::Log::Init();
-	auto application = Revoke::CreateApplication();
+	Revoke::Application* application = Revoke::CreateApplication();
 	application->Run();
 	delete application;
 }

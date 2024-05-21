@@ -15,7 +15,6 @@ namespace Revoke
 		ALCdevice* ALCDevice;
 		ALCcontext* ALCContext;
 
-
 	};
 
 	static AudioDeviceData s_AudioDeviceData;

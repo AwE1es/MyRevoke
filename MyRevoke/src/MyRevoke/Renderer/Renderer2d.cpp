@@ -21,7 +21,7 @@ namespace Revoke
 
 	struct Data2D
 	{
-		static const uint32_t MaxEllements = 20000;
+		static const uint32_t MaxEllements = 10000;
 		static const uint32_t MaxVertices = MaxEllements * 4;
 		static const uint32_t MaxIndices = MaxEllements * 6;
 		static const uint32_t MaxTextures = 32;
@@ -113,15 +113,15 @@ namespace Revoke
 	{
 		//Drawing
 
-		uint32_t dataSize = (uint8_t*)s_Data->QuadVertexBufferPointer - (uint8_t*)s_Data->QuadVertexBufferBase;
+		uint32_t dataSize = (uint32_t)((uint8_t*)s_Data->QuadVertexBufferPointer - (uint8_t*)s_Data->QuadVertexBufferBase);
 		s_Data->QuadVB->InitData(s_Data->QuadVertexBufferBase, dataSize);
 
 		for (uint32_t i = 0; i < s_Data->TextureIndex; i++)
 		{
 			s_Data->Textures[i]->Bind(i);
 		}
+		s_Data->Shader->Bind();
 		RendererAPI::DrawElements(s_Data->QuadVA, s_Data->QuadIndexCount);
-		s_Data->Statistic.DrawCalls++;
 	}
 
 	//Color Draw

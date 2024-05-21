@@ -14,6 +14,8 @@ namespace Revoke
 		static bool IsKeyPressed(int key);
 		static bool IsMousePressed(int mouseButton);
 
+		static bool IsKeyPressedScr(int key);
+
 		static float GetMouseX();
 		static float GetMouseY();
 

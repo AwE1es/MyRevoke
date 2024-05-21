@@ -38,7 +38,7 @@ namespace Revoke {
 		void SetVSync(bool enable);
 		bool IsVSync() const;
 
-		inline void* GetCoreWindow() const { return m_Window; }
+		void* GetCoreWindow() const { return m_Window; }
 	private:
 		void Init(const WindowSettings& settings);
 		void Shutdown();

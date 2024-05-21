@@ -32,28 +32,47 @@ namespace Revoke
 	void ObjectsPannel::OnImGuiRender()
 	{
 		ImGui::Begin("Scene Hierarchy");
-		SceneHierarchyWindow();
+		if (m_CurrentScene)
+		{
+			m_CurrentScene->m_Registry.each([&](auto entityID)
+				{
+					Entity entity{ entityID , m_CurrentScene.get() };
+					SceneHierarchyWindow(entity);
+				});
+			if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
+				m_SelectedEntity = {};
+
+			if (ImGui::BeginPopupContextWindow(0, 1 | ImGuiPopupFlags_NoOpenOverItems))
+			{
+				if (ImGui::MenuItem("Create Entity"))
+				{
+					m_CurrentScene->CreateEntity("Empty Entity");
+				}
+				ImGui::EndPopup();
+			}
+		
+		}
+	
 		ImGui::End();
 
 		ImGui::Begin("Properties");
 		PropertiesWindow();
 		ImGui::End();
 	}
-	void ObjectsPannel::SceneHierarchyWindow()
+	void ObjectsPannel::SceneHierarchyWindow(Entity entity)
 	{
-		m_CurrentScene->m_Registry.each([&](auto entityID)
-			{
 				bool entityExist = true;
-				Entity entity{ entityID , m_CurrentScene.get() };
 				auto& entityName = entity.GetComponent<NameComponent>().Name;
 				ImGuiTreeNodeFlags flags = ((m_SelectedEntity == entity) ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
+				flags |= ImGuiTreeNodeFlags_SpanAvailWidth;
+
 				bool opened = ImGui::TreeNodeEx((void*)(uint64_t)(uint32_t)entity, flags, entityName.c_str());
 				if (ImGui::IsItemClicked())
 				{
 					m_SelectedEntity = entity;
 				}
 
-				if (ImGui::BeginPopupContextItem(0, 1 | ImGuiPopupFlags_NoOpenOverItems))
+				if (ImGui::BeginPopupContextItem())
 				{
 					if (ImGui::MenuItem("Delete Entity"))
 					{
@@ -64,7 +83,7 @@ namespace Revoke
 
 				if (opened)
 				{
-					ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow;
+					ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
 					bool opened = ImGui::TreeNodeEx((void*)9817239, flags, entityName.c_str());
 					if (opened)
 						ImGui::TreePop();
@@ -76,19 +95,7 @@ namespace Revoke
 					if (m_SelectedEntity == entity)
 						m_SelectedEntity = {};
 				}
-			});
 
-		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
-			m_SelectedEntity = {};
-
-		if (ImGui::BeginPopupContextWindow(0, 1 | ImGuiPopupFlags_NoOpenOverItems))
-		{
-			if (ImGui::MenuItem("Create Entity"))
-			{
-				m_CurrentScene->CreateEntity("Empty Entity");
-			}
-			ImGui::EndPopup();
-		}
 	}
 	void ObjectsPannel::PropertiesWindow()
 	{

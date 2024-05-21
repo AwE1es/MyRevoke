@@ -305,22 +305,45 @@ workspace "MyRevoke"
         {
             "MyRevoke/vendor/spdlog/include",
             "MyRevoke/src",
-            "%{IncludeDir.GLM}",
+            "%{IncludeDir.GLM}", 
             "%{IncludeDir.ImGui}",
             "%{IncludeDir.ENTT}",
             "%{IncludeDir.ImGuizmo}",
             "%{IncludeDir.OpenAL}",
             "%{IncludeDir.sndfile}",
+            "%{IncludeDir.Box2D}",
         }
-      
+        
+        links
+        {
+            "MyRevoke",
+        }
            
+        defines
+        {
+            "RV_PLATFORM_WINDOWS",
+            "_CRT_SECURE_NO_WARNINGS"
+        }
 
         filter "configurations:Debug"
             optimize "Off"
             symbols "On"
+
+            libdirs 
+            {
+                "MyRevoke/vendor/OpenALBuild/lib/Debug",
+                "MyRevoke/vendor/libsndfile/lib/Debug",
+            }
             
 
         filter "configurations:Release"
             optimize "Full"
             symbols "Off"
+            
+            libdirs 
+            {
+                "MyRevoke/vendor/OpenALBuild/lib/Release",
+                "MyRevoke/vendor/libsndfile/lib/Release",
+                
+            }
             

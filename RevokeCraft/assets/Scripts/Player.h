@@ -1,14 +1,9 @@
 #pragma once
 
-
-#include "MyRevoke/Scene/Components.h"
-
 #include "MyRevoke/Scripting/ScriptEntity.h"
 
-#include "MyRevoke/Core/Input.h"
-#include "MyRevoke/Utility/KeyCodes.h"
-
 #include "MyRevoke/Core/Time.h"
+
 
 using namespace Revoke;
 

@@ -13,6 +13,11 @@ namespace Revoke
 		{
 			return m_Entity.GetComponent<T>();
 		}
+		template<typename T>
+		bool HasComponent()
+		{
+			return m_Entity.HasComponent<T>();
+		}
 	protected:
 		virtual void OnCreate() {}
 		virtual void OnDestroy() {}

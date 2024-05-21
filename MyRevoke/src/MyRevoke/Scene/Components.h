@@ -15,6 +15,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+//Temp 
+
+#include "MyRevoke/AudioManager/MusicBuffer.h"
 
 class b2Body;
 
@@ -174,7 +177,7 @@ namespace Revoke
 		}
 		void UpdateSource()
 		{
-			AudioRenderer::UpdateSoundSource(SourceID, Pitch, Gain, Position, Velocity, LoopSound, BufferID);
+			//AudioRenderer::UpdateSoundSource(SourceID, Pitch, Gain, Position, Velocity, LoopSound, BufferID);
 		}
 
 		void Play()
@@ -194,6 +197,59 @@ namespace Revoke
 		}
 	
 	};
+	/*
+	struct MusicComponent
+	{
+		std::string AudioPath;
+
+		std::array<uint32_t, 3> BufferIDs;
+		uint32_t SourceID;
+
+
+		float Level = 1.0f;
+		bool HasPlayed = false;
+		bool LoopSound = true;
+
+		MusicComponent() = default;
+		MusicComponent(const MusicComponent&) = default;
+
+		MusicComponent(std::string audioPath)
+		{
+			SetPath(audioPath);
+		}
+
+		void SetPath(std::string audioPath)
+		{
+			AudioPath = audioPath;
+			if (!AudioPath.empty())
+			{
+				BufferIDs = MusicBuffer::CreateMusicBuffers(AudioPath.c_str());
+				SourceID = MusicBuffer::CreateMusicSourse();
+			}
+		}
+		void ShutDown()
+		{ // TODO
+			//AudioRenderer::RemoveSoundSource(SourceID);
+			//AudioRenderer::RemoveSoundBuffer(BufferID);
+		}
+	
+		void Play()
+		{
+			if (!AudioRenderer::IsAudioActive(SourceID))
+			{
+				if (!LoopSound && HasPlayed)
+					return;
+
+				MusicBuffer::Play(SourceID, BufferIDs);
+				HasPlayed = true;
+			}
+		}
+		void Stop()
+		{
+			AudioRenderer::StopRenderingAudio(SourceID);
+		}
+
+	};*/
 
 	struct NativeScriptComponent
 	{
@@ -202,6 +258,8 @@ namespace Revoke
 
 		std::string scriptClassName;
 		ScriptEntity* Instance = nullptr;
+
+		bool DllReloadede = false;
 
 	};
 	

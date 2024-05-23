@@ -19,6 +19,7 @@
 
 namespace Revoke
 {
+
 	class  Application
 	{
 	public:
@@ -40,12 +41,21 @@ namespace Revoke
 
 			return *s_Instance;
 		}
+
+		static Application* GetPointer() {
+
+			return s_Instance;
+		}
+
 		Window& GetWindow() { return *m_Window; }
+		Window* GetWindowPointer() { return m_Window.get(); }
 
 		Shared<Window> GetWindowScr() { return m_Window; }
+
 	private:
 		bool OnWindowClose(WindowsCloseEvent e);
 		bool OnWindowResize(WindowResizeEvent e);
+
 	private:
 
 		Shared<Window> m_Window;
@@ -55,7 +65,7 @@ namespace Revoke
 		float m_LastFrame = 0;
 
 		bool m_Run = true;
-
+		
 	private:
 		static Application* s_Instance;
 	};

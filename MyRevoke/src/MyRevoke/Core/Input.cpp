@@ -8,13 +8,6 @@
 namespace Revoke
 {
 
-	GLFWwindow* g_Window;
-
-	void Input::SetInputWindow()
-	{
-		g_Window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetCoreWindow());
-	}
-	
 	bool Input::IsKeyPressed(int key)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetCoreWindow());
@@ -25,7 +18,9 @@ namespace Revoke
 
 	bool Input::IsKeyPressedScr(int key)
 	{
-		auto stateOfKey = glfwGetKey(g_Window, key);
+		auto window = static_cast<GLFWwindow*>(Application::GetPointer()->GetWindowPointer()->GetCoreWindow());
+
+		auto stateOfKey = glfwGetKey(window, key);
 		return stateOfKey == GLFW_PRESS || stateOfKey == GLFW_REPEAT;
 	}
 

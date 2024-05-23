@@ -343,7 +343,7 @@ namespace Revoke
 			// reload DLL
 			Utilities::unloadDLL(s_Data.Dll);
 			s_Data.Ok = patchDLL(s_Data.DllPath, s_Data.PatchedDllPath, s_Data.PatchedPdbPath);
-			if (s_Data.Ok && (s_Data.Dll = loadDLL(s_Data.PatchedDllPath)).dllHandle)
+			if (s_Data.Ok && (s_Data.Dll = loadDLL(s_Data.DllPath)).dllHandle)
 			{
 				if (s_Data.IsStartWithDebugger)
 					AttachVS();	// re-attach debugger
@@ -431,18 +431,10 @@ namespace Revoke
 		// create a copy of DLL and PDB
 
 		s_Data.Ok = patchDLL(s_Data.DllPath, s_Data.PatchedDllPath, s_Data.PatchedPdbPath);
-		if (s_Data.Ok)
-		{
-			loadDllPath = s_Data.PatchedDllPath;
-			RV_ENGINE_INFO("Patch DLL succeeded");
-		}
-		else
-		{
-			RV_CORE_ASSERT(false, "Patch DLL failed\n");
-			getchar();
-			CoUninitialize();
-			return;
-		}
+	
+			loadDllPath = s_Data.DllPath;
+
+
 
 		// load DLL
 		s_Data.DllLastWriteTime = FileIOgetLastWriteTime(s_Data.DllPath);

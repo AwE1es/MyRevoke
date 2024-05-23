@@ -46,7 +46,6 @@ namespace Revoke
 		RendererAPI::SetClearColor({ 0.2f, 0.2f, 0.2f, 1.0f });
 		RendererAPI::EnableBlending();
 
-		Input::SetInputWindow();
 		
 	}
 	void CraftLayer::OnDetach()

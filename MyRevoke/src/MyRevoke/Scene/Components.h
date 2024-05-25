@@ -17,7 +17,6 @@
 
 //Temp 
 
-#include "MyRevoke/AudioManager/MusicBuffer.h"
 
 class b2Body;
 
@@ -100,6 +99,24 @@ namespace Revoke
 		
 	};
 
+	struct RigidBodyComponent
+	{
+		enum class BodyType
+		{
+			StaticBody = 0,
+			KinematicBody,
+			DynamicBody
+		};
+
+		RigidBodyComponent() = default;
+		RigidBodyComponent(const RigidBodyComponent&) = default;
+
+		BodyType Type = BodyType::StaticBody;
+		bool IsRotating = true;
+
+		b2Body* Body = nullptr;
+	};
+
 	struct BoxColisionComponent
 	{
 		BoxColisionComponent() = default;
@@ -117,25 +134,7 @@ namespace Revoke
 		//void* Fixture = nullptr;
 	};
 
-	struct RigidBodyComponent
-	{
-		enum class BodyType
-		{
-			StaticBody = 0,
-			KinematicBody,
-			DynamicBody
-		};
 
-		RigidBodyComponent() = default;
-		RigidBodyComponent(const RigidBodyComponent&) = default;
-		
-		BodyType Type = BodyType::StaticBody;
-		bool IsRotating = true;
-
-		b2Body *Body = nullptr;
-	};
-
-	
 
 	struct SoundComponent
 	{
@@ -259,7 +258,6 @@ namespace Revoke
 		std::string scriptClassName;
 		ScriptEntity* Instance = nullptr;
 
-		bool DllReloadede = false;
 
 	};
 	

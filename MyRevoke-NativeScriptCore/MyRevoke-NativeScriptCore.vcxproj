@@ -98,11 +98,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\RevokeCraft\assets\Scripts\Player.h" />
+    <ClInclude Include="..\RevokeCraft\assets\Scripts\ScriptExample.h" />
     <ClInclude Include="src\dll.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\RevokeCraft\assets\Scripts\Player.cpp" />
+    <ClCompile Include="..\RevokeCraft\assets\Scripts\ScriptExample.cpp" />
     <ClCompile Include="src\dll.cpp" />
   </ItemGroup>
   <ItemGroup>

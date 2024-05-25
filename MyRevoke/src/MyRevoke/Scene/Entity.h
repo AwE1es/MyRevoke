@@ -1,4 +1,5 @@
 #pragma once
+#include <optional>
 
 #include "MyRevoke/Core/Core.h"
 #include "Scene.h"
@@ -18,10 +19,10 @@ namespace Revoke
 		template<typename T, typename... Args>
 		T& AddComponent(Args&&... args)
 		{
-			RV_CORE_ASSERT(!HasComponent<T>(), "Component already exist in this Entity!");
 			T& comp = m_Scene->m_Registry.emplace<T>(m_EntityHandle, std::forward<Args>(args)...);
 			m_Scene->OnComponentAdded<T>(*this, comp);
 			return comp;
+		
 		}
 		template<typename T>
 		T& GetComponent()

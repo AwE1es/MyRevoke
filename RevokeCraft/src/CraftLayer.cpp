@@ -14,6 +14,26 @@ namespace Revoke
 {
 	extern const std::filesystem::path g_AssetsDirectory = "assets";
 
+	namespace Utils
+	{
+		static bool IsPayloadScene(const wchar_t* path) {
+			if (path == nullptr) {
+				return false;
+			}
+
+			const wchar_t* extension = L".myrevoke";
+			size_t pathLen = wcslen(path);
+			size_t extLen = wcslen(extension);
+
+			if (pathLen < extLen) {
+				return false;
+			}
+
+			const wchar_t* pathExtension = path + pathLen - extLen;
+			return wcscmp(pathExtension, extension) == 0;
+		}
+	}
+
 	CraftLayer::CraftLayer()
 		:Layer("CraftLayer")
 	{
@@ -198,7 +218,15 @@ namespace Revoke
 			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_PAYLOAD"))
 			{
 				const wchar_t* path = (const wchar_t*)payload->Data;
-				OpenScene(std::filesystem::path(g_AssetsDirectory) / path);
+
+				if (Utils::IsPayloadScene(path))
+				{
+					OpenScene(std::filesystem::path(g_AssetsDirectory) / path);
+				}
+				else
+				{
+					RV_EDITOR_ERROR("Wrong Scene File");
+				}
 			}
 
 			ImGui::EndDragDropTarget();

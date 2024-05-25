@@ -48,9 +48,6 @@ namespace Revoke
 		}
 
 		Window& GetWindow() { return *m_Window; }
-		Window* GetWindowPointer() { return m_Window.get(); }
-
-		Shared<Window> GetWindowScr() { return m_Window; }
 
 	private:
 		bool OnWindowClose(WindowsCloseEvent e);

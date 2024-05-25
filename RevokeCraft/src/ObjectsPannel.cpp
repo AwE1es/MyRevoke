@@ -14,9 +14,104 @@ namespace Revoke
 		std::string CurrentScriptName = "Script";
 		std::string CurrentTextureName = "Texture";
 		std::string CurrentSoundName = "Sound";
+
+		void MakeDefault()
+		{
+			CurrentScriptName = "Script";
+			CurrentTextureName = "Texture";
+			CurrentSoundName = "Sound";
+		}
 	};
 
 	static TempData s_TempData;
+
+	namespace Utils
+	{
+		static bool IsPayloadTexture(const wchar_t* path) {
+			if (path == nullptr) {
+				return false;
+			}
+
+			const wchar_t* pngExtension = L".png";
+			const wchar_t* jpgExtension = L".jpg";
+			size_t pathLen = wcslen(path);
+			size_t pngExtLen = wcslen(pngExtension);
+			size_t jpgExtLen = wcslen(jpgExtension);
+
+			if (pathLen >= pngExtLen) {
+				const wchar_t* pathPngExtension = path + pathLen - pngExtLen;
+				if (wcscmp(pathPngExtension, pngExtension) == 0) {
+					return true;
+				}
+			}
+
+			if (pathLen >= jpgExtLen) {
+				const wchar_t* pathJpgExtension = path + pathLen - jpgExtLen;
+				if (wcscmp(pathJpgExtension, jpgExtension) == 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		static bool IsPayloadAudio(const wchar_t* path) {
+			if (path == nullptr) {
+				return false;
+			}
+
+			const wchar_t* pngExtension = L".wov";
+			const wchar_t* jpgExtension = L".ogg";
+			size_t pathLen = wcslen(path);
+			size_t pngExtLen = wcslen(pngExtension);
+			size_t jpgExtLen = wcslen(jpgExtension);
+
+			if (pathLen >= pngExtLen) {
+				const wchar_t* pathPngExtension = path + pathLen - pngExtLen;
+				if (wcscmp(pathPngExtension, pngExtension) == 0) {
+					return true;
+				}
+			}
+
+			if (pathLen >= jpgExtLen) {
+				const wchar_t* pathJpgExtension = path + pathLen - jpgExtLen;
+				if (wcscmp(pathJpgExtension, jpgExtension) == 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		static bool IsPayloadScript(const wchar_t* path) {
+			if (path == nullptr) {
+				return false;
+			}
+
+			const wchar_t* pngExtension = L".cpp";
+			const wchar_t* jpgExtension = L".h";
+			size_t pathLen = wcslen(path);
+			size_t pngExtLen = wcslen(pngExtension);
+			size_t jpgExtLen = wcslen(jpgExtension);
+
+			if (pathLen >= pngExtLen) {
+				const wchar_t* pathPngExtension = path + pathLen - pngExtLen;
+				if (wcscmp(pathPngExtension, pngExtension) == 0) {
+					return true;
+				}
+			}
+
+			if (pathLen >= jpgExtLen) {
+				const wchar_t* pathJpgExtension = path + pathLen - jpgExtLen;
+				if (wcscmp(pathJpgExtension, jpgExtension) == 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+	}
 
 	ObjectsPannel::ObjectsPannel(Shared<Scene> currentScene)
 		:m_CurrentScene(currentScene)
@@ -27,6 +122,7 @@ namespace Revoke
 	{
 		m_CurrentScene = currentScene;
 		m_SelectedEntity = {};
+		s_TempData.MakeDefault();
 	}
 
 	void ObjectsPannel::OnImGuiRender()
@@ -145,8 +241,16 @@ namespace Revoke
 							const wchar_t* path = (const wchar_t*)payload->Data;
 							std::filesystem::path texturePath = std::filesystem::path(g_AssetsDirectory) / path;
 
-							s_TempData.CurrentTextureName = texturePath.stem().string();
-							spriteComponent.Texture2D = texturePath.string();
+							if (Utils::IsPayloadTexture(path))
+							{
+								s_TempData.CurrentTextureName = texturePath.stem().string();
+								spriteComponent.Texture2D = texturePath.string();
+							}
+							else
+							{
+								RV_EDITOR_ERROR("Wrong Texture File");
+							}
+
 						}
 
 						ImGui::EndDragDropTarget();
@@ -169,9 +273,16 @@ namespace Revoke
 						{
 							const wchar_t* path = (const wchar_t*)payload->Data;
 							std::filesystem::path soundPath = std::filesystem::path(g_AssetsDirectory) / path;
-							s_TempData.CurrentSoundName = soundPath.stem().string();
 
-							soundComponent.SetPath(soundPath.string());
+							if (Utils::IsPayloadAudio(path))
+							{
+								s_TempData.CurrentSoundName = soundPath.stem().string();
+								soundComponent.SetPath(soundPath.string());
+							}
+							else
+							{
+								RV_EDITOR_ERROR("Wrong Audio File");
+							}
 
 						}
 						ImGui::EndDragDropTarget();
@@ -254,9 +365,18 @@ namespace Revoke
 						{
 							const wchar_t* path = (const wchar_t*)payload->Data;
 							std::filesystem::path scriptName = path;
-							s_TempData.CurrentScriptName = scriptName.stem().string();
-							nativeScriptComponent.scriptClassName = s_TempData.CurrentScriptName;
-							nativeScriptComponent.Instance = nullptr;
+
+							if (Utils::IsPayloadScript(path))
+							{
+								s_TempData.CurrentScriptName = scriptName.stem().string();
+								nativeScriptComponent.scriptClassName = s_TempData.CurrentScriptName;
+								nativeScriptComponent.Instance = nullptr;
+							}
+
+							else
+							{
+								RV_EDITOR_ERROR("Wrong Script File");
+							}
 						}
 
 						ImGui::EndDragDropTarget();
@@ -345,33 +465,75 @@ namespace Revoke
 			{
 				if (ImGui::MenuItem("Sprite Renderer"))
 				{
-					m_SelectedEntity.AddComponent<SpriteRendererComponent>();
+					if (!m_SelectedEntity.HasComponent<SpriteRendererComponent>())
+					{
+						m_SelectedEntity.AddComponent<SpriteRendererComponent>();
+					}
+					else
+					{
+						RV_EDITOR_WARN("Component Already Exists");
+					}
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Rigid Body"))
 				{
+					if (!m_SelectedEntity.HasComponent<RigidBodyComponent>())
+					{
 					m_SelectedEntity.AddComponent<RigidBodyComponent>();
+					}
+					else
+					{
+						RV_EDITOR_WARN("Component Already Exists");
+					}
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Box Colidor"))
 				{
+					if (!m_SelectedEntity.HasComponent<BoxColisionComponent>())
+					{
 					m_SelectedEntity.AddComponent<BoxColisionComponent>();
+					}
+					else
+					{
+						RV_EDITOR_WARN("Component Already Exists");
+					}
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Sound Component"))
 				{
+					if (!m_SelectedEntity.HasComponent<SoundComponent>())
+					{
 					m_SelectedEntity.AddComponent<SoundComponent>();
+					}
+					else
+					{
+						RV_EDITOR_WARN("Component Already Exists");
+					}
 					ImGui::CloseCurrentPopup();
 				}
 
 				if (ImGui::MenuItem("Camera"))
 				{
+					if (!m_SelectedEntity.HasComponent<CameraComponent>())
+					{
 					m_SelectedEntity.AddComponent<CameraComponent>();
+					}
+					else
+					{
+						RV_EDITOR_WARN("Component Already Exists");
+					}
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Native Script Component"))
 				{
+					if (!m_SelectedEntity.HasComponent<NativeScriptComponent>())
+					{
 					m_SelectedEntity.AddComponent<NativeScriptComponent>();
+					}
+					else
+					{
+						RV_EDITOR_WARN("Component Already Exists");
+					}
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndPopup();

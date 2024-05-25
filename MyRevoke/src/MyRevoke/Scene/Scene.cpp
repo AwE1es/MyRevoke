@@ -20,7 +20,6 @@
 
 #include <AL/al.h>
 
-#include "MyRevoke/Core/Application.h"
 
 
 namespace Revoke
@@ -137,11 +136,14 @@ namespace Revoke
                     if (!nsc.Instance)
                     {
                         nsc.Instance = ScriptEngine::GetScritpByName(nsc.scriptClassName);
+                        if (!nsc.Instance)
+                        {
+                            return;
+                        }
                         nsc.Instance->m_Entity = Entity{ entity, this };
 
                         nsc.Instance->OnCreate();
                     }
-                    auto window = Application::Get();
                     nsc.Instance->OnUpdate(ts);
                    
                  

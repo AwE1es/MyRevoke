@@ -16,13 +16,6 @@ namespace Revoke
 		return stateOfKey == GLFW_PRESS || stateOfKey == GLFW_REPEAT;
 	}
 
-	bool Input::IsKeyPressedScr(int key)
-	{
-		auto window = static_cast<GLFWwindow*>(Application::GetPointer()->GetWindowPointer()->GetCoreWindow());
-
-		auto stateOfKey = glfwGetKey(window, key);
-		return stateOfKey == GLFW_PRESS || stateOfKey == GLFW_REPEAT;
-	}
 
 	bool Input::IsMousePressed(int mouseButton)
 	{

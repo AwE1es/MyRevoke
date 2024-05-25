@@ -173,7 +173,7 @@ namespace Revoke
 		size_t	dotIdx = CStrlastIndexOfChar(fileName, '.');
 		if (dotIdx != (size_t)-1)
 		{
-			fileName[dotIdx - 1] = '_';
+			fileName[dotIdx-1] = '_';
 			return true;
 		}
 		else
@@ -206,7 +206,7 @@ namespace Revoke
 		// check DLL exist
 		if (!FileIOisExist(dllPath))
 		{
-			RV_CORE_ASSERT(false, "Failed to load DLL file.");
+			RV_ENGINE_ERROR( "Failed to load DLL file.");
 			return false;
 		}
 
@@ -214,7 +214,7 @@ namespace Revoke
 		strcpy(patchedDllPath, dllPath);
  		if (!patchFileName(patchedDllPath))
 		{
-			RV_CORE_ASSERT(false, "Failed to create new DLL file Path.");
+			RV_ENGINE_ERROR("Failed to create new DLL file Path.");
 			return false;
 		}
 
@@ -223,7 +223,7 @@ namespace Revoke
 		HANDLE file = CreateFileA(dllPath, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (file == INVALID_HANDLE_VALUE)
 		{
-			RV_CORE_ASSERT(false, "Failed to open DLL");
+			RV_ENGINE_ERROR("Failed to open DLL");
 			return false;
 		}
 		size_t	fileSize = GetFileSize((HANDLE)file, NULL);
@@ -343,7 +343,7 @@ namespace Revoke
 			// reload DLL
 			Utilities::unloadDLL(s_Data.Dll);
 			s_Data.Ok = patchDLL(s_Data.DllPath, s_Data.PatchedDllPath, s_Data.PatchedPdbPath);
-			if (s_Data.Ok && (s_Data.Dll = loadDLL(s_Data.DllPath)).dllHandle)
+			if (s_Data.Ok && (s_Data.Dll = loadDLL(s_Data.PatchedDllPath)).dllHandle)
 			{
 				if (s_Data.IsStartWithDebugger)
 					AttachVS();	// re-attach debugger
@@ -353,7 +353,7 @@ namespace Revoke
 			}
 			else
 			{
-				RV_ASSERT(false, "Failed to reload DLL");
+				RV_ENGINE_ERROR( "Failed to reload DLL");
 			}
 		}
 	}
@@ -406,6 +406,8 @@ namespace Revoke
 
 		//
 		fn_t new_obj_fn = (fn_t)s_Data.Dll.playerScript;
+		if (new_obj_fn == nullptr)
+			return nullptr;
 		auto* script_obj = new_obj_fn();
 		return script_obj;
 	}
@@ -419,8 +421,8 @@ namespace Revoke
 		if (s_Data.IsStartWithDebugger)
 		{
 			// re-attach the debugger to avoid killing the app process when stopping the debugger
-			DetachVS(true);
-			AttachVS();
+			//DetachVS(true);
+			//AttachVS();
 		}
 
 		GetModuleFileNameA(NULL, s_Data.ExePath, MAX_PATH);
@@ -432,7 +434,7 @@ namespace Revoke
 
 		s_Data.Ok = patchDLL(s_Data.DllPath, s_Data.PatchedDllPath, s_Data.PatchedPdbPath);
 	
-			loadDllPath = s_Data.DllPath;
+			loadDllPath = s_Data.PatchedDllPath;
 
 
 
@@ -441,8 +443,7 @@ namespace Revoke
 		s_Data.Dll = loadDLL(loadDllPath);
 		if (s_Data.Dll.dllHandle == nullptr)
 		{
-			RV_CORE_ASSERT(false, "Failed to load DLL.");
-			getchar();
+			RV_ENGINE_ERROR( "Failed to load DLL.");
 			CoUninitialize();
 			return;
 		}
